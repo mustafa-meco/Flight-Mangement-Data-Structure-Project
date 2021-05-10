@@ -2,6 +2,7 @@
 #include <fstream>
 #include <string>
 #include "Flights.h"
+#include "Area.h"
 using namespace std;
 
 #pragma once

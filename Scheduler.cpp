@@ -21,6 +21,7 @@ bool Scheduler::readFile(string filename) {
 	//TODO off-boarding time
 	for (int i = 0; i < numAreas; i++) {
 		getline(F, line, ' ');
-		
+		Area* a = new Area(stoi(line)); //TODO store into DS 
+		//TODO store the dist. in matrix
 	}
 }
