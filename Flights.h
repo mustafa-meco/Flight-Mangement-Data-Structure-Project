@@ -6,5 +6,6 @@ class Flights
 {
 private:
 	int TS;
+	int Bs;
 };
 
