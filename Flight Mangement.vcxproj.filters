@@ -32,5 +32,11 @@
     <ClInclude Include="Scheduler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Area.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Dell\Downloads\Lanes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -144,7 +144,9 @@
     <ClCompile Include="Scheduler.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="C:\Users\Dell\Downloads\Lanes.h" />
     <ClInclude Include="Flights.h" />
+    <ClInclude Include="Area.h" />
     <ClInclude Include="Scheduler.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
