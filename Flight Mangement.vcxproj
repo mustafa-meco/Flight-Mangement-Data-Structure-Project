@@ -144,6 +144,7 @@
     <ClCompile Include="Scheduler.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AreasList.h" />
     <ClInclude Include="C:\Users\Dell\Downloads\Lanes.h" />
     <ClInclude Include="Flights.h" />
     <ClInclude Include="Area.h" />
