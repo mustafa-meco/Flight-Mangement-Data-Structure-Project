@@ -3,15 +3,16 @@ class Area
 {
 
 private:
-	int AreaNum;
-	static int NumOfAreas;
-	static int** ArrOfAreas;
-	int NumOfLanes;
+	int AreaNum;                 // index for each area
+	static int NumOfAreas;       //Variable for number of areas
+	static int** ArrOfAreas;     //two dimentional array for areas  
+	int NumOfLanes;             // Variable for number of lanes
 public:
 
-	Area(int c);
-	int DisOfAreas(int);
-	int getNumLanes();
+	Area(int c);                //constructor
+	int DisOfAreas(int);        // function to get the distance between the given area and the existing area
+	int getNumLanes();          // getter for number of lanes
+	int getAreasNum();         // getter for number of areas
 
 };
 
@@ -29,4 +30,9 @@ int Area::DisOfAreas(int A)
 int Area::getNumLanes()
 {
 	return NumOfLanes;
+}
+
+int Area::getAreasNum()
+{
+	return AreaNum;
 }
