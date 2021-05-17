@@ -7,7 +7,6 @@ bool Scheduler::readFile(string filename) {
 	
 	F.open(filename);
 	if (!F) return false;
-	
 	string line;
 	getline(F, line, ' ');
 	numAreas = stoi(line);
