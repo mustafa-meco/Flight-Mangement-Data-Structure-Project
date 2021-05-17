@@ -35,7 +35,22 @@
     <ClInclude Include="Area.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\Dell\Downloads\Lanes.h">
+    <ClInclude Include="Lanes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LANElist.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Lab\lab5\Code Examples\3-Queues\Node.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LinkedQueue.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Node.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="QueueADT.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

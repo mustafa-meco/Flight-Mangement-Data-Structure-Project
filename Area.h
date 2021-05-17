@@ -12,7 +12,7 @@ public:
 	Area(int c);                //constructor
 	int DisOfAreas(int);        // function to get the distance between the given area and the existing area
 	int getNumLanes();          // getter for number of lanes
-	int getAreasNum();         // getter for number of areas
+	int getAreasNum();         // getter for index of area
 
 };
 
