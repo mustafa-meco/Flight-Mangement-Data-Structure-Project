@@ -9,9 +9,10 @@ void main() {
 	cout << "Flight Mangement System" << endl;
 	cout << "please enter the input file name" << endl;
 	string filename;
+	bool f;
 	do {
 		cin >> filename;
-		bool f = Sc.readFile(filename);
+		f = Sc.readFile(filename);
 	} while (!f);
 	
 	//cout << "please enter the output file name --- (Default: FlightOutput.txt)\nenter 0 for default";

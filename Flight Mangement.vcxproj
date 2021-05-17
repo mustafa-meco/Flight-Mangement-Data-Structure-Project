@@ -145,9 +145,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AreasList.h" />
-    <ClInclude Include="C:\Users\Dell\Downloads\Lanes.h" />
     <ClInclude Include="Flights.h" />
     <ClInclude Include="Area.h" />
+    <ClInclude Include="LinkedQueue.h" />
+    <ClInclude Include="LANElist.h" />
+    <ClInclude Include="Lanes.h" />
+    <ClInclude Include="Node.h" />
+    <ClInclude Include="QueueADT.h" />
     <ClInclude Include="Scheduler.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
