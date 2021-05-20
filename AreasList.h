@@ -7,10 +7,9 @@ template <typename T>
 class AreasList
 {
 private:
-	int numAreas;                   //variable for Number of Areas
-	int** Dists;                    //two dimentional array of distances.
-	T** Areas;                      //two dimentional array of Areas.
-	int size;                          
+	int numAreas;
+	T** Areas;
+	int size;
 public:
 	AreasList(int);              //Constructor
 	void InsertArea(T*);         //function to insert a new area in the array

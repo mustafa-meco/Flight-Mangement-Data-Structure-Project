@@ -30,6 +30,7 @@ private:
 	int pft; //one passenger off time
 	AreasList<Area>* AreasL;
 	int AutoP;
+	int** Dists;
 	int N_Events;
 	//FlightsList<Flights>* FlightsL;
 	string* rawEvents;

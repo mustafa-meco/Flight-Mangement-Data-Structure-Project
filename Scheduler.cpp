@@ -58,7 +58,7 @@ bool Scheduler::readFile(string filename) {
 			MA = stoi(line);
 			getline(F, line);
 			MT = stoi(line);
-			ar->InsertLane(type, AvT, MA, MT);
+			ar->InsertLanes(type, AvT, MA, MT);
 		}
 	}
 	getline(F, line);
@@ -73,7 +73,7 @@ bool Scheduler::readFile(string filename) {
 	//FlightsL = new FlightsList();
 	for (int i = 0; i < N_Events; i++) {
 		getline(F, line);
-
+		rawEvents[i] = line;
 		//if (line == "B") E = B;
 		//else if (line == "X") E = X;
 		//else if (line == "P") E = P;
