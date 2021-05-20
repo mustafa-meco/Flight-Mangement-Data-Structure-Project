@@ -10,29 +10,45 @@ private:
 	Node<T>* backPtr;
 	Node<T>* frontPtr;
 	int numOfLANES;                   //variable fo number of lanes 
-	T* laneARR;           // array to  store lanes
-	int counter=0;
+	//T** laneARR;           // array to  store lanes
+	int size;
+
 public:
-	LANElist(T l);                  // constructor
-	bool EnqueueLANES(T lane);      // Function to insert the lanes   
-	T DequeueLANES();               // function to get the lanes  
+	LANElist(int l);                  // constructor
+	bool EnqueueLANES(T /***/newNodePtr);      // Function to insert the lanes   
+	T Dequeue();               // function to get the lanes  
 	bool isEmpty() const;
 	bool checkALL();
 
 };
 
 template <typename T>
-LANElist<T>::LANElist(T l)
+LANElist<T>::LANElist(int l) 
 {
-	numOfLANES = l;  
-	laneARR = new LinkedQueue[l];    
+	numOfLANES = l;   
+	//laneARR = new T*[numOfLANES]; 
 }
 
+//template <typename T>
+//bool LANElist<T>::EnqueueLANES(T * newEntry)
+//{
+//
+//	Node<T>* newNodePtr = new Node<T>(*newEntry);
+//
+//	if (isEmpty())  
+//		frontPtr = newNodePtr;
+//	else
+//		backPtr->setNext(newNodePtr);
+//
+//	backPtr = newNodePtr;
+//	return true;
+//}
+
 template <typename T>
-bool LANElist<T>::EnqueueLANES(T lane)
+bool LANElist<T>::EnqueueLANES(T  newEntry)
 {
 
-	Node<T>* newNodePtr = new Node<T>(newEntry);
+	Node<T> newNodePtr = new Node<T>(newEntry);
 
 	if (isEmpty())  
 		frontPtr = newNodePtr;
@@ -43,15 +59,14 @@ bool LANElist<T>::EnqueueLANES(T lane)
 	return true;
 }
 
-template <typename T>
-T LANElist<T>::DequeueLANES()
+//template <typename T>
+Lanes LANElist<Lanes>::Dequeue()
 {
 	if (isEmpty())
+		return;
 
-		return false;
-
-	Node<T>* nodeToDeletePtr = frontPtr;
-	frntEntry = frontPtr->getItem();
+	Node<Lanes>* nodeToDeletePtr = frontPtr;
+	Lanes frntEntry = frontPtr->getItem();
 	frontPtr = frontPtr->getNext(); 
 
 	if (nodeToDeletePtr == backPtr)
@@ -59,7 +74,7 @@ T LANElist<T>::DequeueLANES()
 
 	delete nodeToDeletePtr;
 
-	return true;
+	return frntEntry;
 } 
 
 template <typename T>
@@ -71,18 +86,20 @@ bool LANElist<T>::isEmpty() const
 //template <typename T>
 bool LANElist<Lanes>::checkALL()
 {
-	for (int i = 0; i < numOfLANES; i++)
-	{
-		if (laneARR->check())
+	//int counter1=0;
+	Node<Lanes>* N = frontPtr; 
+	while (N)
+	{ 
+		if (N->getItem().check())         
 		{
+		//	counter1++;
 			return true;
-			counter++;
 		}
-
-		if (counter == 0)
-		{
-			return false;
-		}
-	
+		N = N->getNext();
+		//if (//counter1 == 0)
+		//{
+		//	return false;
+		//}
 	}
+	return false;
 }
