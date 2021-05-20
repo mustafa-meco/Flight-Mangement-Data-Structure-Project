@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include "LANElist.h"
 using namespace std;
 class Lanes
 {
@@ -14,11 +15,16 @@ class Lanes
 
 
 public:
-	Lanes(/*int Lane_Area,*/ char specialization, int availability_time, int maintenance_after, int maintenance_time);
-	~Lanes();
+	Lanes(/*int Lane_Area,*/ /*char specialization, int availability_time, int maintenance_after, int maintenance_time*/);
+
 	bool check();
 };
 //no priority in the same type of lanes
+
+Lanes::Lanes( /*char specialization, int availability_time, int maintenance_after, int maintenance_time*/)
+{
+	aval = false;
+}
 
 bool Lanes::check()
 {

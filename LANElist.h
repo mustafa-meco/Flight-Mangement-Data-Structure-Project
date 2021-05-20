@@ -1,17 +1,24 @@
 #pragma once
 #include "LinkedQueue.h"
+#include "Lanes.h"
+#include "Node.h"
 
 template <typename T>
 class LANElist
 {
 private:
-
-	T numOfLANES;                   //variable fo number of lanes 
-	LinkedQueue* laneARR;           // array to  store lanes
+	Node<T>* backPtr;
+	Node<T>* frontPtr;
+	int numOfLANES;                   //variable fo number of lanes 
+	T* laneARR;           // array to  store lanes
+	int counter=0;
 public:
-	LANElist(T l);                 // constructor
-	void EnqueueLANES(T lane);      // Function to insert the lanes   
-	T DequeueLANES();                  // function to get the lanes  
+	LANElist(T l);                  // constructor
+	bool EnqueueLANES(T lane);      // Function to insert the lanes   
+	T DequeueLANES();               // function to get the lanes  
+	bool isEmpty() const;
+	bool checkALL();
+
 };
 
 template <typename T>
@@ -22,15 +29,60 @@ LANElist<T>::LANElist(T l)
 }
 
 template <typename T>
-void LANElist<T>::EnqueueLANES(T lane)
+bool LANElist<T>::EnqueueLANES(T lane)
 {
-	laneARR->enqueue(lane);
+
+	Node<T>* newNodePtr = new Node<T>(newEntry);
+
+	if (isEmpty())  
+		frontPtr = newNodePtr;
+	else
+		backPtr->setNext(newNodePtr);
+
+	backPtr = newNodePtr;
+	return true;
 }
 
 template <typename T>
 T LANElist<T>::DequeueLANES()
 {
-	return laneARR->dequeue();
+	if (isEmpty())
+
+		return false;
+
+	Node<T>* nodeToDeletePtr = frontPtr;
+	frntEntry = frontPtr->getItem();
+	frontPtr = frontPtr->getNext(); 
+
+	if (nodeToDeletePtr == backPtr)
+		backPtr = nullptr;
+
+	delete nodeToDeletePtr;
+
+	return true;
 } 
 
+template <typename T>
+bool LANElist<T>::isEmpty() const
+{
+	return (frontPtr == nullptr);
+}
 
+//template <typename T>
+bool LANElist<Lanes>::checkALL()
+{
+	for (int i = 0; i < numOfLANES; i++)
+	{
+		if (laneARR->check())
+		{
+			return true;
+			counter++;
+		}
+
+		if (counter == 0)
+		{
+			return false;
+		}
+	
+	}
+}

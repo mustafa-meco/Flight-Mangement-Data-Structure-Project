@@ -36,13 +36,13 @@ template <typename T>
 bool LinkedQueue<T>::enqueue( const T& newEntry)
 {
 	Node<T>* newNodePtr = new Node<T>(newEntry);
-	// Insert the new node
-	if (isEmpty())	
-		frontPtr = newNodePtr; // The queue is empty
-	else
-		backPtr->setNext(newNodePtr); // The queue was not empty
 
-	backPtr = newNodePtr; // New node is the last node now
+	if (isEmpty())	
+		frontPtr = newNodePtr; 
+	else
+		backPtr->setNext(newNodePtr); 
+
+	backPtr = newNodePtr; 
 	return true ;
 }
 
@@ -56,11 +56,10 @@ bool LinkedQueue<T>:: dequeue(T& frntEntry)
 	Node<T>* nodeToDeletePtr = frontPtr;
 	frntEntry = frontPtr->getItem();
 	frontPtr = frontPtr->getNext();
-	// Queue is not empty; remove front
-	if (nodeToDeletePtr == backPtr)	 // Special case: last node in the queue
+
+	if (nodeToDeletePtr == backPtr)	
 		backPtr = nullptr ;	
-		
-	// Free memory reserved for the dequeued node
+
 	delete nodeToDeletePtr;
 
 	return true;
@@ -91,5 +90,3 @@ LinkedQueue<T>::~LinkedQueue()
 	cout<<"\n Is LinkedQueue Empty now?? ==> "<<boolalpha<<isEmpty();
 	cout<<"\nEnding LinkedQueue destructor..."<<endl;
 }
-
-#endif
