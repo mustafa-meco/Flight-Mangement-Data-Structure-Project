@@ -12,7 +12,7 @@ private:
 
 public:
 	Eventlist(TS, ID);
-	Eventlist(TS, ID );
+	Eventlist(TS, ID);
 	~Eventlist();
 
 

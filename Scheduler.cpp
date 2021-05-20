@@ -126,10 +126,6 @@ bool Scheduler::readFile(string filename) {
 Eventlist Scheduler::prepareSimulation() {
 	for (int i=0; i<N_Events; i++)
 	{
-		switch (switch_on)
-		{
-		default:
-			break;
-		}
+	
 	}
 }	

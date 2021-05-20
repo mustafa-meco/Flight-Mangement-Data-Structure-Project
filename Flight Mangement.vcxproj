@@ -139,6 +139,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Booking.cpp" />
+    <ClCompile Include="Cancellation.cpp" />
     <ClCompile Include="Event.cpp" />
     <ClCompile Include="Flights.cpp" />
     <ClCompile Include="main.cpp" />
@@ -146,13 +148,17 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AreasList.h" />
+    <ClInclude Include="Booking.h" />
+    <ClInclude Include="Cancellation.h" />
     <ClInclude Include="Eventlist.h" />
+    <ClInclude Include="EVENTS\EVENTS.h" />
     <ClInclude Include="Flights.h" />
     <ClInclude Include="Area.h" />
     <ClInclude Include="LinkedQueue.h" />
     <ClInclude Include="LANElist.h" />
     <ClInclude Include="Lanes.h" />
     <ClInclude Include="Node.h" />
+    <ClInclude Include="PriorityQueue.h" />
     <ClInclude Include="QueueADT.h" />
     <ClInclude Include="Scheduler.h" />
   </ItemGroup>

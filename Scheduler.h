@@ -1,3 +1,4 @@
+#pragma once
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -6,6 +7,7 @@
 #include "Eventlist.h"
 #include "AreasList.h"
 using namespace std;
+#include "PriorityQueue.h"
 
 enum Sp {Normal , VIP};
 
@@ -20,7 +22,6 @@ struct Event {
 	int Pass;
 };
 
-#pragma once
 class Scheduler
 {
 private:
@@ -34,6 +35,8 @@ private:
 	int N_Events;
 	//FlightsList<Flights>* FlightsL;
 	string* rawEvents;
+	PriorityQueue<>* EventList;
+
 public:
 	Scheduler();
 	bool readFile(string );
