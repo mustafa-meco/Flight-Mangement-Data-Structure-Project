@@ -139,12 +139,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Event.cpp" />
     <ClCompile Include="Flights.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Scheduler.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AreasList.h" />
+    <ClInclude Include="Eventlist.h" />
     <ClInclude Include="Flights.h" />
     <ClInclude Include="Area.h" />
     <ClInclude Include="LinkedQueue.h" />

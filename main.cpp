@@ -1,6 +1,7 @@
 #include <iostream>
 #include "Flights.h"
 #include "Scheduler.h"
+#include "Eventlist.h"
 using namespace std;
 
 void main() {
@@ -14,7 +15,12 @@ void main() {
 		cin >> filename;
 		f = Sc.readFile(filename);
 	} while (!f);
+
+	Eventlist Events = Sc.prepareSimulation();
+	Sc.Simulate(Events);
+	//cout << "please enter the output file name" << endl;
 	
+	Sc.outToFile();
 	//cout << "please enter the output file name --- (Default: FlightOutput.txt)\nenter 0 for default";
 	//cin >> filename;
 	//if (filename == 0) 
