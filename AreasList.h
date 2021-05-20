@@ -7,16 +7,16 @@ template <typename T>
 class AreasList
 {
 private:
-	int numAreas;
-	int** Dists;
-	T** Areas;
-	int size;
+	int numAreas;                   //variable for Number of Areas
+	int** Dists;                    //two dimentional array of distances.
+	T** Areas;                      //two dimentional array of Areas.
+	int size;                          
 public:
-	AreasList(int);
-	void InsertArea(T*);
-	Area* getArea(int);
-	void addDist(int a, int d);
-	int getNumAreas() const;
+	AreasList(int);              //Constructor
+	void InsertArea(T*);         //function to insert a new area in the array
+ 	Area* getArea(int);          // return an area
+	void addDist(int a, int d);  // function to add area and its distance
+	int getNumAreas() const;     // getter for number of arrays     
 	~AreasList();
 
 };
@@ -47,7 +47,7 @@ void AreasList<Area>::InsertArea(Area* a) {
 
 template <typename T>
 void AreasList<T>::addDist(int a, int d) {
-	Dist
+	
 }
 
 

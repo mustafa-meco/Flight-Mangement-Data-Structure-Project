@@ -9,7 +9,7 @@ using namespace std;
 
 enum Sp {Normal , VIP};
 
-enum EventT {B, X, P};
+enum EventT {B, X, P, AP, ASSIGNtoLane, FlyFromTo, FinishedFlight};
 
 struct Event {
 	int ID;
@@ -40,3 +40,4 @@ public:
 	void Simulate(Eventlist Evs);
 	void outToFile();
 };
+

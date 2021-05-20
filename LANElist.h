@@ -2,23 +2,25 @@
 #include "LinkedQueue.h"
 #include "Lanes.h"
 #include "Node.h"
+#include "Scheduler.h"
+using namespace std;
 
 template <typename T>
 class LANElist
 {
 private:
-	Node<T>* backPtr;
-	Node<T>* frontPtr;
-	int numOfLANES;                   //variable fo number of lanes 
-	//T** laneARR;           // array to  store lanes
+	Node<T>* backPtr;          //pointer at the rear of the queue        
+	Node<T>* frontPtr;         //pointer at the front of the queue.
+	int numOfLANES;            //variable fo number of lanes 
+	//T** laneARR;             // array to  store lanes
 	int size;
 
 public:
-	LANElist(int l);                  // constructor
-	bool EnqueueLANES(T /***/newNodePtr);      // Function to insert the lanes   
-	T Dequeue();               // function to get the lanes  
-	bool isEmpty() const;
-	bool checkALL();
+	LANElist(int l);							//Constructor
+	bool EnqueueLANES(T /***/newNodePtr);       // Function to insert the lanes   
+	T Dequeue();							   // function to get the lanes  
+	bool isEmpty() const;					   //Function to check if there is no lanes or not
+	bool checkALL();                           // Function to check if all the lanes are available or not 
 
 };
 
