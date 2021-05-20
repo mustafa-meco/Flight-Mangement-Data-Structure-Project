@@ -8,7 +8,6 @@ class AreasList
 {
 private:
 	int numAreas;
-	int** Dists;
 	T** Areas;
 	int size;
 public:
@@ -47,7 +46,7 @@ void AreasList<Area>::InsertArea(Area* a) {
 
 template <typename T>
 void AreasList<T>::addDist(int a, int d) {
-	Dist
+	
 }
 
 

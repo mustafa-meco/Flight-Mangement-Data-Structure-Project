@@ -2,6 +2,8 @@
 #include "LinkedQueue.h"
 #include "Lanes.h"
 #include "Node.h"
+#include "Scheduler.h"
+using namespace std;
 
 template <typename T>
 class LANElist
