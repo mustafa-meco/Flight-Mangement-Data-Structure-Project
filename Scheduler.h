@@ -6,6 +6,10 @@
 #include "AreasList.h"
 using namespace std;
 
+enum Sp {Normal , VIP};
+
+enum Event {B, X, P};
+
 #pragma once
 class Scheduler
 {
@@ -15,7 +19,9 @@ private:
 	int pnt; //one passenger on time
 	int pft; //one passenger off time
 	AreasList<Area>* AreasL;
-
+	int AutoP;
+	int N_Events;
+	FlightsList<Flights>* FlightsL;
 public:
 	Scheduler();
 	bool readFile(string );
