@@ -24,6 +24,9 @@
     <ClCompile Include="Scheduler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Event.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Flights.h">
@@ -51,6 +54,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="AreasList.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Eventlist.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

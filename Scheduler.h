@@ -3,12 +3,22 @@
 #include <string>
 #include "Flights.h"
 #include "Area.h"
+#include "Eventlist.h"
 #include "AreasList.h"
 using namespace std;
 
 enum Sp {Normal , VIP};
 
-enum Event {B, X, P};
+enum EventT {B, X, P};
+
+struct Event {
+	int ID;
+	int TS;
+	int TA;
+	int LA;
+	Sp typ;
+	int Pass;
+};
 
 #pragma once
 class Scheduler
@@ -21,8 +31,12 @@ private:
 	AreasList<Area>* AreasL;
 	int AutoP;
 	int N_Events;
-	FlightsList<Flights>* FlightsL;
+	//FlightsList<Flights>* FlightsL;
+	string* rawEvents;
 public:
 	Scheduler();
 	bool readFile(string );
+	Eventlist prepareSimulation();
+	void Simulate(Eventlist Evs);
+	void outToFile();
 };

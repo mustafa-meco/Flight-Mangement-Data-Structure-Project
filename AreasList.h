@@ -47,7 +47,7 @@ void AreasList<Area>::InsertArea(Area* a) {
 
 template <typename T>
 void AreasList<T>::addDist(int a, int d) {
-
+	Dist
 }
 
 

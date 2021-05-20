@@ -65,45 +65,55 @@ bool Scheduler::readFile(string filename) {
 	AutoP = stoi(line);
 	getline(F, line);
 	N_Events = stoi(line);
-	Event E;
-	int TfA, LnA, Ts, ID, Pass;
+	rawEvents = new string[N_Events];
+	//EventT E;
+	///int TfA, LnA, Ts, ID, Pass;
 
-
-	FlightsL = new FlightsList();
+	
+	//FlightsL = new FlightsList();
 	for (int i = 0; i < N_Events; i++) {
-		getline(F, line, ' ');
-		if (line == "B") E = B;
-		else if (line == "X") E = X;
-		else if (line == "P") E = P;
+		getline(F, line);
 
-		switch (E)
-		{
-		case B:
-			getline(F, line, ' ');
-			TfA = stoi(line);
-			getline(F, line, ' ');
-			LnA = stoi(line);
-			getline(F, line, ' ');
-			if (line == "V") type = VIP;
-			else type = Normal;
-			getline(F, line, ' ');
-			Ts = stoi(line);
-			getline(F, line, ' ');
-			ID = stoi(line);
-			getline(F, line, ' ');
-			Pass = stoi(line);
-			Flights F = new Flights(TfA, LnA, type, Ts, ID, Pass);
-			FlightsL.Insert(F);
-			break;
-		case X:
+		//if (line == "B") E = B;
+		//else if (line == "X") E = X;
+		//else if (line == "P") E = P;
 
-			break;
-		case P:
+		//switch (E)
+		//{
+		//case B:
+		//	getline(F, line);
 
-			break;
-		default:
-			break;
-		}
+		//	/*TfA = stoi(line);
+		//	getline(F, line, ' ');
+		//	LnA = stoi(line);
+		//	getline(F, line, ' ');
+		//	if (line == "V") type = VIP;
+		//	else type = Normal;
+		//	getline(F, line, ' ');
+		//	Ts = stoi(line);
+		//	getline(F, line, ' ');
+		//	ID = stoi(line);
+		//	getline(F, line, ' ');
+		//	Pass = stoi(line);*/
+
+		//	//Flights F = new Flights(TfA, LnA, type, Ts, ID, Pass);
+		//	//FlightsL.Insert(F);
+		//	break;
+		//case X:
+		//	getline(F, line, ' ');
+		//	Ts = stoi(line);
+		//	getline(F, line, ' ');
+		//	ID = stoi(line);
+		//	break;
+		//case P:
+		//	getline(F, line, ' ');
+		//	Ts = stoi(line);
+		//	getline(F, line, ' ');
+		//	ID = stoi(line);
+		//	break;
+		//default:
+		//	break;
+		//}
 	}
 	
 	
@@ -111,3 +121,8 @@ bool Scheduler::readFile(string filename) {
 	
 
 }
+
+
+Eventlist Scheduler::prepareSimulation() {
+
+}	
