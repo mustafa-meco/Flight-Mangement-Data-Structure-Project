@@ -114,6 +114,7 @@ bool Scheduler::readFile(string filename) {
 		//default:
 		//	break;
 		//}
+		
 	}
 	
 	
@@ -121,7 +122,24 @@ bool Scheduler::readFile(string filename) {
 	
 
 }
-
+int Scheduler::getAutoP() {
+	return AutoP;
+}
+void Scheduler::setAutoP(int AutoP) {
+	this->AutoP = AutoP;
+}
+int Scheduler::getnormal() {
+	return normal
+}
+int getvip() {
+	return VIP_flights;
+}
+void setnormal(int normal) {
+	this->normal_flights = normal;
+}
+void setvip(int vip) {
+	this->VIP_flights = vip;
+}
 
 Eventlist Scheduler::prepareSimulation() {
 

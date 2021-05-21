@@ -139,6 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Def.cpp" />
     <ClCompile Include="Event.cpp" />
     <ClCompile Include="Flights.cpp" />
     <ClCompile Include="main.cpp" />
@@ -146,6 +147,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AreasList.h" />
+    <ClInclude Include="Def.h" />
     <ClInclude Include="Eventlist.h" />
     <ClInclude Include="Flights.h" />
     <ClInclude Include="Area.h" />

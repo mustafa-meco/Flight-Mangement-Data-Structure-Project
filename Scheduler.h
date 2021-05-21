@@ -7,18 +7,18 @@
 #include "AreasList.h"
 using namespace std;
 
-enum Sp {Normal , VIP};
-
-enum EventT {B, X, P};
-
-struct Event {
-	int ID;
-	int TS;
-	int TA;
-	int LA;
-	Sp typ;
-	int Pass;
-};
+////enum Sp {Normal , VIP};
+//
+//enum EventT {B, X, P};
+//
+//struct Event {
+//	int ID;
+//	int TS;
+//	int TA;
+//	int LA;
+//	Sp typ;
+//	int Pass;
+//};
 
 #pragma once
 class Scheduler
@@ -28,6 +28,7 @@ private:
 	int lndt; //landing time
 	int pnt; //one passenger on time
 	int pft; //one passenger off time
+	int normal_flights, VIP_flights;
 	AreasList<Area>* AreasL;
 	int AutoP;
 	int N_Events;
@@ -35,6 +36,12 @@ private:
 	string* rawEvents;
 public:
 	Scheduler();
+	int getAutoP();
+	void setAutoP(int AutoP);
+	int getnormal();
+	int getvip();
+	void setnormal(int normal);
+	void setnvip(int normal);
 	bool readFile(string );
 	Eventlist prepareSimulation();
 	void Simulate(Eventlist Evs);
