@@ -6,21 +6,31 @@
 #include "Area.h"
 #include "Eventlist.h"
 #include "AreasList.h"
-using namespace std;
+#include "Booking.h"
 #include "PriorityQueue.h"
+#include "EVENTS/EVENTS.h"
+#include "Cancellation.h"
+#include "Promotion.h"
+
+using namespace std;
 
 enum Sp {Normal , VIP};
 
 enum EventT {B, X, P, AP, ASSIGNtoLane, FlyFromTo, FinishedFlight};
 
-struct Event {
-	int ID;
-	int TS;
-	int TA;
-	int LA;
-	Sp typ;
-	int Pass;
+struct TnL {
+	Area* TA;
+	Area* LA;
 };
+
+//struct Event {
+//	int ID;
+//	int TS;
+//	int TA;
+//	int LA;
+//	Sp typ;
+//	int Pass;
+//};
 
 class Scheduler
 {
@@ -34,9 +44,9 @@ private:
 	int** Dists;
 	int N_Events;
 	//FlightsList<Flights>* FlightsL;
-	string* rawEvents;
-	PriorityQueue<>* EventList;
-
+	//string* rawEvents;
+	PriorityQueue<EVENTS>* EventList;
+	PriorityQueue<EVENTS>* preparedEvents;
 public:
 	Scheduler();
 	bool readFile(string );

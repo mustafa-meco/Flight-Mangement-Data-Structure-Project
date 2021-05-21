@@ -65,55 +65,70 @@ bool Scheduler::readFile(string filename) {
 	AutoP = stoi(line);
 	getline(F, line);
 	N_Events = stoi(line);
-	rawEvents = new string[N_Events];
-	//EventT E;
-	///int TfA, LnA, Ts, ID, Pass;
-
+	//rawEvents = new string[N_Events];
+	EventT E;
+	int TfA, LnA, Ts, ID, Pass;
+	Sp type;
+	EVENTS* events;
+	v<EVENTS>* ev;
 	
 	//FlightsL = new FlightsList();
 	for (int i = 0; i < N_Events; i++) {
-		getline(F, line);
-		rawEvents[i] = line;
-		//if (line == "B") E = B;
-		//else if (line == "X") E = X;
-		//else if (line == "P") E = P;
+		getline(F, line, ' ');
+		//rawEvents[i] = line;
+		if (line == "B") E = B;
+		else if (line == "X") E = X;
+		else if (line == "P") E = P;
 
-		//switch (E)
-		//{
-		//case B:
-		//	getline(F, line);
+		switch (E)
+		{
+		case B:
+			getline(F, line, ' ');
+			TfA = stoi(line);
+			getline(F, line, ' ');
+			LnA = stoi(line);
+			getline(F, line, ' ');
+			if (line == "v") type = VIP;
+			else type = Normal;
+			getline(F, line, ' ');
+			Ts = stoi(line);
+			getline(F, line, ' ');
+			ID = stoi(line);
+			getline(F, line);
+			Pass = stoi(line);
+			
+			events = new Booking(ID, E, AreasL->getArea(TfA), AreasL->getArea(LnA), type, Pass);
+			
 
-		//	/*TfA = stoi(line);
-		//	getline(F, line, ' ');
-		//	LnA = stoi(line);
-		//	getline(F, line, ' ');
-		//	if (line == "V") type = VIP;
-		//	else type = Normal;
-		//	getline(F, line, ' ');
-		//	Ts = stoi(line);
-		//	getline(F, line, ' ');
-		//	ID = stoi(line);
-		//	getline(F, line, ' ');
-		//	Pass = stoi(line);*/
 
-		//	//Flights F = new Flights(TfA, LnA, type, Ts, ID, Pass);
-		//	//FlightsL.Insert(F);
-		//	break;
-		//case X:
-		//	getline(F, line, ' ');
-		//	Ts = stoi(line);
-		//	getline(F, line, ' ');
-		//	ID = stoi(line);
-		//	break;
-		//case P:
-		//	getline(F, line, ' ');
-		//	Ts = stoi(line);
-		//	getline(F, line, ' ');
-		//	ID = stoi(line);
-		//	break;
-		//default:
-		//	break;
-		//}
+			//flights f = new flights(tfa, lna, type, ts, id, pass);
+			//flightsl.insert(f);
+			break;
+		case X:
+			getline(F, line, ' ');
+			Ts = stoi(line);
+			getline(F, line);
+			ID = stoi(line);
+			events = new Cancellation(ID, E);
+
+			break;
+		case P:
+			getline(F, line, ' ');
+			Ts = stoi(line);
+			getline(F, line);
+			ID = stoi(line);
+			events = new Promotion(ID, E);
+
+			break;
+		default:
+			break;
+		}
+		ev->priority = Ts;
+		ev->value = *events;
+		EventList->enqueue(*ev);
+		delete events;
+		events = NULL;
+		ev = NULL;
 	}
 	
 	
@@ -124,8 +139,17 @@ bool Scheduler::readFile(string filename) {
 
 
 Eventlist Scheduler::prepareSimulation() {
-	for (int i=0; i<N_Events; i++)
-	{
 	
+	v<EVENTS>* ev;
+	EVENTS* eve;
+	EventList->dequeue(*ev);
+	eve = &ev->value;
+	int ID = eve->getID();
+	switch(eve->getEventT()) {
+	case B:
+		Booking* Be = static_cast<Booking*>(eve);
+		Flights* fl = new Flights(ID,Be->getAreas(),Be.);
+
 	}
+
 }	

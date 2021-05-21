@@ -3,5 +3,8 @@
 
 class Cancellation : public EVENTS
 {
+
+public:
+	Cancellation(/*int,*/ int);
 };
 

@@ -3,5 +3,8 @@
 class Promotion :
     public EVENTS
 {
+
+public:
+    Promotion(/*int,*/ int);
 };
 

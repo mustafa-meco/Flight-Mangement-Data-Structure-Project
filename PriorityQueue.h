@@ -64,7 +64,7 @@ bool PriorityQueue<T>::enqueue(const v<T>& newEntry) {
 	}
 	Arr[++rear] = newEntry;
 	int i = 0; v<T> n = rear;
-	while (n.priority > Arr[rear - i - 1].priority) {
+	while (n.priority < Arr[rear - i - 1].priority) {
 		n = Arr[rear - i];
 		Arr[rear - i ] = rear[rear -i -1];
 		Arr[rear - i - 1] = n;
