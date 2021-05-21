@@ -139,26 +139,36 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AP.cpp" />
+    <ClCompile Include="ASSIGNtoLane.cpp" />
     <ClCompile Include="Booking.cpp" />
     <ClCompile Include="Cancellation.cpp" />
     <ClCompile Include="Event.cpp" />
+    <ClCompile Include="FinishedFlight.cpp" />
     <ClCompile Include="Flights.cpp" />
+    <ClCompile Include="FlyFromTo.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Promotion.cpp" />
     <ClCompile Include="Scheduler.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AP.h" />
     <ClInclude Include="AreasList.h" />
+    <ClInclude Include="ASSIGNtoLane.h" />
     <ClInclude Include="Booking.h" />
     <ClInclude Include="Cancellation.h" />
     <ClInclude Include="Eventlist.h" />
     <ClInclude Include="EVENTS\EVENTS.h" />
+    <ClInclude Include="FinishedFlight.h" />
     <ClInclude Include="Flights.h" />
     <ClInclude Include="Area.h" />
+    <ClInclude Include="FlyFromTo.h" />
     <ClInclude Include="LinkedQueue.h" />
     <ClInclude Include="LANElist.h" />
     <ClInclude Include="Lanes.h" />
     <ClInclude Include="Node.h" />
     <ClInclude Include="PriorityQueue.h" />
+    <ClInclude Include="Promotion.h" />
     <ClInclude Include="QueueADT.h" />
     <ClInclude Include="Scheduler.h" />
   </ItemGroup>
