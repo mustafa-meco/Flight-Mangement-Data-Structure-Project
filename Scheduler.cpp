@@ -1,4 +1,5 @@
 #include "Scheduler.h"
+
 using namespace std;
 
 
@@ -149,7 +150,24 @@ Eventlist Scheduler::prepareSimulation() {
 	case B:
 		Booking* Be = static_cast<Booking*>(eve);
 		Flights* fl = new Flights(ID,Be->getAreas(),Be.);
+	case X:
+		Cancellation* Ca = static_cast<Cancellation*>(eve);
+		for ()
 
 	}
 
 }	
+
+PriorityQueue<Flights*> Q1; //
+
+
+
+
+
+
+
+
+
+
+
+
