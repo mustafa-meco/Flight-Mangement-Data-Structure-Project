@@ -35,6 +35,7 @@ struct TnL {
 class Scheduler
 {
 private:
+	int N_Areas;
 	int tkft; //take off time 
 	int lndt; //landing time
 	int pnt; //one passenger on time
@@ -47,11 +48,19 @@ private:
 	//string* rawEvents;
 	PriorityQueue<EVENTS>* EventList;
 	PriorityQueue<EVENTS>* preparedEvents;
+	PriorityQueue<Flights>* AreasWaitinglist;
+	int normal_flights;
+	int VIP_flights;
 public:
 	Scheduler();
 	bool readFile(string );
 	Eventlist prepareSimulation();
 	void Simulate(Eventlist Evs);
 	void outToFile();
+	static int getAutoP();
+	int getnormal();
+	static int getvip();
+	void setnormal(int normal);
+	static void setvip(int vip);
 };
 
