@@ -10,7 +10,9 @@ bool Scheduler::readFile(string filename) {
 	string line;
 	
 	getline(F, line, ' ');
-	AreasL = new AreasList<Area>(stoi(line));
+	N_Areas = stoi(line);
+	AreasL = new AreasList<Area>(N_Areas);
+	AreasWaitinglist = new PriorityQueue<Flights>[N_Areas];
 	getline(F, line, ' ');
 	//TODO take off time //DONE
 	tkft = stoi(line);
@@ -98,8 +100,6 @@ bool Scheduler::readFile(string filename) {
 			Pass = stoi(line);
 			
 			events = new Booking(ID, E, AreasL->getArea(TfA), AreasL->getArea(LnA), type, Pass);
-			
-
 
 			//flights f = new flights(tfa, lna, type, ts, id, pass);
 			//flightsl.insert(f);
@@ -109,7 +109,7 @@ bool Scheduler::readFile(string filename) {
 			Ts = stoi(line);
 			getline(F, line);
 			ID = stoi(line);
-			events = new Cancellation(ID, E);
+			events = new Cancellation(ID);
 
 			break;
 		case P:
@@ -117,7 +117,7 @@ bool Scheduler::readFile(string filename) {
 			Ts = stoi(line);
 			getline(F, line);
 			ID = stoi(line);
-			events = new Promotion(ID, E);
+			events = new Promotion(ID);
 
 			break;
 		default:
@@ -148,8 +148,28 @@ Eventlist Scheduler::prepareSimulation() {
 	switch(eve->getEventT()) {
 	case B:
 		Booking* Be = static_cast<Booking*>(eve);
-		Flights* fl = new Flights(ID,Be->getAreas(),Be.);
+		Flights* fl = new Flights(ID,Be->getAreas(), Be->getType(), ev->priority, Be->getNpass());
+		AreasWaitinglist[Be->getAreas().TA]
 
 	}
 
 }	
+
+int Scheduler::getAutoP() {
+	return AP;
+}
+//void Scheduler::setAutoP(int AutoP) {
+//	AutoP = AutoP;
+//}
+int Scheduler::getnormal() {
+	return normal_flights;
+}
+int Scheduler::getvip() {
+	return VIP_flights;
+}
+void Scheduler::setnormal(int normal) {
+	normal_flights = normal;
+}
+void Scheduler::setvip(int vip) {
+	VIP_flights = vip;
+}
