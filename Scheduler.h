@@ -59,7 +59,7 @@ public:
 	//Scheduler();
 	bool readFile(string );
 	PriorityQueue<EVENTS*> prepareSimulation();
-	void Simulate(PriorityQueue<EVENTS> Evs);
+	void Simulate(PriorityQueue<EVENTS*> Evs);
 	void outToFile();
 	//static int getAutoP();
 	int getnormal();

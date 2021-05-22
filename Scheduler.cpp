@@ -39,16 +39,17 @@ bool Scheduler::readFile(string filename) {
 		//strcpy_s(value, line.c_str());
 		Dists[i] = new int[N_Areas];
 		//TODO store the dist. in matrix
-		for (int j = 0; j < N_Areas; j++) {
-			if (j == i) Dists[i][j] = 1;
-			else {
-				if (j == N_Areas - 1 || N_Areas == 2) 
+		for (int j = 0; j < N_Areas-1; j++) {
+			//if (j == i) Dists[i][j] = 1;
+			//else {
+				if (j == N_Areas - 2 ) 
 					getline(F, line);
 				else getline(F, line, ' '); 
 				cout << line << "( ";
 				Dists[i][j] = stoi(line);
-			}
+			//}
 		}
+		Dists[i][i] = 0;
 		//delete[] value;
 		cout << endl;
 	}
@@ -136,66 +137,121 @@ bool Scheduler::readFile(string filename) {
 	}
 }
 
-//PriorityQueue<EVENTS> Scheduler::prepareSimulation() {
-//	v<EVENTS>* ev;
-//	EVENTS* eve;
-//	EventList->dequeue(*ev);
-//	eve = &ev->value;
-//	int ID = eve->getID();
-//	Flights* fl;
-//	v<Flights>* flightnode;
-//	Area* tempArea;
-//	switch(eve->getEventT()) {
-//	case B:
-//		Booking* Be = static_cast<Booking*>(eve);
-//		fl = new Flights(ID,Be->getAreas(), Be->getType(), ev->priority, Be->getNpass());
-//		flightnode->priority = Be->getType() == VIP ? 0 :NULL /*(formula for priority depending on flight duration and no. of passengers)*/;
-//		AreasWaitinglist[fl->getTA()->getAreasNum() - 1].enqueue(*flightnode);
-//		break;
-//	case X:
-//		tempArea = getAreaByID(ID,fl);
-//		//if (tempArea) cancelFlight(fl);
-//		delete fl;
-//		//else;
-//		break;
-//	case P:
-//		tempArea = getAreaByID(ID, fl);
-//		if (tempArea) /*promoteflight(fl)*/fl->promote();
-//		flightnode->value = *fl;
-//		flightnode->priority = 0;
-//		AreasWaitinglist[tempArea->getAreasNum() - 1].enqueue(*flightnode);
-//		break;
-//	}
-//	int c ;
-//	Lanes* ServLane;
-//	for (int i = 0; i < N_Areas; i++) {
-//		c = 0;
-//		if (AreasWaitinglist[i].peek(*flightnode)) {
-//			switch (flightnode->value.getType())
-//			{
-//			case VIP:
-//				ServLane = flightnode->value.getTA()->getVIPlane(flightnode->priority);
-//				if (ServLane) {
-//					AreasWaitinglist[i].dequeue(*flightnode);
-//					c++;
-//					break;
-//				}
-//			case Normal:
-//				ServLane = flightnode->value.getTA()->getNORMlane(flightnode->priority);
-//				if (ServLane) {
-//					AreasWaitinglist[i].dequeue(*flightnode);
-//					c++;
-//				}
-//				break;
-//			}
-//		}
-//		if (c = 0) {
-//			
-//		}
-//	}
-//
-//
-//}	
+//==============================================================================================================||
+//																												||
+//												CONSTRUCTION AREA												||
+//																												||
+//==============================================================================================================||
+//																						  /\					||
+//				 /[]\																	 //\\					||
+//				/ ||  \																	//	\\					||	
+//			   /  ||    \															   //	 \\					||
+//	[]============||=================================================[]				  //	  \\				||
+//                ||												 ||				 //		   \\				||
+//                ||												 ||				//			\\				||
+//				  ||											     || 		   //			 \\				||
+//				  ||												 /\			  //			  \\			||
+//				  ||												/  \	     //				   \\			||
+//				  ||				  []				  [<code>][<code>]      //					\\			||
+//				  ||              []--||-------------    [<public>][<public>]  //					 \\			||
+//================||==================||============|=========================//					  \\		||
+//				  ||CONSTRUCTION AREA ||            |		[<private>]		 //						   \\		||
+//================||==================[]============|=======================//							\\		||
+//				  ||				   [<class>][<class>][<class>]		   //							 \\		||
+//				  ||			[<object>][<object>][<object>][<object>]  //							  \\	||
+//----------------[]-----------------------------------------------------//--------------------------------\\---||
+//==============================================================================================================||
+//==============================================================================================================||
+
+
+PriorityQueue<EVENTS*> Scheduler::prepareSimulation() {
+	v<EVENTS*>* ev = nullptr;
+	EVENTS* eve;
+	EventList.dequeue(*ev);
+	eve = ev->value;
+	int ID = eve->getID();
+	Flights* fl;
+	v<Flights*>* flightnode = nullptr;
+	Area* tempArea;
+	switch(eve->getEventT()) {
+	case B:
+		//Booking* Be = static_cast<Booking*>(eve);
+		//fl = new Flights(ID,Be->getAreas(), Be->getType(), ev->priority, Be->getNpass());
+		//flightnode->priority = Be->getType() == VIP ? 0 :NULL /*(formula for priority depending on flight duration and no. of passengers)*/;
+		//AreasWaitinglist[fl->getTA()->getAreasNum() - 1].enqueue(*flightnode);
+		//TODO make event booking and add to preparedevents
+		break;
+	case X:
+		tempArea = getAreaByID(ID,fl);
+		//if (tempArea) cancelFlight(fl); // TODO make event cancel and add to preparedevents
+		delete fl;
+		//else //TODO donothing;
+		break;
+	case P:
+		tempArea = getAreaByID(ID, fl);
+		if (tempArea) /*promoteflight(fl)*/fl->promote(); // TODO make event promotion and add to prepared events;
+		flightnode->value = fl;
+		flightnode->priority = 0;
+		AreasWaitinglist[tempArea->getAreasNum() - 1].enqueue(*flightnode);
+		break;
+	}
+	int c ;
+	Lanes* ServLane;
+	for (int i = 0; i < N_Areas; i++) {
+		c = 0;
+		if (AreasWaitinglist[i].peek(*flightnode)) {
+			switch (flightnode->value->getType())
+			{
+			case VIP:
+				ServLane = flightnode->value->getTA()->getVIPlane(flightnode->priority);
+				if (ServLane) {
+					AreasWaitinglist[i].dequeue(*flightnode);
+					c++;
+					break;
+				}
+			case Normal:
+				ServLane = flightnode->value->getTA()->getNORMlane(flightnode->priority);
+				if (ServLane) {
+					AreasWaitinglist[i].dequeue(*flightnode);
+					c++;
+				}
+				break;
+			}
+		}
+		/*if (c = 0) {
+			
+		}*/
+	}
+
+	return preparedEvents;
+}	
+
+//==============================================================================================================||
+//																												||
+//												CONSTRUCTION AREA												||
+//																												||
+//==============================================================================================================||
+//																						  /\					||
+//				 /[]\																	 //\\					||
+//				/ ||  \																	//	\\					||	
+//			   /  ||    \															   //	 \\					||
+//	[]============||=================================================[]				  //	  \\				||
+//                ||												 ||				 //		   \\				||
+//                ||												 ||				//			\\				||
+//				  ||											     || 		   //			 \\				||
+//				  ||												 /\			  //			  \\			||
+//				  ||												/  \	     //				   \\			||
+//				  ||				  []				  [<code>][<code>]      //					\\			||
+//				  ||              []--||-------------    [<public>][<public>]  //					 \\			||
+//================||==================||============|=========================//					  \\		||
+//				  ||CONSTRUCTION AREA ||            |		[<private>]		 //						   \\		||
+//================||==================[]============|=======================//							\\		||
+//				  ||				   [<class>][<class>][<class>]		   //							 \\		||
+//				  ||			[<object>][<object>][<object>][<object>]  //							  \\	||
+//----------------[]-----------------------------------------------------//--------------------------------\\---||
+//==============================================================================================================||
+//==============================================================================================================||
+
 
 //int Scheduler::getAutoP() {
 //	return AutoP;

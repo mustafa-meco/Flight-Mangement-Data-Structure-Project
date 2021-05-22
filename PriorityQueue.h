@@ -104,7 +104,7 @@ bool PriorityQueue<T>::peek(v<T>& frntEntry) const
 	if (isEmpty())
 		return false;
 
-	frntEntry = *Arr[front];
+	frntEntry = Arr[front];
 	return true;
 
 }
