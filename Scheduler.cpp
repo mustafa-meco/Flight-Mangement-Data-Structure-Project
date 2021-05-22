@@ -43,7 +43,6 @@ bool Scheduler::readFile(string filename) {
 		}
 		delete[] value;
 	}
-
 	Sp type;
 	int AvT, MA, MT;
 	Area* ar;
@@ -73,7 +72,6 @@ bool Scheduler::readFile(string filename) {
 	Sp type;
 	EVENTS* events;
 	v<EVENTS>* ev;
-	
 	//FlightsL = new FlightsList();
 	for (int i = 0; i < N_Events; i++) {
 		getline(F, line, ' ');
@@ -81,7 +79,6 @@ bool Scheduler::readFile(string filename) {
 		if (line == "B") E = B;
 		else if (line == "X") E = X;
 		else if (line == "P") E = P;
-
 		switch (E)
 		{
 		case B:
@@ -98,9 +95,7 @@ bool Scheduler::readFile(string filename) {
 			ID = stoi(line);
 			getline(F, line);
 			Pass = stoi(line);
-			
-			events = new Booking(ID, E, AreasL->getArea(TfA), AreasL->getArea(LnA), type, Pass);
-			Flights* f = new Flights(ID, LnA, TfA, Pass);
+			events = new Booking(ID,AreasL->getArea(TfA), AreasL->getArea(LnA), type, Pass);
 			//flights f = new flights(tfa, lna, type, ts, id, pass);
 			//flightsl.insert(f);
 			break;
@@ -110,7 +105,6 @@ bool Scheduler::readFile(string filename) {
 			getline(F, line);
 			ID = stoi(line);
 			events = new Cancellation(ID);
-
 			break;
 		case P:
 			getline(F, line, ' ');
@@ -118,7 +112,6 @@ bool Scheduler::readFile(string filename) {
 			getline(F, line);
 			ID = stoi(line);
 			events = new Promotion(ID);
-
 			break;
 		default:
 			break;
@@ -130,27 +123,45 @@ bool Scheduler::readFile(string filename) {
 		events = NULL;
 		ev = NULL;
 	}
-	
-	
-
-	
-
 }
 
-
 Eventlist Scheduler::prepareSimulation() {
-	
 	v<EVENTS>* ev;
 	EVENTS* eve;
 	EventList->dequeue(*ev);
 	eve = &ev->value;
-	int id = eve->getID();
+	int ID = eve->getID();
+	Flights* fl;
+	v<Flights>* flightnode;
+	Area* tempArea;
 	switch(eve->getEventT()) {
 	case B:
 		Booking* Be = static_cast<Booking*>(eve);
-		Flights* fl = new Flights(id,Be->getAreas(), Be->getType(), ev->priority, Be->getNpass());
-		AreasWaitinglist[Be->getAreas().TA];
-	
+		fl = new Flights(ID,Be->getAreas(), Be->getType(), ev->priority, Be->getNpass());
+		flightnode->priority = Be->getType() == VIP ? 0 :NULL /*(formula for priority depending on flight duration and no. of passengers)*/;
+		AreasWaitinglist[fl->getTA()->getAreasNum() - 1].enqueue(*flightnode);
+		break;
+	case X:
+		tempArea = getAreaByID(ID,fl);
+		//if (tempArea) cancelFlight(fl);
+		delete fl;
+		//else;
+		break;
+	case P:
+		tempArea = getAreaByID(ID, fl);
+		if (tempArea) /*promoteflight(fl)*/fl->promote();
+		flightnode->value = *fl;
+		flightnode->priority = 0;
+		AreasWaitinglist[tempArea->getAreasNum() - 1].enqueue(*flightnode);
+		break;
+	}
+
+	for (int i = 0; i < N_Areas; i++) {
+		if (AreasWaitinglist[i].peek(*flightnode)) {
+			if (flightnode->value.getType() == VIP) {
+				flightnode->value.getTA()->getVIPlane();
+			}
+		}
 	}
 
 }	
@@ -158,6 +169,7 @@ Eventlist Scheduler::prepareSimulation() {
 int Scheduler::getAutoP() {
 	return AP;
 }
+
 //void Scheduler::setAutoP(int AutoP) {
 //	AutoP = AutoP;
 //}
@@ -174,7 +186,33 @@ void Scheduler::setvip(int vip) {
 	VIP_flights = vip;
 }
 
-
+Area* Scheduler::getAreaByID(int ID, Flights*& reqF)  {
+	Flights* fl;
+	v<Flights>* flightnode;
+	int cou = 0;
+	for (int i = 0; i < N_Areas; i++) {
+		//v<Flights>* tempf ;
+		//AreasWaitinglist[i].dequeue(*tempf);
+		PriorityQueue<Flights>* tempQ = new PriorityQueue<Flights>;
+		//if (!(tempf->value.getID() == ID))
+		while (AreasWaitinglist[i].dequeue(*flightnode)) {
+			tempQ->enqueue(*flightnode);
+			flightnode = nullptr;
+			if (flightnode->value.getID() == ID) {
+				cou++;
+				*reqF = flightnode->value;
+				while (tempQ->dequeue(*flightnode))	AreasWaitinglist[i].enqueue(*flightnode);
+				break;
+			}
+		}
+		if (cou) {
+			return AreasL->getArea(i + 1);
+			break;
+		}
+		while (tempQ->dequeue(*flightnode)) AreasWaitinglist[i].enqueue(*flightnode);
+	}
+	return NULL;
+}
 void outputfile() {
 	string filename = "Output file";
 	ofstream file;                                                              //create file with name filename
@@ -182,7 +220,7 @@ void outputfile() {
 	file << "FT ID BT WT ST \n";
 	string line;
 	for (int i = 0; i < getnormal(); i++) {
-		
+
 		cout << line;
 		int ind;
 		for (int j = 0; j < line.length(); j++) {
@@ -196,3 +234,6 @@ void outputfile() {
 		file << line;
 	}
 }
+//bool Scheduler::cancelFlight(Flights* canceledFl, Area * are) {
+//	AreasWaitinglist[are->getAreasNum() - 1]
+//}

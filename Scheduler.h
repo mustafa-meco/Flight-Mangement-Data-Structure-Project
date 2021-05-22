@@ -48,13 +48,14 @@ private:
 	//string* rawEvents;
 	PriorityQueue<EVENTS>* EventList;
 	PriorityQueue<EVENTS>* preparedEvents;
-	PriorityQueue<Flights*> AreasWaitinglist;
+	PriorityQueue<Flights>* AreasWaitinglist;
 	int normal_flights;
-	static int VIP_flights;
+	int VIP_flights;
+	LinkedQueue<Flights>* ServingFlights;
+	LinkedQueue<Flights>* finishedFlights;
 public:
 	Scheduler();
 	bool readFile(string );
-	void outputfile();
 	Eventlist prepareSimulation();
 	void Simulate(Eventlist Evs);
 	void outToFile();
@@ -63,5 +64,8 @@ public:
 	static int getvip();
 	void setnormal(int normal);
 	static void setvip(int vip);
+	void promote(Flights* f);
+	Area* getAreaByID(int, Flights * & reqF) ;
+	bool cancelFlight(Flights*, Area*);
 };
 
