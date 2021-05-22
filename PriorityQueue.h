@@ -80,8 +80,8 @@ bool PriorityQueue<T>::enqueue(const v<T>& newEntry) {
 
 template<typename T>
 bool PriorityQueue<T>::dequeue(v<T>& frntEntry) {
-	if (isEmpty());
-	return false;
+	if (isEmpty())
+		return false;
 	if (front == rear) {
 		frntEntry = *Arr[front];
 		front = -1; rear = -1;
@@ -92,7 +92,7 @@ bool PriorityQueue<T>::dequeue(v<T>& frntEntry) {
 	if (front == size-1) {
 		front = (front + 1) % size - 1;
 	}
-	return true		
+	return true;
 	
 }
 
