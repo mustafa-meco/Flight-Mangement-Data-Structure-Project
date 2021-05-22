@@ -100,7 +100,7 @@ bool Scheduler::readFile(string filename) {
 			Pass = stoi(line);
 			
 			events = new Booking(ID, E, AreasL->getArea(TfA), AreasL->getArea(LnA), type, Pass);
-
+			Flights* f = new Flights(ID, LnA, TfA, Pass);
 			//flights f = new flights(tfa, lna, type, ts, id, pass);
 			//flightsl.insert(f);
 			break;
@@ -144,15 +144,13 @@ Eventlist Scheduler::prepareSimulation() {
 	EVENTS* eve;
 	EventList->dequeue(*ev);
 	eve = &ev->value;
-	int ID = eve->getID();
+	int id = eve->getID();
 	switch(eve->getEventT()) {
 	case B:
 		Booking* Be = static_cast<Booking*>(eve);
-		Flights* fl = new Flights(ID,Be->getAreas(), Be->getType(), ev->priority, Be->getNpass());
-		AreasWaitinglist[Be->getAreas().TA]
-	case X:
-		Cancellation* Ca = static_cast<Cancellation*>(eve);
-		for ()
+		Flights* fl = new Flights(id,Be->getAreas(), Be->getType(), ev->priority, Be->getNpass());
+		AreasWaitinglist[Be->getAreas().TA];
+	
 	}
 
 }	
@@ -174,4 +172,27 @@ void Scheduler::setnormal(int normal) {
 }
 void Scheduler::setvip(int vip) {
 	VIP_flights = vip;
+}
+
+
+void outputfile() {
+	string filename = "Output file";
+	ofstream file;                                                              //create file with name filename
+	file.open(filename + ".txt");
+	file << "FT ID BT WT ST \n";
+	string line;
+	for (int i = 0; i < getnormal(); i++) {
+		
+		cout << line;
+		int ind;
+		for (int j = 0; j < line.length(); j++) {
+			if (line.at(j) == '1') {
+				ind = j;
+				break;
+			}
+		}
+		line = line.substr(0, ind) + to_string(i + 1) + line.substr(ind + 1, line.length() - ind);
+
+		file << line;
+	}
 }

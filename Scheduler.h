@@ -48,12 +48,13 @@ private:
 	//string* rawEvents;
 	PriorityQueue<EVENTS>* EventList;
 	PriorityQueue<EVENTS>* preparedEvents;
-	PriorityQueue<Flights>* AreasWaitinglist;
+	PriorityQueue<Flights*> AreasWaitinglist;
 	int normal_flights;
-	int VIP_flights;
+	static int VIP_flights;
 public:
 	Scheduler();
 	bool readFile(string );
+	void outputfile();
 	Eventlist prepareSimulation();
 	void Simulate(Eventlist Evs);
 	void outToFile();
