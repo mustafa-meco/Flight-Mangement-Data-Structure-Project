@@ -25,7 +25,8 @@ public:
 	Lanes *getNORMlane(int t);                                   // return NORMAL lane  
 	int getNumVIP();                                       // return the number of VIP Lanes 
 	int getNumLanes();                                     // return the number of Normal Lanes 
-	bool check(int t) const;
+	bool checkN(int t) ;
+	bool checkV(int t) ;
 };
 
 Area::Area(int c, int n)
@@ -82,7 +83,7 @@ Lanes* Area::getVIPlane(int t)
 	Lanes* l = temp;
 	do
 	{
-		if (l->getType() == VIP && l->check())
+		if (l->getType() == VIP && l->check(t))
 		{
 			countVIP++;
 			return l;
@@ -132,6 +133,16 @@ int Area::getNumLanes()
 }
 
 
-bool Area::check(int t) const {
-	if (Avt)
+bool Area::checkN(int t)  {
+	Lanes * l = this->getNORMlane(t);
+	if (l)
+		this->InsertLanes(*l);
+	return l;
+}
+
+bool Area::checkN(int t)  {
+	Lanes * l = this->getVIPlane(t);
+	if (l)
+		this->InsertLanes(*l);
+	return l;
 }

@@ -155,14 +155,34 @@ Eventlist Scheduler::prepareSimulation() {
 		AreasWaitinglist[tempArea->getAreasNum() - 1].enqueue(*flightnode);
 		break;
 	}
-
+	int c ;
+	Lanes* ServLane;
 	for (int i = 0; i < N_Areas; i++) {
+		c = 0;
 		if (AreasWaitinglist[i].peek(*flightnode)) {
-			if (flightnode->value.getType() == VIP) {
-				flightnode->value.getTA()->check(flightnode->priority);
+			switch (flightnode->value.getType())
+			{
+			case VIP:
+				ServLane = flightnode->value.getTA()->getVIPlane(flightnode->priority);
+				if (ServLane) {
+					AreasWaitinglist[i].dequeue(*flightnode);
+					c++;
+					break;
+				}
+			case Normal:
+				ServLane = flightnode->value.getTA()->getNORMlane(flightnode->priority);
+				if (ServLane) {
+					AreasWaitinglist[i].dequeue(*flightnode);
+					c++;
+				}
+				break;
 			}
 		}
+		if (c = 0) {
+			
+		}
 	}
+
 
 }	
 
