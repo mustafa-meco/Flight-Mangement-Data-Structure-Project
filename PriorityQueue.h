@@ -32,7 +32,7 @@ template<typename T>
 PriorityQueue<T>::PriorityQueue(int s) {
 	front = -1;
 	rear = -1;
-	Arr = new T[s];
+	Arr = new v<T>[s];
 	size = s;
 }
 
@@ -66,11 +66,11 @@ bool PriorityQueue<T>::enqueue(const v<T>& newEntry) {
 		rear = (rear + 1) % size - 1;
 	}
 	Arr[++rear] = newEntry;
-	int i = 0; v<T> n = rear;
-	while (n.priority < Arr[rear - i - 1].priority) {
-		n = Arr[rear - i];
-		Arr[rear - i ] = rear[rear -i -1];
-		Arr[rear - i - 1] = n;
+	int i = 0; v<T>* n = &Arr[rear];
+	while (n->priority < Arr[rear - i - 1].priority) {
+		*n = Arr[rear - i];
+		Arr[rear - i ] = Arr[rear -i -1];
+		Arr[rear - i - 1] = *n;
 		if (rear - i == front)
 			break;
 		i++;
@@ -85,11 +85,11 @@ bool PriorityQueue<T>::dequeue(v<T>& frntEntry) {
 	if (isEmpty())
 		return false;
 	if (front == rear) {
-		frntEntry = *Arr[front];
+		frntEntry = Arr[front];
 		front = -1; rear = -1;
 	}
 	else
-	frntEntry = *Arr[front++];
+		frntEntry = Arr[front++];
 	
 	if (front == size-1) {
 		front = (front + 1) % size - 1;

@@ -1,21 +1,21 @@
 #include "Scheduler.h"
 
 
-Scheduler::Scheduler() {
-	
-}
+//Scheduler::Scheduler() {
+//	
+//}
 
 bool Scheduler::readFile(string filename) {
 	ifstream F;
 	
 	F.open(filename); cout << "Filename: " << filename << endl;
 	if (!F) return false;
-	string line;
+	string line = " ";
 	
 	getline(F, line, ' '); cout << "No. of Areas: " + line << endl;
 	N_Areas = stoi(line); 
 	AreasL = new Area*[N_Areas+1];
-	AreasWaitinglist = new PriorityQueue<Flights>[N_Areas];
+	AreasWaitinglist = new PriorityQueue<Flights*>[N_Areas];
 	getline(F, line, ' '); cout << "Take off time: " + line << endl;
 	//TODO take off time //DONE
 	tkft = stoi(line); 
@@ -33,7 +33,7 @@ bool Scheduler::readFile(string filename) {
 	for (int i = 0; i < N_Areas ; i++) {
 		getline(F, line, ' '); cout << line << " ";
 		Area* a = new Area(i,stoi(line)); //TODO store into DS 
-		AreasL[i+1];
+		AreasL[i+1]= a;
 		
 		//char* value = new char[line.length() + 1];
 		//strcpy_s(value, line.c_str());
@@ -42,7 +42,8 @@ bool Scheduler::readFile(string filename) {
 		for (int j = 0; j < N_Areas; j++) {
 			if (j == i) Dists[i][j] = 1;
 			else {
-				if (j == N_Areas - 1) getline(F, line);
+				if (j == N_Areas - 1 || N_Areas == 2) 
+					getline(F, line);
 				else getline(F, line, ' '); 
 				cout << line << "( ";
 				Dists[i][j] = stoi(line);
@@ -53,23 +54,23 @@ bool Scheduler::readFile(string filename) {
 	}
 	Sp type;
 	int AvT, MA, MT;
-	Area* ar;
+	Area* ar = nullptr;
 	cout << "Each Lane in each Area: \n";
-	for (int i = 0; i < N_Areas; i++) {
+	int total_N_Lanes = 0;
+	for (int i = 0; i < N_Areas; i++) total_N_Lanes += AreasL[i + 1]->getNumLanes();
+	for (int i = 0; i < total_N_Lanes; i++) {
 		getline(F, line, ' '); cout << line;
 		ar = AreasL[stoi(line)];
-		for (int j = 0; j < ar->getNumLanes(); j++) {
-			getline(F, line, ' '); cout << " " << line;
-			if (line == "V") type = VIP;
-			else type = Normal;
-			getline(F, line, ' '); cout << " " << line;
-			AvT = stoi(line);
-			getline(F, line, ' '); cout << " " << line;
-			MA = stoi(line);
-			getline(F, line); cout << " " << line << endl;
-			MT = stoi(line);
-			ar->InsertLanes(type, AvT, MA, MT);
-		}
+		getline(F, line, ' '); cout << " " << line;
+		if (line == "V") type = VIP;
+		else type = Normal;
+		getline(F, line, ' '); cout << " " << line;
+		AvT = stoi(line);
+		getline(F, line, ' '); cout << " " << line;
+		MA = stoi(line);
+		getline(F, line); cout << " " << line << endl;
+		MT = stoi(line);
+		ar->InsertLanes(type, AvT, MA, MT);
 	}
 	getline(F, line); cout << "Auto Promotion time: " + line << endl;
 	AutoP = stoi(line);
@@ -79,8 +80,8 @@ bool Scheduler::readFile(string filename) {
 	EventT E;
 	int TfA, LnA, Ts, ID, Pass;
 	//Sp type;
-	EVENTS* events;
-	v<EVENTS>* ev = new v<EVENTS>[N_Events];
+	EVENTS* events = nullptr;
+	v<EVENTS*>* ev = new v<EVENTS*>[N_Events];
 	//FlightsL = new FlightsList();
 	for (int i = 0; i < N_Events; i++) {
 		getline(F, line, ' '); cout << line;
@@ -128,11 +129,10 @@ bool Scheduler::readFile(string filename) {
 		cout << endl;
 		//ev[i] = { Ts, *events };
 		ev[i].priority = Ts;
-		ev[i].value = *events;
+		ev[i].value = events;
 		EventList.enqueue(ev[i]);
 		delete events;
 		events = NULL;
-		ev = NULL;
 	}
 }
 
@@ -219,19 +219,19 @@ void Scheduler::setnormal(int normal) {
 
 Area* Scheduler::getAreaByID(int ID, Flights*& reqF)  {
 	//Flights* fl = ;
-	v<Flights>* flightnode = nullptr;
+	v<Flights*>* flightnode = nullptr;
 	int cou = 0;
 	for (int i = 0; i < N_Areas; i++) {
 		//v<Flights>* tempf ;
 		//AreasWaitinglist[i].dequeue(*tempf);
-		PriorityQueue<Flights>* tempQ = new PriorityQueue<Flights>;
+		PriorityQueue<Flights*>* tempQ = new PriorityQueue<Flights*>;
 		//if (!(tempf->value.getID() == ID))
 		while (AreasWaitinglist[i].dequeue(*flightnode)) {
 			tempQ->enqueue(*flightnode);
 			flightnode = nullptr;	
-			if (flightnode->value.getID() == ID) {
+			if (flightnode->value->getID() == ID) {
 				cou++;
-				*reqF = flightnode->value;
+				reqF = flightnode->value;
 				while (tempQ->dequeue(*flightnode))	AreasWaitinglist[i].enqueue(*flightnode);
 				break;
 			}

@@ -6,8 +6,9 @@ using namespace std;
 
 int main() {
 
-	Scheduler Sc;
 	cout << "Flight Mangement System" << endl;
+	Scheduler Sc;
+	
 	cout << "please enter the input file name" << endl;
 	string filename;
 	//bool f;

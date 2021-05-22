@@ -6,6 +6,7 @@ Lanes::Lanes(Sp typ, int Avt, int MA, int MT) {
 	MainAft = MA;
 	MainTime = MT;
 	VARaft = 0;
+	VARtime = 0;
 	aval = false;
 }
 

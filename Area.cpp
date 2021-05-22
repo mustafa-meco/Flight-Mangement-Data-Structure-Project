@@ -4,8 +4,8 @@ Area::Area(int c, int n)
 {
 	AreaNum = c;
 	NumOfLanes = n;
-	lanesLIST = new LinkedQueue<Lanes>;               /////////////
-	NumOfAreas++;
+	lanesLIST = new LinkedQueue<Lanes*>;               /////////////
+	//NumOfAreas++;
 }
 
 // function insert lane +++ list of lanes
@@ -36,11 +36,11 @@ void Area::InsertLanes(Sp type, int Avt, int MA, int MT)
 		countNORM++;
 	}
 	Lanes* L1 = new Lanes(type, Avt, MA, MT);
-	lanesLIST->enqueue(*L1);
+	lanesLIST->enqueue(L1);
 	delete L1;
 }
 
-void Area::InsertLane(Lanes L) {
+void Area::InsertLane(Lanes* L) {
 	lanesLIST->enqueue(L);
 }
 
@@ -50,7 +50,7 @@ Lanes* Area::getVIPlane(int t)
 	// 	   
 		//for (/*int i = 0; i < NumOfLanes; i++*/)   
 	Lanes* temp = nullptr;
-	lanesLIST->dequeue(*temp);
+	lanesLIST->dequeue(temp);
 	Lanes* l = temp;
 	do
 	{
@@ -61,12 +61,12 @@ Lanes* Area::getVIPlane(int t)
 		}
 		else
 		{
-			lanesLIST->enqueue(*l);
+			lanesLIST->enqueue(l);
 		}
-		lanesLIST->dequeue(*l);
+		lanesLIST->dequeue(l);
 
 	} while (l != temp);
-	lanesLIST->enqueue(*l);
+	lanesLIST->enqueue(l);
 	return NULL;
 
 }
@@ -74,7 +74,7 @@ Lanes* Area::getVIPlane(int t)
 Lanes* Area::getNORMlane(int t)
 {
 	Lanes* temp = nullptr;
-	lanesLIST->dequeue(*temp);
+	lanesLIST->dequeue(temp);
 	Lanes* l = temp;
 	do
 	{
@@ -84,12 +84,12 @@ Lanes* Area::getNORMlane(int t)
 		}
 		else
 		{
-			lanesLIST->enqueue(*l);
+			lanesLIST->enqueue(l);
 		}
-		lanesLIST->dequeue(*l);
+		lanesLIST->dequeue(l);
 
 	} while (l != temp);
-	lanesLIST->enqueue(*l);
+	lanesLIST->enqueue(l);
 	return NULL;
 }
 
@@ -102,13 +102,13 @@ int Area::getNumVIP()
 bool Area::checkN(int t) {
 	Lanes* l = this->getNORMlane(t);
 	if (l)
-		this->InsertLane(*l);
+		this->InsertLane(l);
 	return l;
 }
 
 bool Area::checkV(int t) {
 	Lanes* l = this->getVIPlane(t);
 	if (l)
-		this->InsertLane(*l);
+		this->InsertLane(l);
 	return l;
 }

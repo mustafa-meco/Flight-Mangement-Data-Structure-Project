@@ -91,3 +91,8 @@ bool LinkedQueue<T>:: peek(T& frntEntry) const
 //	cout<<"\n Is LinkedQueue Empty now?? ==> "<<boolalpha<<isEmpty();
 //	cout<<"\nEnding LinkedQueue destructor..."<<endl;
 //}
+
+template <typename T>
+LinkedQueue<T>::~LinkedQueue() {
+
+}

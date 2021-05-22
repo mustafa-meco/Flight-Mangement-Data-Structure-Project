@@ -7,7 +7,7 @@ using namespace std;
 class Lanes
 {
 
-	char Lane_Specialization;
+	//char Lane_Specialization;
 	int Availability_Time;   //As the flight taxi becomes popular, more lanes will be added.A lane is available when it�s availability time is reached.
 	int MainAft;			  //Each lane needs servicing after a number of flights.
 	int MainTime;			//Each lane takes a service time to finish maintenance.
@@ -18,6 +18,7 @@ class Lanes
 
 
 public:
+
 	Lanes(Sp typ, int Avt, int MA, int MT);              //Constructor intialize the members
 	bool check(int t);                                // Boolean function to check the Availability of the lane.
 	Sp getType() const;                                        // getter for the type of the lane

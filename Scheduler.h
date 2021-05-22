@@ -47,18 +47,18 @@ private:
 	int N_Events;
 	//FlightsList<Flights>* FlightsL;
 	//string* rawEvents;
-	PriorityQueue<EVENTS> EventList;
-	PriorityQueue<EVENTS> preparedEvents;
-	PriorityQueue<Flights>* AreasWaitinglist;
+	PriorityQueue<EVENTS*> EventList;
+	PriorityQueue<EVENTS*> preparedEvents;
+	PriorityQueue<Flights*>* AreasWaitinglist;
 	int normal_flights;
 	int VIP_flights;
-	LinkedQueue<Flights> ServingFlights;
-	LinkedQueue<Flights> finishedFlights;
+	LinkedQueue<Flights*> ServingFlights;
+	LinkedQueue<Flights*> finishedFlights;
 public:
 	
-	Scheduler();
+	//Scheduler();
 	bool readFile(string );
-	PriorityQueue<EVENTS> prepareSimulation();
+	PriorityQueue<EVENTS*> prepareSimulation();
 	void Simulate(PriorityQueue<EVENTS> Evs);
 	void outToFile();
 	//static int getAutoP();
