@@ -44,13 +44,13 @@ private:
 	int N_Events;
 	//FlightsList<Flights>* FlightsL;
 	//string* rawEvents;
-	PriorityQueue<EVENTS>* EventList;
-	PriorityQueue<EVENTS>* preparedEvents;
+	PriorityQueue<EVENTS> EventList;
+	PriorityQueue<EVENTS> preparedEvents;
 	PriorityQueue<Flights>* AreasWaitinglist;
 	int normal_flights;
 	int VIP_flights;
-	LinkedQueue<Flights>* ServingFlights;
-	LinkedQueue<Flights>* finishedFlights;
+	LinkedQueue<Flights> ServingFlights;
+	LinkedQueue<Flights> finishedFlights;
 public:
 	Scheduler();
 	bool readFile(string );

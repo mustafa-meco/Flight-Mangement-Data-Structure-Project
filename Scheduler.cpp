@@ -2,6 +2,10 @@
 using namespace std;
 
 
+Scheduler::Scheduler() {
+	
+}
+
 bool Scheduler::readFile(string filename) {
 	ifstream F;
 	
@@ -124,7 +128,7 @@ bool Scheduler::readFile(string filename) {
 		cout << endl;
 		ev->priority = Ts;
 		ev->value = *events;
-		EventList->enqueue(*ev);
+		EventList.enqueue(*ev);
 		delete events;
 		events = NULL;
 		ev = NULL;
