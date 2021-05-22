@@ -9,4 +9,6 @@ EVENTS::EVENTS(int i)
 
 int EVENTS::getID() const { return ID; }
 //int EVENTS::getTS() const { return TS; }
-EventT EVENTS::getEventT() const { return tp; }
+EventT EVENTS::getEventT() const { 
+	return tp; 
+}

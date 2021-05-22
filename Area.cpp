@@ -40,7 +40,7 @@ void Area::InsertLanes(Sp type, int Avt, int MA, int MT)
 	delete L1;
 }
 
-void Area::InsertLanes(Lanes L) {
+void Area::InsertLane(Lanes L) {
 	lanesLIST->enqueue(L);
 }
 
@@ -102,13 +102,13 @@ int Area::getNumVIP()
 bool Area::checkN(int t) {
 	Lanes* l = this->getNORMlane(t);
 	if (l)
-		this->InsertLanes(*l);
+		this->InsertLane(*l);
 	return l;
 }
 
 bool Area::checkV(int t) {
 	Lanes* l = this->getVIPlane(t);
 	if (l)
-		this->InsertLanes(*l);
+		this->InsertLane(*l);
 	return l;
 }

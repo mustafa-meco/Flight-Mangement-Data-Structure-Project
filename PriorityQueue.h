@@ -1,14 +1,15 @@
 #pragma once
 
-#include "Scheduler.h"
-
+//#include "Scheduler.h"
+#include"Flights.h"
 template <typename T>
 struct v {
 	int priority;
 	T value;
 };
 
-
+//class Flights;
+class EVENTS;
 template <typename T>
 class PriorityQueue
 {

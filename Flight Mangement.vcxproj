@@ -160,6 +160,7 @@
     <ClInclude Include="Booking.h" />
     <ClInclude Include="Cancellation.h" />
     <ClInclude Include="Def.h" />
+    <ClInclude Include="definitions.h" />
     <ClInclude Include="Eventlist.h" />
     <ClInclude Include="EVENTS\EVENTS.h" />
     <ClInclude Include="FinishedFlight.h" />

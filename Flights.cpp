@@ -15,7 +15,7 @@ Flights::Flights(int ID, TnL ars, Sp ty, int ts, int pa) {
 //	}
 //}
 
-Sp Flights::getType() {
+Sp Flights::getType() const{
 	return Flight_Type;
 }
 

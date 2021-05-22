@@ -2,14 +2,16 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include "Lanes.h"
 #include "Area.h"
 #include "Booking.h"
 #include "PriorityQueue.h"
-#include "EVENTS/EVENTS.h"
+//#include "EVENTS/EVENTS.h"
 #include "Cancellation.h"
 #include "Promotion.h"
-#include "Flights.h"
+//#include "Flights.h"
 #include "Def.h"
+//#include "EVENTS/EVENTS.h"
 using namespace std;
 
 //enum Sp {Normal , VIP};
@@ -29,6 +31,7 @@ using namespace std;
 //	Sp typ;
 //	int Pass;
 //};
+
 
 class Scheduler
 {
@@ -52,6 +55,7 @@ private:
 	LinkedQueue<Flights> ServingFlights;
 	LinkedQueue<Flights> finishedFlights;
 public:
+	
 	Scheduler();
 	bool readFile(string );
 	PriorityQueue<EVENTS> prepareSimulation();
