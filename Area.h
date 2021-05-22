@@ -12,25 +12,27 @@ private:
 	static int NumOfAreas;			  //Variable for number of areas
 /*	static int** ArrOfAreas;*/		  //two dimentional array for areas  
 	int NumOfLanes;					  // Variable for number of lanes
-	LANElist<Lanes>* lanesLIST;		  //list to store the lanes
+	LinkedQueue<Lanes>* lanesLIST;		  //list to store the lanes
 public:
 
 	Area(int c, int n);          //constructor
 	int DisOfAreas(int);         // function to get the distance between the given area and the existing area
 	int getNumLanes();           // getter for number of lanes
 	int getAreasNum();           // getter for index of area
-	void InsertLanes(Sp type, int Avt, int MA, int MT);    //Function to store lanes and define its type  
-	Lanes* getVIPlane();                                    // return VIP lane
-	Lanes *getNORMlane();                                   // return NORMAL lane  
+	void InsertLanes(Sp, int, int, int);    //Function to store lanes and define its type  
+	void InsertLanes(Lanes L);
+	Lanes* getVIPlane(int);                                    // return VIP lane
+	Lanes *getNORMlane(int t);                                   // return NORMAL lane  
 	int getNumVIP();                                       // return the number of VIP Lanes 
 	int getNumLanes();                                     // return the number of Normal Lanes 
-	bool check();
+	bool check(int t) const;
 };
 
 Area::Area(int c, int n)
 {
 	AreaNum = c;
-	lanesLIST = new LANElist<Lanes>(n);               /////////////
+	NumOfLanes = n;
+	lanesLIST = new LinkedQueue<Lanes>;               /////////////
 	NumOfAreas++;
 }
 
@@ -50,65 +52,72 @@ int Area::getAreasNum()
 	return AreaNum;
 }
 
-void Area::InsertLanes(Sp typ, int Avt, int MA, int MT)
+void Area::InsertLanes(Sp type, int Avt, int MA, int MT)
 {
-	if (typ == VIP)
+	if (type == VIP)
 	{
 		countVIP++;
 	}
 
-	if (typ == Normal)
+	if (type == Normal)
 	{
 		countNORM++;
 	}
-	Lanes* L1 = new Lanes(typ, Avt, MA, MT);
-	lanesLIST->EnqueueLANES(*L1);
+	Lanes* L1 = new Lanes(type, Avt, MA, MT);
+	lanesLIST->enqueue(*L1);
 	delete L1;
 }
 
-Lanes* Area::getVIPlane()
+void Area::InsertLanes(Lanes L) {
+	lanesLIST->enqueue(L);
+}
+
+Lanes* Area::getVIPlane(int t)
 {
 //	Sp type;
 // 	   
 	//for (/*int i = 0; i < NumOfLanes; i++*/)   
-	Lanes* temp = &lanesLIST->Dequeue();
+	Lanes* temp;
+	lanesLIST->dequeue(*temp);
 	Lanes* l = temp;
 	do
 	{
 		if (l->getType() == VIP && l->check())
 		{
+			countVIP++;
 			return l;
 		}
 		else
 		{
-			lanesLIST->EnqueueLANES(*l);
+			lanesLIST->enqueue(*l);
 		}
-		l = &lanesLIST->Dequeue();
+		lanesLIST->dequeue(*l);
 
 	} while (l != temp);
-	lanesLIST->EnqueueLANES(*l);
+	lanesLIST->enqueue(*l);
 	return NULL;
 	
 }
 
-Lanes* Area::getNORMlane()
+Lanes* Area::getNORMlane(int t)
 {
-	Lanes* temp = &lanesLIST->Dequeue();
+	Lanes* temp;
+	lanesLIST->dequeue(*temp);
 	Lanes* l = temp;
 	do
 	{
-		if (l->getType() == Normal)
+		if (l->getType() == Normal && l->check(t))
 		{
 			return l;
 		}
 		else
 		{
-			lanesLIST->EnqueueLANES(*l);
+			lanesLIST->enqueue(*l);
 		}
-		l = &lanesLIST->Dequeue();
+		lanesLIST->dequeue(*l);
 
 	} while (l != temp);
-	lanesLIST->EnqueueLANES(*l);
+	lanesLIST->enqueue(*l);
 	return NULL;
 }
 
@@ -123,3 +132,6 @@ int Area::getNumLanes()
 }
 
 
+bool Area::check(int t) const {
+	if (Avt)
+}

@@ -159,7 +159,7 @@ Eventlist Scheduler::prepareSimulation() {
 	for (int i = 0; i < N_Areas; i++) {
 		if (AreasWaitinglist[i].peek(*flightnode)) {
 			if (flightnode->value.getType() == VIP) {
-				flightnode->value.getTA()->getVIPlane();
+				flightnode->value.getTA()->check(flightnode->priority);
 			}
 		}
 	}
