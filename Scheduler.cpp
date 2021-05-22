@@ -213,7 +213,27 @@ Area* Scheduler::getAreaByID(int ID, Flights*& reqF)  {
 	}
 	return NULL;
 }
+void outputfile() {
+	string filename = "Output file";
+	ofstream file;                                                              //create file with name filename
+	file.open(filename + ".txt");
+	file << "FT ID BT WT ST \n";
+	string line;
+	for (int i = 0; i < getnormal(); i++) {
 
+		cout << line;
+		int ind;
+		for (int j = 0; j < line.length(); j++) {
+			if (line.at(j) == '1') {
+				ind = j;
+				break;
+			}
+		}
+		line = line.substr(0, ind) + to_string(i + 1) + line.substr(ind + 1, line.length() - ind);
+
+		file << line;
+	}
+}
 //bool Scheduler::cancelFlight(Flights* canceledFl, Area * are) {
 //	AreasWaitinglist[are->getAreasNum() - 1]
 //}
