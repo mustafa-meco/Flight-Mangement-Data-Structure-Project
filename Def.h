@@ -1,17 +1,20 @@
 #pragma once
-#include "Scheduler.h"
 
-enum Sp { Normal = 0, VIP = 1 };
 
-enum EventT { B = 0, X = 1, P = 2 };
+//#include "Area.h"
 
-class TnL {
-private:
-
-public:
-	Area* TA;
-	Area* LA;
+enum Sp {
+	Normal,
+	VIP
 };
+
+
+enum EventT { B, X, P };
+
+//struct TnL {
+//	Area* TA;
+//	Area* LA;
+//};
 
 //struct Event {
 //	int ID;

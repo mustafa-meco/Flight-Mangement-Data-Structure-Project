@@ -1,13 +1,16 @@
 #pragma once
 #include "QueueADT.h"
 
+//#include "Scheduler.h"
+#include"Flights.h"
 template <typename T>
 struct v {
 	int priority = NULL;
 	T value = NULL;
 };
 
-
+//class Flights;
+class EVENTS;
 template <typename T>
 class PriorityQueue
 {

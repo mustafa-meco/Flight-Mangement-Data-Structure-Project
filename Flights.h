@@ -1,6 +1,9 @@
 #pragma once
-#include"Scheduler.h"
-
+//#include <iostream>
+//#include"Scheduler.h"
+//using namespace std;
+#include "Def.h"
+#include "Area.h"
 
 class Flights
 {
@@ -9,7 +12,7 @@ private:
 	int Arrival_Area; //This is the area that the flight finishes at.
 	int ID;
 	int time_service, time_wait;
-	int TS; //time stand
+	int TS; //time stand 
 	int landing_area;
 	
 	//double Departure_Area; //There are n areas for each area there is a specific number of lanes.A flight is reserved from an area to another, this is the area that the flight starts from.
@@ -22,7 +25,7 @@ public:
 	Flights(int ID, TnL, Sp, int , int );
 	//void AutoP(int time); // calls promote()
 	//check();
-	Sp getType();
+	Sp getType() const;
 	//bool cancel();
 	void promote();
 	Area* getTA() const;

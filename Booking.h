@@ -1,10 +1,12 @@
 #pragma once
+//#include "Scheduler.h"
 #include "EVENTS/EVENTS.h"
+#include "Area.h"
+using namespace std;
 
+//class EVENTS;
 
-class Booking :
-    public EVENTS
-{
+class Booking :public EVENTS{
 private:
     TnL As;
     Sp typ;
