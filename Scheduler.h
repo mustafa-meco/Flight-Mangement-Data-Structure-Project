@@ -51,6 +51,8 @@ private:
 	PriorityQueue<Flights>* AreasWaitinglist;
 	int normal_flights;
 	int VIP_flights;
+	LinkedQueue<Flights>* ServingFlights;
+	LinkedQueue<Flights>* finishedFlights;
 public:
 	Scheduler();
 	bool readFile(string );
@@ -62,5 +64,8 @@ public:
 	static int getvip();
 	void setnormal(int normal);
 	static void setvip(int vip);
+	void promote(Flights* f);
+	Area* getAreaByID(int, Flights * & reqF) ;
+	bool cancelFlight(Flights*, Area*);
 };
 

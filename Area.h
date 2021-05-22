@@ -20,10 +20,11 @@ public:
 	int getNumLanes();           // getter for number of lanes
 	int getAreasNum();           // getter for index of area
 	void InsertLanes(Sp type, int Avt, int MA, int MT);    //Function to store lanes and define its type  
-	Lanes getVIPlane();                                    // return VIP lane
-	Lanes getNORMlane();                                   // return NORMAL lane  
+	Lanes* getVIPlane();                                    // return VIP lane
+	Lanes *getNORMlane();                                   // return NORMAL lane  
 	int getNumVIP();                                       // return the number of VIP Lanes 
 	int getNumLanes();                                     // return the number of Normal Lanes 
+	bool check();
 };
 
 Area::Area(int c, int n)
@@ -65,7 +66,7 @@ void Area::InsertLanes(Sp typ, int Avt, int MA, int MT)
 	delete L1;
 }
 
-Lanes Area::getVIPlane()
+Lanes* Area::getVIPlane()
 {
 //	Sp type;
 // 	   
@@ -74,32 +75,9 @@ Lanes Area::getVIPlane()
 	Lanes* l = temp;
 	do
 	{
-		if (l->getType() == VIP)
+		if (l->getType() == VIP && l->check())
 		{
-			return *l;
-		}
-		else
-		{
-			lanesLIST->EnqueueLANES(*l);
-		}
-		l = &lanesLIST->Dequeue();
-
-	} while (l != temp);
-		lanesLIST->EnqueueLANES(*l);
-
-		
-	
-}
-
-Lanes Area::getNORMlane()
-{
-	Lanes* temp = &lanesLIST->Dequeue();
-	Lanes* l = temp;
-	do
-	{
-		if (l->getType() == Normal)
-		{
-			return *l;
+			return l;
 		}
 		else
 		{
@@ -109,6 +87,29 @@ Lanes Area::getNORMlane()
 
 	} while (l != temp);
 	lanesLIST->EnqueueLANES(*l);
+	return NULL;
+	
+}
+
+Lanes* Area::getNORMlane()
+{
+	Lanes* temp = &lanesLIST->Dequeue();
+	Lanes* l = temp;
+	do
+	{
+		if (l->getType() == Normal)
+		{
+			return l;
+		}
+		else
+		{
+			lanesLIST->EnqueueLANES(*l);
+		}
+		l = &lanesLIST->Dequeue();
+
+	} while (l != temp);
+	lanesLIST->EnqueueLANES(*l);
+	return NULL;
 }
 
 int Area::getNumVIP()

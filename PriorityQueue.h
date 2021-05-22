@@ -23,6 +23,7 @@ public:
 	bool enqueue(const v<T>& newEntry);
 	bool dequeue(v<T>& frntEntry);
 	bool isFull() const;
+	bool peek(v<T>& frntEntry)  const;
 };
 
 template<typename T>
@@ -93,4 +94,15 @@ bool PriorityQueue<T>::dequeue(v<T>& frntEntry) {
 	}
 	return true		
 	
+}
+
+template<typename T>
+bool PriorityQueue<T>::peek(v<T>& frntEntry) const
+{
+	if (isEmpty())
+		return false;
+
+	frntEntry = *Arr[front];
+	return true;
+
 }

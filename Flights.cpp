@@ -1,8 +1,12 @@
 #include "Flights.h"
 
-Flights::Flights(int ID, int no_areas, int take_off_time, int landing_time, int passenger_boarding_time, int passenger_off_boarding_time) {
+Flights::Flights(int ID, TnL ars, Sp ty, int ts, int pa) {
 	this->ID = ID;
 	//this-> take_off_time= 
+	Areas = ars;
+	Flight_Type = ty;
+	Booking_Timestamp = ts;
+	Passengers = pa;
 }
 
 void Flights::AutoP(int time) {
@@ -18,8 +22,12 @@ Sp Flights::getType() {
 
 void Flights::promote() {
 	int a = Scheduler::getvip();
-	Scheduler::setvip(a++);
+	//Scheduler::setvip(a++);
 }
+
+Area* Flights::getTA() const { return Areas.TA; }
+
+int Flights::getID() const { return ID; }
 
 Flights::~Flights() {
 
