@@ -1,7 +1,5 @@
-#include <iostream>
-#include "Flights.h"
 #include "Scheduler.h"
-#include "Eventlist.h"
+//#include "Def.h"
 using namespace std;
 
 int main() {

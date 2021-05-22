@@ -1,5 +1,4 @@
 #include "Scheduler.h"
-using namespace std;
 
 
 Scheduler::Scheduler() {
@@ -64,7 +63,8 @@ bool Scheduler::readFile(string filename) {
 			if (line == "V") type = VIP;
 			else type = Normal;
 			getline(F, line, ' '); cout << " " << line;
-			getline(F, line, ' '); cout << " " << line << endl;
+			AvT = stoi(line);
+			getline(F, line, ' '); cout << " " << line;
 			MA = stoi(line);
 			getline(F, line); cout << " " << line << endl;
 			MT = stoi(line);
@@ -80,7 +80,7 @@ bool Scheduler::readFile(string filename) {
 	int TfA, LnA, Ts, ID, Pass;
 	//Sp type;
 	EVENTS* events;
-	v<EVENTS>* ev;
+	v<EVENTS>* ev = new v<EVENTS>[N_Events];
 	//FlightsL = new FlightsList();
 	for (int i = 0; i < N_Events; i++) {
 		getline(F, line, ' '); cout << line;
@@ -126,9 +126,10 @@ bool Scheduler::readFile(string filename) {
 			break;
 		}
 		cout << endl;
-		ev->priority = Ts;
-		ev->value = *events;
-		EventList.enqueue(*ev);
+		//ev[i] = { Ts, *events };
+		ev[i].priority = Ts;
+		ev[i].value = *events;
+		EventList.enqueue(ev[i]);
 		delete events;
 		events = NULL;
 		ev = NULL;
@@ -217,8 +218,8 @@ void Scheduler::setnormal(int normal) {
 //}
 
 Area* Scheduler::getAreaByID(int ID, Flights*& reqF)  {
-	Flights* fl;
-	v<Flights>* flightnode;
+	//Flights* fl = ;
+	v<Flights>* flightnode = nullptr;
 	int cou = 0;
 	for (int i = 0; i < N_Areas; i++) {
 		//v<Flights>* tempf ;
@@ -227,7 +228,7 @@ Area* Scheduler::getAreaByID(int ID, Flights*& reqF)  {
 		//if (!(tempf->value.getID() == ID))
 		while (AreasWaitinglist[i].dequeue(*flightnode)) {
 			tempQ->enqueue(*flightnode);
-			flightnode = nullptr;
+			flightnode = nullptr;	
 			if (flightnode->value.getID() == ID) {
 				cou++;
 				*reqF = flightnode->value;
@@ -237,7 +238,6 @@ Area* Scheduler::getAreaByID(int ID, Flights*& reqF)  {
 		}
 		if (cou) {
 			return AreasL[i+1];
-			break;
 		}
 		while (tempQ->dequeue(*flightnode)) AreasWaitinglist[i].enqueue(*flightnode);
 	}

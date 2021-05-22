@@ -1,8 +1,6 @@
 #pragma once
 #include "Lanes.h"
-#include "Scheduler.h"
-#include "LinkedQueue.h"
-using namespace std;
+
 
 class Area
 {
@@ -18,14 +16,14 @@ private:
 public:
 
 	Area(int c, int n);          //constructor
-	int DisOfAreas(int);         // function to get the distance between the given area and the existing area
+	//int DisOfAreas(int);         // function to get the distance between the given area and the existing area
 	int getNumLanes();           // getter for number of lanes
 	int getAreasNum();           // getter for index of area
-	void InsertLanes(Sp, int, int, int);    //Function to store lanes and define its type  
-	void InsertLanes(Lanes L);
+	void InsertLanes(Sp type, int Avt, int MA, int MT);    //Function to store lanes and define its type  
+	void InsertLanes1(Lanes* L);
 	Lanes* getVIPlane(int);                                    // return VIP lane
 	Lanes *getNORMlane(int t);                                   // return NORMAL lane  
-	int getNumVIP();                                       // return the number of VIP Lanes 
+	int getNumVIP();                                      // return the number of VIP Lanes 
 	bool checkN(int t) ;
 	bool checkV(int t) ;
 };

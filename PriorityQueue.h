@@ -1,11 +1,10 @@
 #pragma once
-
-#include "Scheduler.h"
+#include "QueueADT.h"
 
 template <typename T>
 struct v {
-	int priority;
-	T value;
+	int priority = NULL;
+	T value = NULL;
 };
 
 

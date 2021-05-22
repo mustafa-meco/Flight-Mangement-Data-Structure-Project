@@ -1,6 +1,5 @@
 #pragma once
 #include "../Scheduler.h"
-using namespace std;
 
 class EVENTS
 {

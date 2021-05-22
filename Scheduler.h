@@ -5,10 +5,10 @@
 #include "Area.h"
 #include "Booking.h"
 #include "PriorityQueue.h"
-#include "EVENTS/EVENTS.h"
 #include "Cancellation.h"
 #include "Promotion.h"
 #include "Flights.h"
+#include "LinkedQueue.h"
 #include "Def.h"
 using namespace std;
 
@@ -63,7 +63,7 @@ public:
 	void setnormal(int normal);
 	//static void setvip(int vip);
 	void promote(Flights* f);
-	Area* getAreaByID(int, Flights * & reqF) ;
+	Area* getAreaByID(int, Flights * & reqF);
 	bool cancelFlight(Flights*, Area*);
 };
 

@@ -40,8 +40,8 @@ void Area::InsertLanes(Sp type, int Avt, int MA, int MT)
 	delete L1;
 }
 
-void Area::InsertLanes(Lanes L) {
-	lanesLIST->enqueue(L);
+void Area::InsertLanes1(Lanes* L) {
+	lanesLIST->enqueue(*L);
 }
 
 Lanes* Area::getVIPlane(int t)
@@ -49,7 +49,7 @@ Lanes* Area::getVIPlane(int t)
 	//	Sp type;
 	// 	   
 		//for (/*int i = 0; i < NumOfLanes; i++*/)   
-	Lanes* temp;
+	Lanes* temp = nullptr;
 	lanesLIST->dequeue(*temp);
 	Lanes* l = temp;
 	do
@@ -73,7 +73,7 @@ Lanes* Area::getVIPlane(int t)
 
 Lanes* Area::getNORMlane(int t)
 {
-	Lanes* temp;
+	Lanes* temp = nullptr;
 	lanesLIST->dequeue(*temp);
 	Lanes* l = temp;
 	do
@@ -102,13 +102,13 @@ int Area::getNumVIP()
 bool Area::checkN(int t) {
 	Lanes* l = this->getNORMlane(t);
 	if (l)
-		this->InsertLanes(*l);
+		this->InsertLanes1(l);
 	return l;
 }
 
 bool Area::checkV(int t) {
 	Lanes* l = this->getVIPlane(t);
 	if (l)
-		this->InsertLanes(*l);
+		this->InsertLanes1(l);
 	return l;
 }

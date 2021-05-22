@@ -1,7 +1,5 @@
 #pragma once
-#include <iostream>
 #include"Scheduler.h"
-using namespace std;
 
 
 class Flights
@@ -22,7 +20,7 @@ private:
 	TnL Areas;
 public:
 	Flights(int ID, TnL, Sp, int , int );
-	void AutoP(int time); // calls promote()
+	//void AutoP(int time); // calls promote()
 	//check();
 	Sp getType();
 	//bool cancel();

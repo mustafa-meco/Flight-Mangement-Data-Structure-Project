@@ -1,11 +1,14 @@
 #pragma once
 #include "Scheduler.h"
 
-enum Sp { Normal, VIP };
+enum Sp { Normal = 0, VIP = 1 };
 
-enum EventT { B, X, P };
+enum EventT { B = 0, X = 1, P = 2 };
 
-struct TnL {
+class TnL {
+private:
+
+public:
 	Area* TA;
 	Area* LA;
 };
