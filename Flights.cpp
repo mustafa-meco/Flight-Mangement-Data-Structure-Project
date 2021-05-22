@@ -9,11 +9,11 @@ Flights::Flights(int ID, TnL ars, Sp ty, int ts, int pa) {
 	Passengers = pa;
 }
 
-void Flights::AutoP(int time) {
-	if (time == Scheduler::getAutoP()) {
-		promote();
-	}
-}
+//void Flights::AutoP(int time) {
+//	if (time == Scheduler::getAutoP()) {
+//		promote();
+//	}
+//}
 
 Sp Flights::getType() {
 	return Flight_Type;
@@ -21,7 +21,7 @@ Sp Flights::getType() {
 
 
 void Flights::promote() {
-	int a = Scheduler::getvip();
+	//int a = Scheduler::getvip();
 	//Scheduler::setvip(a++);
 }
 

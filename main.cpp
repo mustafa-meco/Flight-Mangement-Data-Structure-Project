@@ -4,26 +4,26 @@
 #include "Eventlist.h"
 using namespace std;
 
-void main() {
+int main() {
 
 	Scheduler Sc;
 	cout << "Flight Mangement System" << endl;
 	cout << "please enter the input file name" << endl;
 	string filename;
-	bool f;
+	//bool f;
 	do {
 		cin >> filename;
-		f = Sc.readFile(filename);
-	} while (!f);
+		//f = Sc.readFile(filename);
+	} while (!Sc.readFile(filename));
 
-	Eventlist Events = Sc.prepareSimulation();
-	Sc.Simulate(Events);
-	//cout << "please enter the output file name" << endl;
-	
-	Sc.outToFile();
+	//Eventlist Events = Sc.prepareSimulation();
+	//Sc.Simulate(Events);
+	////cout << "please enter the output file name" << endl;
+	//
+	//Sc.outToFile();
 	//cout << "please enter the output file name --- (Default: FlightOutput.txt)\nenter 0 for default";
 	//cin >> filename;
 	//if (filename == 0) 
 		//Sc.OutFile("FlightOutput.txt");
-
+	return 0;
 }

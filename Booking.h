@@ -1,6 +1,7 @@
 #pragma once
 #include "EVENTS/EVENTS.h"
-
+#include "Scheduler.h"
+using namespace std;
 
 
 class Booking :

@@ -140,13 +140,15 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AP.cpp" />
+    <ClCompile Include="Area.cpp" />
     <ClCompile Include="ASSIGNtoLane.cpp" />
     <ClCompile Include="Booking.cpp" />
     <ClCompile Include="Cancellation.cpp" />
-    <ClCompile Include="Event.cpp" />
+    <ClCompile Include="EVENTS\EVENTS.cpp" />
     <ClCompile Include="FinishedFlight.cpp" />
     <ClCompile Include="Flights.cpp" />
     <ClCompile Include="FlyFromTo.cpp" />
+    <ClCompile Include="Lanes.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Promotion.cpp" />
     <ClCompile Include="Scheduler.cpp" />
@@ -157,12 +159,14 @@
     <ClInclude Include="ASSIGNtoLane.h" />
     <ClInclude Include="Booking.h" />
     <ClInclude Include="Cancellation.h" />
+    <ClInclude Include="Def.h" />
     <ClInclude Include="Eventlist.h" />
     <ClInclude Include="EVENTS\EVENTS.h" />
     <ClInclude Include="FinishedFlight.h" />
     <ClInclude Include="Flights.h" />
     <ClInclude Include="Area.h" />
     <ClInclude Include="FlyFromTo.h" />
+    <ClInclude Include="LinkedList.h" />
     <ClInclude Include="LinkedQueue.h" />
     <ClInclude Include="LANElist.h" />
     <ClInclude Include="Lanes.h" />

@@ -2,26 +2,24 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-#include "Flights.h"
 #include "Area.h"
-#include "Eventlist.h"
-#include "AreasList.h"
 #include "Booking.h"
 #include "PriorityQueue.h"
 #include "EVENTS/EVENTS.h"
 #include "Cancellation.h"
 #include "Promotion.h"
-
+#include "Flights.h"
+#include "Def.h"
 using namespace std;
 
-enum Sp {Normal , VIP};
-
-enum EventT {B, X, P, AP, ASSIGNtoLane, FlyFromTo, FinishedFlight};
-
-struct TnL {
-	Area* TA;
-	Area* LA;
-};
+//enum Sp {Normal , VIP};
+//
+//enum EventT {B, X, P, AP, ASSIGNtoLane, FlyFromTo, FinishedFlight};
+//
+//struct TnL {
+//	Area* TA;
+//	Area* LA;
+//};
 
 //struct Event {
 //	int ID;
@@ -40,7 +38,7 @@ private:
 	int lndt; //landing time
 	int pnt; //one passenger on time
 	int pft; //one passenger off time
-	AreasList<Area>* AreasL;
+	Area** AreasL;
 	int AutoP;
 	int** Dists;
 	int N_Events;
@@ -56,14 +54,14 @@ private:
 public:
 	Scheduler();
 	bool readFile(string );
-	Eventlist prepareSimulation();
-	void Simulate(Eventlist Evs);
+	PriorityQueue<EVENTS> prepareSimulation();
+	void Simulate(PriorityQueue<EVENTS> Evs);
 	void outToFile();
-	static int getAutoP();
+	//static int getAutoP();
 	int getnormal();
-	static int getvip();
+	//static int getvip();
 	void setnormal(int normal);
-	static void setvip(int vip);
+	//static void setvip(int vip);
 	void promote(Flights* f);
 	Area* getAreaByID(int, Flights * & reqF) ;
 	bool cancelFlight(Flights*, Area*);
