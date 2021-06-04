@@ -16,7 +16,7 @@ private:
 public:
 
 	Area(int c, int n);          //constructor
-	int DisOfAreas(int);         // function to get the distance between the given area and the existing area
+	//int DisOfAreas(int);         // function to get the distance between the given area and the existing area
 	int getNumLanes();           // getter for number of lanes
 	int getAreasNum();           // getter for index of area
 	void InsertLanes(Sp type, int Avt, int MA, int MT);    //Function to store lanes and define its type  
