@@ -29,6 +29,7 @@ public:
 	//bool cancel();
 	void promote();
 	Area* getTA() const;
+	Area* getLA() const;
 	int getID() const;
 	~Flights();
 };

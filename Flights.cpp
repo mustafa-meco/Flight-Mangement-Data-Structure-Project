@@ -26,6 +26,7 @@ void Flights::promote() {
 }
 
 Area* Flights::getTA() const { return Areas.TA; }
+Area* Flights::getTA() const { return Areas.LA; }
 
 int Flights::getID() const { return ID; }
 
