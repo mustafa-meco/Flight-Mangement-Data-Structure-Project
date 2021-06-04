@@ -173,7 +173,7 @@ PriorityQueue<EVENTS*> Scheduler::prepareSimulation() {
 	Flights* fl;
 	v<Flights*>* flightnode = nullptr;
 	Area* tempArea;
-	switch(eve->getEventT()) {
+	switch (eve->getEventT()) {
 	case B:
 		//Booking* Be = static_cast<Booking*>(eve);
 		//fl = new Flights(ID,Be->getAreas(), Be->getType(), ev->priority, Be->getNpass());
@@ -182,7 +182,7 @@ PriorityQueue<EVENTS*> Scheduler::prepareSimulation() {
 		//TODO make event booking and add to preparedevents
 		break;
 	case X:
-		tempArea = getAreaByID(ID,fl);
+		tempArea = getAreaByID(ID, fl);
 		//if (tempArea) cancelFlight(fl); // TODO make event cancel and add to preparedevents
 		delete fl;
 		//else //TODO donothing;
@@ -195,36 +195,40 @@ PriorityQueue<EVENTS*> Scheduler::prepareSimulation() {
 		AreasWaitinglist[tempArea->getAreasNum() - 1].enqueue(*flightnode);
 		break;
 	}
-	int c ;
+	int c;
 	Lanes* ServLane;
 	for (int i = 0; i < N_Areas; i++) {
 		c = 0;
-		if (AreasWaitinglist[i].peek(*flightnode)) {
-			switch (flightnode->value->getType())
-			{
-			case VIP:
-				ServLane = flightnode->value->getTA()->getVIPlane(flightnode->priority);
-				if (ServLane) {
-					AreasWaitinglist[i].dequeue(*flightnode);
-					c++;
+		do {
+			if (AreasWaitinglist[i].peek(*flightnode)) {
+				switch (flightnode->value->getType())
+				{
+				case VIP:
+					ServLane = flightnode->value->getTA()->getVIPlane(flightnode->priority);
+					if (ServLane) {
+						AreasWaitinglist[i].dequeue(*flightnode);
+						c++;
+						break;
+					}
+				case Normal:
+					ServLane = flightnode->value->getTA()->getNORMlane(flightnode->priority);
+					if (ServLane) {
+						AreasWaitinglist[i].dequeue(*flightnode);
+						c++;
+					}
+					else c = 0;
 					break;
 				}
-			case Normal:
-				ServLane = flightnode->value->getTA()->getNORMlane(flightnode->priority);
-				if (ServLane) {
-					AreasWaitinglist[i].dequeue(*flightnode);
-					c++;
-				}
-				break;
 			}
-		}
-		/*if (c = 0) {
-			
-		}*/
+		} while (c);
 	}
-
+	
+	// pass * pt + taking off time = Event(flyfromto)
+	// A1-A2 + time landing + pass *pl = Event(Finished)
+	// 
 	return preparedEvents;
-}	
+}
+
 
 //==============================================================================================================||
 //																												||
