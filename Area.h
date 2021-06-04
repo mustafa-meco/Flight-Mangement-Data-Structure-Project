@@ -1,124 +1,39 @@
 #pragma once
 #include "Lanes.h"
-#include "LANElist.h"
-#include "Scheduler.h"
-class Area
-{
+//#include "Scheduler.h"
+#include "LinkedQueue.h"
+#include "Def.h"
+using namespace std;
+//class Scheduler;
+//class Lanes;
+
+
+
+class Area {
 
 private:
 	int countVIP;                     //counter for the VIP lanes
 	int countNORM;                    //counter for the normal lanes
 	int AreaNum;					  // index for each area
-	static int NumOfAreas;			  //Variable for number of areas
+	//static int NumOfAreas;			  //Variable for number of areas
 /*	static int** ArrOfAreas;*/		  //two dimentional array for areas  
 	int NumOfLanes;					  // Variable for number of lanes
-	LANElist<Lanes>* lanesLIST;		  //list to store the lanes
+	LinkedQueue<Lanes*>* lanesLIST;		  //list to store the lanes
 public:
 
 	Area(int c, int n);          //constructor
 	//int DisOfAreas(int);         // function to get the distance between the given area and the existing area
 	int getNumLanes();           // getter for number of lanes
 	int getAreasNum();           // getter for index of area
-	void InsertLanes(Sp type, int Avt, int MA, int MT);    //Function to store lanes and define its type  
-	Lanes getVIPlane();                                    // return VIP lane
-	Lanes getNORMlane();                                   // return NORMAL lane  
+	void InsertLanes(Sp s, int, int, int);    //Function to store lanes and define its type  
+	void InsertLane(Lanes* L);
+	Lanes* getVIPlane(int);                                    // return VIP lane
+	Lanes* getNORMlane(int t);                                   // return NORMAL lane  
 	int getNumVIP();                                       // return the number of VIP Lanes 
-	int getNumLanes();                                     // return the number of Normal Lanes 
+	bool checkN(int t);
+	bool checkV(int t);
 };
-
-Area::Area(int c, int n)
-{
-	AreaNum = c;
-	lanesLIST = new LANElist<Lanes>(n);               /////////////
-	NumOfAreas++;
-}
-
-// function insert lane +++ list of lanes
-//int Area::DisOfAreas(int A)
-//{
-//	return ArrOfAreas[AreaNum][A];
-//}
-
-int Area::getNumLanes()
-{
-	return NumOfLanes;
-}
-
-int Area::getAreasNum()
-{
-	return AreaNum;
-}
-
-void Area::InsertLanes(Sp typ, int Avt, int MA, int MT)
-{
-	if (typ == VIP)
-	{
-		countVIP++;
-	}
-
-	if (typ == Normal)
-	{
-		countNORM++;
-	}
-	Lanes* L1 = new Lanes(typ, Avt, MA, MT);
-	lanesLIST->EnqueueLANES(*L1);
-	delete L1;
-}
-
-Lanes Area::getVIPlane()
-{
-//	Sp type;
-// 	   
-	//for (/*int i = 0; i < NumOfLanes; i++*/)   
-	Lanes* temp = &lanesLIST->Dequeue();
-	Lanes* l = temp;
-	do
-	{
-		if (l->getType() == VIP)
-		{
-			return *l;
-		}
-		else
-		{
-			lanesLIST->EnqueueLANES(*l);
-		}
-		l = &lanesLIST->Dequeue();
-
-	} while (l != temp);
-		lanesLIST->EnqueueLANES(*l);
-
-		
-	
-}
-
-Lanes Area::getNORMlane()
-{
-	Lanes* temp = &lanesLIST->Dequeue();
-	Lanes* l = temp;
-	do
-	{
-		if (l->getType() == Normal)
-		{
-			return *l;
-		}
-		else
-		{
-			lanesLIST->EnqueueLANES(*l);
-		}
-		l = &lanesLIST->Dequeue();
-
-	} while (l != temp);
-	lanesLIST->EnqueueLANES(*l);
-}
-
-int Area::getNumVIP()
-{
-	return countVIP;
-}
-
-int Area::getNumLanes()
-{
-	return countNORM;
-}
-
-
+struct TnL {
+	Area* TA;
+	Area* LA;
+};
