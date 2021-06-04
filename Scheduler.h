@@ -68,6 +68,8 @@ public:
 	//static void setvip(int vip);
 	void promote(Flights* f);
 	Area* getAreaByID(int, Flights * & reqF);
-	bool cancelFlight(Flights*, Area*);
+	bool cancelFlight(int ID);
+	void Refersh(); 
+
 };
 

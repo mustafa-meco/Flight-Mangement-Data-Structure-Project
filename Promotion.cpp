@@ -1,5 +1,6 @@
 #include "Promotion.h"
 
-Promotion::Promotion(/*int t,*/ int i) : EVENTS(/*t,*/ i) {
-	tp = P;
+Promotion::Promotion(int t, int i) : EVENTS(t, i)
+{
+
 }

@@ -303,6 +303,65 @@ Area* Scheduler::getAreaByID(int ID, Flights*& reqF)  {
 	}
 	return NULL;
 }
+
+bool Scheduler::cancelFlight(int ID)
+{
+	v<EVENTS*> *temp= nullptr;
+	preparedEvents.dequeue(*temp);
+	Booking *P =static_cast <Booking*> (temp->value);
+	v<EVENTS*>* first = temp;
+
+	do
+	{
+		if (P->getID()==ID)
+		{
+			delete temp;
+			return true; 
+		}
+		else
+		{
+			preparedEvents.enqueue(*temp);
+		}
+		preparedEvents.dequeue(*temp);
+
+	} while (first != temp);
+
+	preparedEvents.enqueue(*temp);
+	return false;
+}
+//
+//void Scheduler::Refersh()
+//{
+//
+//}
+
+//Lanes* Area::getVIPlane(int t)
+//{
+//	//	Sp type;
+//	// 	   
+//		//for (/*int i = 0; i < NumOfLanes; i++*/)   
+//	Lanes* temp = nullptr;
+//	lanesLIST->dequeue(temp);
+//	Lanes* l = temp;
+//	do
+//	{
+//		if (l->getType() == VIP && l->check(t))
+//		{
+//			countVIP++;
+//			return l;
+//		}
+//		else
+//		{
+//			lanesLIST->enqueue(l);
+//		}
+//		lanesLIST->dequeue(l);
+//
+//	} while (l != temp);
+//	lanesLIST->enqueue(l);
+//	return NULL;
+//
+//}
+
 //void outputfile() {
 //	string filename = "Output file";
 //	ofstream file;                                                              //create file with name filename

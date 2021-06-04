@@ -1,6 +1,6 @@
 #include "Booking.h"
 
-Booking::Booking(/*int t,*/ int i, Area* ta, Area* la, Sp ty, int pa) : EVENTS(i) {
+Booking::Booking(int t, int i, Area* ta, Area* la, Sp ty, int pa) : EVENTS(t,i) {
 	As.TA = ta;
 	As.LA = la;
 	typ = ty;
