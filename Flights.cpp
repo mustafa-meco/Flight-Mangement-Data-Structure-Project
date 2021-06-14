@@ -1,5 +1,9 @@
 #include "Flights.h"
 
+Flights::Flights() {
+	
+}
+
 Flights::Flights(int ID, TnL ars, Sp ty, int ts, int pa) {
 	this->ID = ID;
 	//this-> take_off_time= 
@@ -21,13 +25,32 @@ Sp Flights::getType() const{
 
 
 void Flights::promote() {
-	//int a = Scheduler::getvip();
+	Flight_Type = VIP;
 	//Scheduler::setvip(a++);
 }
 
 Area* Flights::getTA() const { return Areas.TA; }
 
 int Flights::getID() const { return ID; }
+
+int Flights::getBT() const{
+	return boarding_time;
+}
+void Flights::ToServe(int time) {
+	wait_time = time- TS;
+}
+
+int Flights::getWT() const {
+
+	return wait_time;
+}
+int Flights::getST() const {
+	return service_time;
+}
+int Flights::getFT() const {
+	return getBT() + getWT() + getST();
+}
+
 
 Flights::~Flights() {
 

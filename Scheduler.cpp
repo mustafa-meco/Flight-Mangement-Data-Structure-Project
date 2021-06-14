@@ -257,25 +257,31 @@ PriorityQueue<EVENTS*> Scheduler::prepareSimulation() {
 //==============================================================================================================||
 
 
-//int Scheduler::getAutoP() {
-//	return AutoP;
-//}
+int Scheduler::getAutoP() {
+	return AutoP;
+}
 
-//void Scheduler::setAutoP(int AutoP) {
-//	AutoP = AutoP;
-//}
-int Scheduler::getnormal() {
+void Scheduler::setAutoP(int AutoP) {
+	AutoP = AutoP;
+}
+int Scheduler::getnormal() const{
 	return normal_flights;
 }
-//int Scheduler::getvip() {
-//	//return VIP_flights;
-//}
+int Scheduler::getvip() const{
+	return VIP_flights;
+}
 void Scheduler::setnormal(int normal) {
 	normal_flights = normal;
 }
 //void Scheduler::setvip(int vip) {
 //	//VIP_flights = vip;
 //}
+
+void Scheduler::promote(v<Flights*>* f) {
+	normal_flights--;
+	VIP_flights++;
+	f->priority = 0;
+}
 
 Area* Scheduler::getAreaByID(int ID, Flights*& reqF)  {
 	//Flights* fl = ;
@@ -303,27 +309,39 @@ Area* Scheduler::getAreaByID(int ID, Flights*& reqF)  {
 	}
 	return NULL;
 }
-//void outputfile() {
-//	string filename = "Output file";
-//	ofstream file;                                                              //create file with name filename
-//	file.open(filename + ".txt");
-//	file << "FT ID BT WT ST \n";
-//	string line;
-//	for (int i = 0; i < getnormal(); i++) {
-//
-//		cout << line;
-//		int ind;
-//		for (int j = 0; j < line.length(); j++) {
-//			if (line.at(j) == '1') {
-//				ind = j;
-//				break;
-//			}
-//		}
-//		line = line.substr(0, ind) + to_string(i + 1) + line.substr(ind + 1, line.length() - ind);
-//
-//		file << line;
-//	}
-//}
+
+void Scheduler::outputfile() {
+	string filename = "Output file";
+	ofstream file;                                                              //create file with name filename
+	file.open(filename + ".txt");
+	file << "FT ID BT WT ST \n";
+	int FT, ID, BT, WT, ST;
+	int sumWT = 0;
+	int sumST = 0;
+	
+	Flights* F;
+	EVENTS* E;
+	while(finishedFlights.dequeue(F)) {
+		 FT= F->getFT() ;
+		 ID = F->getID();
+		 BT = F->getBT();
+		 WT = F->getWT();
+		 sumWT = sumWT + WT;
+		 ST = F->getST();
+		 sumST = sumST + ST;
+
+		file << FT << " "<< ID <<" "<< BT<<" "<<WT<<" "<<ST<<endl;
+	}
+	file << "Flights: " << getnormal() + getvip() << "[Norm: " << getnormal() << ", VIP: " << getvip()<<endl;
+	file << "Areas: " << N_Areas<<endl;
+	for (int i = 0; i < N_Areas; i++) {
+		file << "Area " <<i<<":"<<"Lanes: " << AreasL[i]->getNumLanes()<<endl;
+	}
+	file << "Avg Wait = " << sumWT/(getnormal() + getvip()) << ", Avg Serv = " << sumST/ (getnormal() + getvip() )<<endl;
+	file << "Auto-promoted: " << getAutoP() << endl;
+	
+}
+
 //bool Scheduler::cancelFlight(Flights* canceledFl, Area * are) {
 //	AreasWaitinglist[are->getAreasNum() - 1]
 //}

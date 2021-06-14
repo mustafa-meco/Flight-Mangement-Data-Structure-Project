@@ -17,6 +17,7 @@ private:
 protected:
 	EventT tp;
 public:
+	EVENTS();
 	EVENTS(int i);
 	//int getTS() const;
 	int getID() const;

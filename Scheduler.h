@@ -14,23 +14,6 @@
 //#include "EVENTS/EVENTS.h"
 using namespace std;
 
-//enum Sp {Normal , VIP};
-//
-//enum EventT {B, X, P, AP, ASSIGNtoLane, FlyFromTo, FinishedFlight};
-//
-//struct TnL {
-//	Area* TA;
-//	Area* LA;
-//};
-
-//struct Event {
-//	int ID;
-//	int TS;
-//	int TA;
-//	int LA;
-//	Sp typ;
-//	int Pass;
-//};
 
 
 class Scheduler
@@ -60,14 +43,17 @@ public:
 	bool readFile(string );
 	PriorityQueue<EVENTS*> prepareSimulation();
 	void Simulate(PriorityQueue<EVENTS*> Evs);
-	void outToFile();
-	//static int getAutoP();
-	int getnormal();
-	//static int getvip();
+	void outputfile();
+	int getAutoP();
+	void setAutoP(int AutoP);
+		int getnormal() const;
+	int getvip() const;
 	void setnormal(int normal);
 	//static void setvip(int vip);
-	void promote(Flights* f);
+	void promote(v<Flights*>* f);
 	Area* getAreaByID(int, Flights * & reqF);
 	bool cancelFlight(Flights*, Area*);
+	int get_AVG_wait();
+	int get_AVG_serve();
 };
 
