@@ -4,12 +4,13 @@
 //#include "Area.h"
 
 enum Sp {
-	Normal,
-	VIP
+	
+	VIP,
+	Normal
 };
 
 
-enum EventT { B, X, P };
+enum EventT { B, X, P , L, F, FF};
 
 //struct TnL {
 //	Area* TA;

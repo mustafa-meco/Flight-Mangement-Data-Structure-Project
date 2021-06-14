@@ -13,6 +13,8 @@
 #include "Def.h"
 //#include "EVENTS/EVENTS.h"
 #include "ASSIGNtoLane.h"
+#include "FlyFromTo.h"
+#include "FinishedFlight.h"
 using namespace std;
 
 //enum Sp {Normal , VIP};
@@ -59,7 +61,7 @@ public:
 	
 	//Scheduler();
 	bool readFile(string );
-	PriorityQueue<EVENTS*> prepareSimulation();
+	PriorityQueue<EVENTS*> prepare();
 	void Simulate(PriorityQueue<EVENTS*> Evs);
 	void outToFile();
 	//static int getAutoP();
@@ -70,7 +72,9 @@ public:
 	void promote(Flights* f);
 	Area* getAreaByID(int, Flights * & reqF);
 	bool cancelFlight(int ID);
+	void ServeFligh(Flights *);
 	void Refersh(); 
-
+	void preServe(v<Flights*>*);
+	Lanes checkLane(int t,)
 };
 

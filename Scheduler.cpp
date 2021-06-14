@@ -164,7 +164,145 @@ bool Scheduler::readFile(string filename) {
 //==============================================================================================================||
 
 
-PriorityQueue<EVENTS*> Scheduler::prepareSimulation() {
+PriorityQueue<EVENTS*> Scheduler::prepare() {
+	int curT = 0; int ID;
+	v<EVENTS*>* EventNode = nullptr;
+	EVENTS* Event;
+	Flights* tempFlight;
+	v<Flights*>* FlightNode;
+	Area* tempArea;
+	Lanes* tempLane;
+	
+	while (EventList.dequeue(*EventNode)) {
+		Event = EventNode->value;
+		ID = Event->getID();
+		curT = EventNode->priority;
+		EventT Etype = Event->getEventT();
+		switch (Etype)
+		{
+		case B:
+			Booking* BookEvent = static_cast<Booking*>(Event);
+			tempFlight = new Flights(ID, BookEvent->getAreas(), BookEvent->getType(), EventNode->priority, BookEvent->getNpass());
+			FlightNode->priority = BookEvent->getType() == VIP ? 0 : NULL /*(formula for priority depending on flight duration and no. of passengers)*/;
+			AreasWaitinglist[tempFlight->getTA()->getAreasNum() - 1].enqueue(*FlightNode);
+			//preparedEvents.enqueue(*EventNode);
+			break;
+		case X:
+			if (getAreaByID(ID, tempFlight)) cancelFlight(ID);
+			else delete EventNode->value;
+			Event = nullptr;
+			break;
+		case P:
+			if (getAreaByID(ID, tempFlight)) {
+				/*promoteflight(fl)*/tempFlight->promote(); // TODO make event promotion and add to prepared events
+				FlightNode->value = tempFlight;
+				FlightNode->priority = 0;
+				AreasWaitinglist[tempArea->getAreasNum() - 1].enqueue(*FlightNode);
+				preparedEvents.enqueue(*EventNode);
+			}
+			else delete EventNode->value;
+			Event = nullptr;
+			break;
+		case L:
+			ASSIGNtoLane * Ass2LaneEvent = static_cast<ASSIGNtoLane*>(Event);
+			*tempLane = Ass2LaneEvent->getAssignedLane1();
+			getAreaByID(ID,tempFlight);
+			//TODO
+			//ServeFlight(tempFlight,curT); //call function to move the flight from waiting list to serving list
+			//TODO
+			//tempLane->Served() /*call function to apply that it has been used and decrement the Maintainance after*/
+			break;
+		case F:
+			FlyFromTo * Fly2Event = static_cast<FlyFromTo*>(Event);
+			*tempLane = Fly2Event->getFromLane();
+			tempLane->Activate();
+			break;
+		case FF:
+			FinishedFlight * FinFlyEvent = static_cast<FinishedFlight*>(Event);
+			*tempLane = FinFlyEvent->getFinishedLane();
+			tempLane->Activate();
+			break;
+		default:
+			break;
+		}
+		Lanes* ServLane, *LandLane;
+		Sp FlightType;
+		for (int i = 0; i < N_Areas; i++) {
+			int c = 0;
+			while (c == 0) {
+				if (AreasWaitinglist[i].dequeue(*FlightNode)) {
+					//TODO
+					//preServe(FlightNode) //Function to assign a Lane and make Assign to Lane Event for both taking off and landing 
+				}
+			}
+			//refresh();
+		}
+		///////////////////////
+		for (int i = 0; i < N_Areas; i++) {
+			int c = 0;
+			do {
+				if (AreasWaitinglist[i].peek(*FlightNode)) {
+					//LnT = curT + calcTO(flightnode->value) + calcFly(flightnode->value);
+					switch (FlightNode->value->getType())
+					{
+					case VIP:
+						
+						if (FlightNode->value->getTA()->checkV(curT) && FlightNode->value->getLA()->checkV(LnT)) {
+
+							ServLane = flightnode->value->getTA()->getVIPlane(curT);
+							//LandLane = flightnode->value->getLA()->getVIPlane(LnT);
+							AreasWaitinglist[i].dequeue(*flightnode);
+							ASSIGNtoLane* EV = new ASSIGNtoLane(curT);
+						}
+
+						//if (ServLane) {
+						//	/*AreasWaitinglist[i].dequeue(*flightnode);
+						//	ASSIGNtoLane *= new ASSIGNtoLane();*/
+						//	//c++;
+						//	break;
+						//}
+					case Normal:
+						ServLane = flightnode->value->getTA()->getNORMlane(curT);
+						/*if (ServLane) {
+							AreasWaitinglist[i].dequeue(*flightnode);
+							c++;
+						}
+						else c = 0;*/
+						break;
+					}
+					switch (flightnode->value->getType())
+					{
+					case VIP:
+						LandLane = flightnode->value.getLA()->getVIPlane(curT + calcTO(flightnode->value) + calcFly(flightnode->value));
+						if (LandLane) {
+							break;
+						}
+
+					case Normal:
+						LandLane = flightnode->value->getLA()->getNORMlane(curT + calcTO(flightnode->value) + calcFly(flightnode->value));
+						/*if (ServLane) {
+							AreasWaitinglist[i].dequeue(*flightnode);
+							c++;
+						}
+						else c = 0;*/
+						break;
+					}
+					if (ServLane && LandLane) {
+						AreasWaitinglist[i].dequeue(*flightnode);
+
+						ASSIGNtoLane *= new ASSIGNtoLane();
+						c++;
+						break;
+					}
+					ServLane->Serving()
+						ServLane = NULL;
+				}
+			} while (c);
+		}
+	}
+}
+
+PriorityQueue<EVENTS*> Scheduler::prepare() {
 	int curT = 0;
 	int nextT = 0;
 	int tempT = 0;
@@ -225,7 +363,7 @@ PriorityQueue<EVENTS*> Scheduler::prepareSimulation() {
 								ServLane = flightnode->value->getTA()->getVIPlane(curT);
 								LandLane = flightnode->value->getLA()->getVIPlane(LnT);
 								AreasWaitinglist[i].dequeue(*flightnode);
-								ASSIGNtoLane *= new ASSIGNtoLane(curT);
+								ASSIGNtoLane * EV= new ASSIGNtoLane(curT);
 							}
 
 							//if (ServLane) {
@@ -338,7 +476,7 @@ Area* Scheduler::getAreaByID(int ID, Flights*& reqF)  {
 		//if (!(tempf->value.getID() == ID))
 		while (AreasWaitinglist[i].dequeue(*flightnode)) {
 			tempQ->enqueue(*flightnode);
-			flightnode = nullptr;	
+			//flightnode = nullptr;	
 			if (flightnode->value->getID() == ID) {
 				cou++;
 				reqF = flightnode->value;
@@ -436,3 +574,9 @@ bool Scheduler::cancelFlight(int ID)
 //bool Scheduler::cancelFlight(Flights* canceledFl, Area * are) {
 //	AreasWaitinglist[are->getAreasNum() - 1]
 //}
+
+
+
+
+
+

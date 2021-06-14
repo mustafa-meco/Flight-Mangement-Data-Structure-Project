@@ -23,7 +23,7 @@ public:
 	bool check(int t);                                // Boolean function to check the Availability of the lane.
 	Sp getType() const;                                        // getter for the type of the lane
 	void Activate();                                     // function to activate the lane 
-	bool Serving(int time1, int time2);                  // function to serve the lane (deactivate the lane during the serving time)
+	bool Serving (int time1, int time2);                  // function to serve the lane (deactivate the lane during the serving time)
 };
 
 
