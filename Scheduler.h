@@ -33,7 +33,7 @@ using namespace std;
 //	int Pass;
 //};
 
-
+//template <typename T>
 class Scheduler
 {
 private:
@@ -55,6 +55,10 @@ private:
 	int VIP_flights;
 	LinkedQueue<Flights*> ServingFlights;
 	LinkedQueue<Flights*> finishedFlights;
+	template <typename T>
+	void RefershP(PriorityQueue<T*> q);
+	void RefershLinK(LinkedQueue<Flights*> q);
+
 public:
 	
 	//Scheduler();
@@ -70,7 +74,7 @@ public:
 	void promote(Flights* f);
 	Area* getAreaByID(int, Flights * & reqF);
 	bool cancelFlight(int ID);
-	void Refersh(); 
+	void RefershAll();
 
 };
 
