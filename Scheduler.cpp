@@ -517,11 +517,58 @@ bool Scheduler::cancelFlight(int ID)
 	preparedEvents.enqueue(*temp);
 	return false;
 }
-//
-//void Scheduler::Refersh()
-//{
-//
-//}
+
+void Scheduler::RefershAll() // To arrange the contents of the list after changing its priopority 
+{
+	RefershP(EventList);
+	RefershP(preparedEvents);
+	RefershP(*AreasWaitinglist);
+	RefershLinK(ServingFlights);
+	RefershLinK(finishedFlights);
+}
+
+template <typename T>
+void Scheduler::RefershP(PriorityQueue<T*> q)
+{
+	T x,y;
+	int i = 0;
+	q.peek(x);
+	while (q.dequeue(y))
+	{
+		if (x==y)
+		{
+			i++;
+		}
+		if (i==3)
+		{
+			break;
+		}
+		q.enqueue(y);
+
+	}
+}
+
+void Scheduler::RefershLinK(LinkedQueue<Flights*> q)
+{
+	Flights* x;
+	Flights* y;
+
+	int i = 0;
+	q.peek(x);
+	while (q.dequeue(y))
+	{
+		if (x == y)
+		{
+			i++;
+		}
+		if (i == 3)
+		{
+			break;
+		}
+		q.enqueue(y);
+
+	}
+}
 
 //Lanes* Area::getVIPlane(int t)
 //{
