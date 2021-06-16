@@ -13,10 +13,9 @@ private:
 	TnL AssignedArea; 
 
 public:
-	ASSIGNtoLane();
-	ASSIGNtoLane(int T, int id, Lanes l, Area A); 
-	Lanes getAssignedLane1();
-	Lanes getAssignedLane2();
+	ASSIGNtoLane(int T, int id, Lanes l, Area A);
+	Lanes getAssignedLane1() const;
+	Lanes getAssignedLane2() const;
 	//int getIDAssign();
 	//TnL getAssignedArea();
 	//int getTimeAssign();

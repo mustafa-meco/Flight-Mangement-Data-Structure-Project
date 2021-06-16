@@ -38,3 +38,22 @@ int Flights::getPassNUM()
 {
 	return Passengers;
 }
+}
+
+
+///this function is to refresh the flight by taking the current time and calculate the waiting time and if it is normal and its waiting time above autoprom time, it will return false to be auto promoted
+bool Flights::refresh(int ct) {
+	WT = ct - TS;
+	switch (Flight_Type)
+	{
+	case Normal:
+		return WT < autoProm;
+	default:
+		break;
+	}
+	return true;
+}
+
+void Flights::setAutoProm(int ap) {
+	autoProm = ap;
+}

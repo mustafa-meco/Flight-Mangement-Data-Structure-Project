@@ -14,6 +14,8 @@
 //#include "EVENTS/EVENTS.h"
 #include "ASSIGNtoLane.h"
 #include "FlyFromTo.h"
+#include "FlyFromTo.h"
+#include "FinishedFlight.h"
 using namespace std;
 
 //enum Sp {Normal , VIP};
@@ -56,15 +58,15 @@ private:
 	int VIP_flights;
 	LinkedQueue<Flights*> ServingFlights;
 	LinkedQueue<Flights*> finishedFlights;
-	template <typename T>
-	void RefershP(PriorityQueue<T*> q);
+	void RefershPE(PriorityQueue<EVENTS*> q);
+	void RefershPF(PriorityQueue<Flights*> q,int );
 	void RefershLinK(LinkedQueue<Flights*> q);
 
 public:
 	
 	//Scheduler();
 	bool readFile(string );
-	PriorityQueue<EVENTS*> prepareSimulation();
+	PriorityQueue<EVENTS*> prepare();
 	void Simulate(PriorityQueue<EVENTS*> Evs);
 	void outToFile();
 	//static int getAutoP();
@@ -81,6 +83,12 @@ public:
 //	bool CheckLane(Lanes l, int time);
 	void serveFlight(Flights *F, int t);
 	void preServe(v<Flights*>* f, int curT)
+	void RefershAll(int);
 
+	void ServeFligh(Flights *);
+	void Refersh(int); 
+	bool preServe(v<Flights*>*, int);
+	//Lanes getLane(Sp , int t1, int t2);
+	bool checkLane(Lanes*);
 };
 
