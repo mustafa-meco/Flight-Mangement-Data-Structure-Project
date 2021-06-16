@@ -2,7 +2,7 @@
 
 EVENTS::EVENTS(int i)
 {
-	//TS = t;
+	TS = t;
 	ID = i;
 	//tp = et;
 }

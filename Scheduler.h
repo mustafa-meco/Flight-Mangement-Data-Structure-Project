@@ -57,8 +57,8 @@ private:
 	int VIP_flights;
 	LinkedQueue<Flights*> ServingFlights;
 	LinkedQueue<Flights*> finishedFlights;
-	template <typename T>
-	void RefershP(PriorityQueue<T*> q);
+	void RefershPE(PriorityQueue<EVENTS*> q);
+	void RefershPF(PriorityQueue<Flights*> q,int );
 	void RefershLinK(LinkedQueue<Flights*> q);
 
 public:
@@ -76,11 +76,12 @@ public:
 	void promote(Flights* f);
 	Area* getAreaByID(int, Flights * & reqF);
 	bool cancelFlight(int ID);
-	void RefershAll();
+	void RefershAll(int);
 
 	void ServeFligh(Flights *);
-	void Refersh(); 
-	void preServe(v<Flights*>*);
-	Lanes checkLane(int t,)
+	void Refersh(int); 
+	bool preServe(v<Flights*>*, int);
+	//Lanes getLane(Sp , int t1, int t2);
+	bool checkLane(Lanes*);
 };
 

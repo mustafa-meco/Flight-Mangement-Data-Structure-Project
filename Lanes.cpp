@@ -1,6 +1,6 @@
 #include "Lanes.h"
 
-Lanes::Lanes(Sp typ, int Avt, int MA, int MT) {
+Lanes::Lanes(Sp typ, int Avt, int MA, int MT,int i) {
 	type = typ;
 	Availability_Time = Avt;
 	MainAft = MA;
@@ -8,6 +8,7 @@ Lanes::Lanes(Sp typ, int Avt, int MA, int MT) {
 	VARaft = 0;
 	VARtime = 0;
 	aval = false;
+	ID = i;
 }
 
 //bool Lanes::check(int time )
