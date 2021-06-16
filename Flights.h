@@ -32,4 +32,6 @@ public:
 	Area* getLA() const;
 	int getID() const;
 	~Flights();
+	int getPassNUM();
+	
 };

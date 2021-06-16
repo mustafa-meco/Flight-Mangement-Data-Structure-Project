@@ -1,8 +1,13 @@
 #include "ASSIGNtoLane.h"
 
-ASSIGNtoLane::ASSIGNtoLane(int T, int id, Lanes l, Area A): EVENTS(T, id)
+ASSIGNtoLane::ASSIGNtoLane() 
 {
 
+}
+ASSIGNtoLane::ASSIGNtoLane(int T, int id, Lanes l, Area A): EVENTS(T, id)
+{
+	AssignedLane1 = l;
+	AssignedArea.TA = &A;
 }
 //Lanes ASSIGNtoLane::getLane0()
 //{

@@ -66,3 +66,11 @@ bool Lanes::Serving(int time1, int time2)
 bool Lanes::check(int t) {
 	return Availability_Time < t;
 }
+
+void Lanes::served()
+{
+	if (VARaft++>MainAft)
+	{
+		VARtime = 0;
+	}
+}

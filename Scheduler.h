@@ -13,6 +13,7 @@
 #include "Def.h"
 //#include "EVENTS/EVENTS.h"
 #include "ASSIGNtoLane.h"
+#include "FlyFromTo.h"
 using namespace std;
 
 //enum Sp {Normal , VIP};
@@ -75,6 +76,11 @@ public:
 	Area* getAreaByID(int, Flights * & reqF);
 	bool cancelFlight(int ID);
 	void RefershAll();
+	int calcFly(Flights* f);
+	int calcTO(Flights* f);
+//	bool CheckLane(Lanes l, int time);
+	void serveFlight(Flights *F, int t);
+	void preServe(v<Flights*>* f, int curT)
 
 };
 

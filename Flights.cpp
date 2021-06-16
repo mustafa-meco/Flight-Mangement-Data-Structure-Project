@@ -33,3 +33,8 @@ int Flights::getID() const { return ID; }
 Flights::~Flights() {
 
 }
+
+int Flights::getPassNUM()
+{
+	return Passengers;
+}
