@@ -52,7 +52,7 @@ void Lanes::Activate()                    // function to activate the lane
 bool Lanes::Serving(int time1, int time2)// function to serve the lane 
 										   //(deactivate the lane during the serving time)
 {
-	v<int>* workNode;
+	v<int>* workNode=NULL;
 	if (WorkingQueue.isEmpty()) {
 		workNode = new v<int>;
 		*workNode = { time1,time2 };

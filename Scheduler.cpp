@@ -164,7 +164,7 @@ bool Scheduler::readFile(string filename) {
 //==============================================================================================================||
 //==============================================================================================================||
 
-PriorityQueue<EVENTS*> Scheduler::prepare() {
+void Scheduler::prepare() {
 	int curT = 0; int ID;
 	v<EVENTS*>* EventNode = nullptr;
 	EVENTS* Event;
@@ -194,10 +194,12 @@ PriorityQueue<EVENTS*> Scheduler::prepare() {
 			Event = nullptr;
 			break;
 		case P:
-			if (getAreaByID(ID, tempFlight)) {
+			tempArea = getAreaByID(ID, tempFlight);
+			if (tempArea) {
 				/*promoteflight(fl)*/tempFlight->promote(); // TODO make event promotion and add to prepared events
 				FlightNode->value = tempFlight;
 				FlightNode->priority = 0;
+				//tempArea = new Area(ID, );
 				AreasWaitinglist[tempArea->getAreasNum() - 1].enqueue(*FlightNode);
 				preparedEvents.enqueue(*EventNode);
 			}
@@ -235,7 +237,7 @@ PriorityQueue<EVENTS*> Scheduler::prepare() {
 			}
 			while (tempQ.dequeue(*FlightNode)) AreasWaitinglist[i].enqueue(*FlightNode);
 		}
-		RefershAll();
+		RefershAll(curT);
 	}
 }
 
@@ -384,7 +386,7 @@ void Scheduler::RefershPF(PriorityQueue<Flights*> q,int ct)
 		if (x.value == y.value)
 		{
 			i++;
-			y.value->refresh(ct);
+			y.value->refresh(ct, AutoP);
 		}
 		if (i == 3)
 		{
@@ -531,7 +533,8 @@ void Scheduler::outToFile() {
 bool Scheduler::preServe(v<Flights*>* fnode, int cT) {
 	Sp ftype = fnode->value->getType();
 	int Id = fnode->value->getID();
-	Lanes* ServeLane,* LandLane;
+	Lanes* ServeLane = NULL;
+	Lanes* LandLane = NULL;
 	Area* TkAr = fnode->value->getTA();
 	Area* LnAr = fnode->value->getLA();
 	int FlyTime = cT + calcTO(fnode->value);

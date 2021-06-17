@@ -9,7 +9,7 @@
 //#include "EVENTS/EVENTS.h"
 #include "Cancellation.h"
 #include "Promotion.h"
-//#include "Flights.h"
+#include "Flights.h"
 #include "Def.h"
 //#include "EVENTS/EVENTS.h"
 //#include "ASSIGNtoLane.h"
@@ -65,7 +65,7 @@ public:
 	
 	//Scheduler();
 	bool readFile(string );
-	PriorityQueue<EVENTS*> prepare();
+	void prepare();
 	void Simulate(PriorityQueue<EVENTS*> Evs);
 	void outToFile();
 	int getAutoP();
@@ -76,7 +76,7 @@ public:
 	void promote(v<Flights*>* f);
 	Area* getAreaByID(int, Flights * & reqF);
 	bool cancelFlight(int ID);
-	void RefershAll();
+	//void RefershAll();
 	int calcFly(Flights* f);
 	int calcTO(Flights* f);
 	int calcLand(Flights* f);

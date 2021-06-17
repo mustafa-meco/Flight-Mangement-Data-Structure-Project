@@ -67,7 +67,7 @@ int Flights::getPassNUM()                           //Getter for the number of p
 
 
 
-bool Flights::refresh(int ct) { //this function is to refresh the flight by taking the current time
+bool Flights::refresh(int ct, int autoP) { //this function is to refresh the flight by taking the current time
 								//and calculate the waiting time 
 								//and if it is normal and its waiting time above autoprom time 
 								// it will return false to be auto promoted
@@ -75,16 +75,16 @@ bool Flights::refresh(int ct) { //this function is to refresh the flight by taki
 	switch (Flight_Type)
 	{
 	case Normal:
-		return WT < autoProm;
+		return WT < autoP;
 	default:
 		break;
 	}
 	return true;
 }
 
-void Flights::setAutoProm(int ap) {         //Comment 
-	autoProm = ap;
-}
+//void Flights::setAutoProm(int ap) {         //Comment 
+//	autoProm = ap;
+//}
 
 void Flights::toServe(int cT) {
 	WT = cT - TS;
