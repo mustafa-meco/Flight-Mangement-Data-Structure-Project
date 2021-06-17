@@ -406,7 +406,7 @@ PriorityQueue<EVENTS*> Scheduler::prepare() {
 							c++;
 							break;
 						}
-						ServLane->Serving()
+						ServLane->Serving();
 							ServLane = NULL;
 					}
 				} while (c);
@@ -520,7 +520,7 @@ PriorityQueue<EVENTS*> Scheduler::prepareSimulation() {
 							c++;
 							break;
 						}
-						ServLane->Serving()
+						ServLane->Serving();
 							ServLane = NULL;
 					}
 				} while (c);
@@ -564,9 +564,9 @@ int Scheduler::getAutoP() {
 	return AutoP;
 }
 
-void Scheduler::setAutoP(int AutoP) {
-	AutoP = AutoP;
-}
+//void Scheduler::setAutoP(int AutoP) {
+//	AutoP = AutoP;
+//}
 int Scheduler::getnormal() {
 	return normal_flights;
 }
@@ -796,7 +796,6 @@ void Scheduler::outputfile() {
 	int FT, ID, BT, WT, ST;
 	int sumWT = 0;
 	int sumST = 0;
-
 	Flights* F;
 	EVENTS* E;
 	while (finishedFlights.dequeue(F)) {
