@@ -1,17 +1,17 @@
 //#pragma once
 //
 //#include <iostream>
-//#include "Scheduler.h"
+//#include "scheduler.h"
 //using namespace std;
 //
-//class Eventlist
+//class eventlist
 //{
 //private:
-//	Event type;
-//	ID;
+//	event type;
+//	id;
 //
 //public:
-//	Eventlist(TS, ID);
+//	eventlist(ts, id);
 //	Eventlist(TS, ID);
 //	~Eventlist();
 //

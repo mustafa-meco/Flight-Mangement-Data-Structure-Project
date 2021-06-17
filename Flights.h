@@ -11,7 +11,7 @@ private:
 	int Booking_Timestamp;
 	int Arrival_Area; //This is the area that the flight finishes at.
 	int ID;
-	int service_time, wait_time, boarding_time;
+	int service_time, wait_time, boarding_time, finishing_time;
 	int TS; //time stamp 
 	int landing_area;
 	
@@ -25,6 +25,7 @@ public:
 	Flights();
 	Flights(int ID, TnL, Sp, int , int );
 	void ToServe(int time) ;
+	void Finish(int landing_time);
 	int getBT() const;
 	int getWT() const;
 	int getST() const;
@@ -35,6 +36,8 @@ public:
 	//bool cancel();
 	void promote();
 	Area* getTA() const;
+	Area* getLA() const;
+
 	int getID() const;
 	~Flights();
 };

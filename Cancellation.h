@@ -3,9 +3,15 @@
 using namespace std;
 
 class EVENTS;
-class Cancellation : public EVENTS{
+class Cancellation : public EVENTS
+{
+private:
+	/*int IDcancel;
+	int TimeCancel;*/
 
 public:
-	Cancellation(/*int,*/ int);
+	Cancellation(int T, int id);
+	//int getIDcancel();
+	//int getTimeCancel();
 };
 

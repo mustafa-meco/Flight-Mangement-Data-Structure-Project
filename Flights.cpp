@@ -30,6 +30,8 @@ void Flights::promote() {
 }
 
 Area* Flights::getTA() const { return Areas.TA; }
+Area* Flights::getLA() const { return Areas.LA; }
+
 
 int Flights::getID() const { return ID; }
 
@@ -38,6 +40,9 @@ int Flights::getBT() const{
 }
 void Flights::ToServe(int time) {
 	wait_time = time- TS;
+}
+void Flights::Finish(int landing_time) {
+	finishing_time = service_time + wait_time + landing_time;
 }
 
 int Flights::getWT() const {
