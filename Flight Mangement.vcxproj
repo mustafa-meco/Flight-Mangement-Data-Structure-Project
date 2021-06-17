@@ -139,6 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AddLane.cpp" />
     <ClCompile Include="AP.cpp" />
     <ClCompile Include="Area.cpp" />
     <ClCompile Include="ASSIGNtoLane.cpp" />
@@ -154,6 +155,7 @@
     <ClCompile Include="Scheduler.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AddLane.h" />
     <ClInclude Include="AP.h" />
     <ClInclude Include="AreasList.h" />
     <ClInclude Include="ASSIGNtoLane.h" />

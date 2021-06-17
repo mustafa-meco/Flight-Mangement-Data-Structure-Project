@@ -57,6 +57,9 @@
     <ClCompile Include="EVENTS\EVENTS.cpp">
       <Filter>EVENTS</Filter>
     </ClCompile>
+    <ClCompile Include="AddLane.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Flights.h">
@@ -123,6 +126,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="definitions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AddLane.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

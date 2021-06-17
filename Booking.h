@@ -6,7 +6,7 @@ using namespace std;
 
 //class EVENTS;
 
-class Booking :public EVENTS{
+class Booking :public EVENTS {
 private:
     //TnL As;
     Area *TA;

@@ -38,7 +38,6 @@ public:
 	void promote();
 	Area* getTA() const;
 	Area* getLA() const;
-
 	int getID() const;
 	bool refresh(int);
 	static void setAutoProm(int);
