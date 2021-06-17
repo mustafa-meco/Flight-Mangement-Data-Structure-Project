@@ -24,7 +24,7 @@ int Area::getAreasNum()
 	return AreaNum;
 }
 
-void Area::InsertLanes(Sp type, int Avt, int MA, int MT)
+void Area::InsertLanes(Sp type, int Avt, int MA, int MT,int i)
 {
 	if (type == VIP)
 	{
@@ -35,7 +35,7 @@ void Area::InsertLanes(Sp type, int Avt, int MA, int MT)
 	{
 		countNORM++;
 	}
-	Lanes* L1 = new Lanes(type, Avt, MA, MT);
+	Lanes* L1 = new Lanes(type, Avt, MA, MT,i);
 	lanesLIST->enqueue(L1);
 	delete L1;
 }

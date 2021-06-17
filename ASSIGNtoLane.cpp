@@ -1,8 +1,13 @@
 #include "ASSIGNtoLane.h"
 
-ASSIGNtoLane::ASSIGNtoLane(int T, int id, Lanes l, Area A): EVENTS(T, id)
+ASSIGNtoLane::ASSIGNtoLane() 
 {
 
+}
+ASSIGNtoLane::ASSIGNtoLane(int T, int id, Lanes l, Area A): EVENTS(T, id)
+{
+	AssignedLane1 = l;
+	AssignedArea.TA = &A;
 }
 //Lanes ASSIGNtoLane::getLane0()
 //{
@@ -19,11 +24,11 @@ ASSIGNtoLane::ASSIGNtoLane(int T, int id, Lanes l, Area A): EVENTS(T, id)
 //	return AssignedArea;
 //}
 
-Lanes ASSIGNtoLane::getAssignedLane1()
+Lanes ASSIGNtoLane::getAssignedLane1() const
 {
 	return AssignedLane1;
 }
-Lanes ASSIGNtoLane::getAssignedLane2()
+Lanes ASSIGNtoLane::getAssignedLane2() const
 {
 	return AssignedLane2;
 }

@@ -25,7 +25,7 @@ public:
 	//int DisOfAreas(int);         // function to get the distance between the given area and the existing area
 	int getNumLanes();           // getter for number of lanes
 	int getAreasNum();           // getter for index of area
-	void InsertLanes(Sp s, int, int, int);    //Function to store lanes and define its type  
+	void InsertLanes(Sp s, int, int, int,int);    //Function to store lanes and define its type  
 	void InsertLane(Lanes* L);
 	Lanes* getVIPlane(int);                                    // return VIP lane
 	Lanes* getNORMlane(int t);                                   // return NORMAL lane  

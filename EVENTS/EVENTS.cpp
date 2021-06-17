@@ -1,10 +1,8 @@
 #include "EVENTS.h"
-EVENTS::EVENTS() {
 
-}
-EVENTS::EVENTS(int i)
+EVENTS::EVENTS(int t, int i)
 {
-	//TS = t;
+	TS = t;
 	ID = i;
 	//tp = et;
 }
