@@ -25,10 +25,10 @@ public:
 	//int DisOfAreas(int);                      
 	int getNumLanes();					        
 	int getAreasNum();							
-	void InsertLanes(Sp s, int, int, int,int);    
+	void InsertLanes(Sp s, int, int, int);    
 	void InsertLane(Lanes* L);                  
-	Lanes* getVIPlane(int);                     
-	Lanes* getNORMlane(int t);                    
+	Lanes* getVIPlane(int, int);                     
+	Lanes* getNORMlane(int t, int);                    
 	int getNumVIP();                             
 	bool checkN(int t);                           
 	bool checkV(int t);                          

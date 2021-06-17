@@ -44,7 +44,7 @@ void Area::InsertLane(Lanes* L) { //Function to insert lane in the laneList  // 
 	lanesLIST->enqueue(L);
 }
 
-Lanes* Area::getVIPlane(int t)
+Lanes* Area::getVIPlane(int t1, int t2)
 {
 	//	Sp type;
 	// 	   
@@ -71,7 +71,7 @@ Lanes* Area::getVIPlane(int t)
 
 }
 
-Lanes* Area::getNORMlane(int t)
+Lanes* Area::getNORMlane(int t1,int t2)
 {
 	Lanes* temp = nullptr;
 	lanesLIST->dequeue(temp);
@@ -99,16 +99,16 @@ int Area::getNumVIP()     // return the number of VIP Lanes
 }
 
 
-bool Area::checkN(int t) {
-	Lanes* l = this->getNORMlane(t);
-	if (l)
-		this->InsertLane(l);
-	return l;
-}
-
-bool Area::checkV(int t) {
-	Lanes* l = this->getVIPlane(t);
-	if (l)
-		this->InsertLane(l);
-	return l;
-}
+//bool Area::checkN(int t) {
+//	Lanes* l = this->getNORMlane(t);
+//	if (l)
+//		this->InsertLane(l);
+//	return l;
+//}
+//
+//bool Area::checkV(int t) {
+//	Lanes* l = this->getVIPlane(t);
+//	if (l)
+//		this->InsertLane(l);
+//	return l;
+//}
