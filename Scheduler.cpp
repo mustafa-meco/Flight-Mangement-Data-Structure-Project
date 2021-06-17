@@ -572,7 +572,7 @@ int Scheduler::getnormal() {
 //int Scheduler::getvip() {
 //	//return VIP_flights;
 //}
-void Scheduler::setnormal(int normal) {
+void Scheduler::setnormal(int normal) {  
 	normal_flights = normal;
 }
 //void Scheduler::setvip(int vip) {

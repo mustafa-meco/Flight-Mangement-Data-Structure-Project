@@ -1,6 +1,6 @@
 #include "Lanes.h"
 
-Lanes::Lanes(Sp typ, int Avt, int MA, int MT,int i) {
+Lanes::Lanes(Sp typ, int Avt, int MA, int MT,int i) {        //Constructor intialize the members
 	type = typ;
 	Availability_Time = Avt;
 	MainAft = MA;
@@ -39,18 +39,19 @@ Lanes::Lanes(Sp typ, int Avt, int MA, int MT,int i) {
 //}
 
 
-Sp Lanes::getType() const
+Sp Lanes::getType() const               // getter for the type of the lane
 {
 	return type;
 }
 
-void Lanes::Activate()
+void Lanes::Activate()                    // function to activate the lane
 {
 	aval = true;
 }
 
-bool Lanes::Serving(int time1, int time2)
-{
+bool Lanes::Serving(int time1, int time2) 
+{                                          // function to serve the lane 
+										   //(deactivate the lane during the serving time)
 	if (check(time1))
 	{
 		VARaft++;
@@ -64,11 +65,11 @@ bool Lanes::Serving(int time1, int time2)
 	}
 }
 
-bool Lanes::check(int t) {
+bool Lanes::check(int t) {                   //Boolean function to check the Availability of the lane.
 	return Availability_Time < t;
 }
-
-void Lanes::served()
+ 
+void Lanes::served()                         //Comment
 {
 	if (VARaft++>MainAft)
 	{

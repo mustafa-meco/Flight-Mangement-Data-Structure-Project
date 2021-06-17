@@ -4,7 +4,8 @@ ASSIGNtoLane::ASSIGNtoLane()
 {
 
 }
-ASSIGNtoLane::ASSIGNtoLane(int T, int id, Lanes l, Area A): EVENTS(T, id)
+
+ASSIGNtoLane::ASSIGNtoLane(int T, int id, Lanes l, Area A): EVENTS(T, id) //Constructor 
 {
 	AssignedLane1 = l;
 	AssignedArea.TA = &A;
@@ -24,7 +25,7 @@ ASSIGNtoLane::ASSIGNtoLane(int T, int id, Lanes l, Area A): EVENTS(T, id)
 //	return AssignedArea;
 //}
 
-Lanes ASSIGNtoLane::getAssignedLane1() const
+Lanes ASSIGNtoLane::getAssignedLane1() const              // getter for the assigned area 
 {
 	return AssignedLane1;
 }

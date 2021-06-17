@@ -4,15 +4,16 @@
 //#include "Scheduler.h"
 #include"Flights.h"
 template <typename T>
-struct v {
+struct v {                 //Comment
 	int priority = NULL;
-	T value = NULL;
+	T value = NULL;        
 };
 
 //class Flights;
 class EVENTS;
 template <typename T>
-class PriorityQueue
+class PriorityQueue    // PriorityQueue is a special type of queues
+					   //as when we dequeue an element it will not be the last element but the one with the most priority  
 {
 private:
 	int front;

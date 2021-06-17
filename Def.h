@@ -3,14 +3,14 @@
 
 //#include "Area.h"
 
-enum Sp {
+enum Sp {    // The type of the flight 
 	
 	VIP,
 	Normal
 };
 
 
-enum EventT { B, X, P , L, F, FF};
+enum EventT { B, X, P , L, F, FF};  //The event type. // comment
 
 //struct TnL {
 //	Area* TA;

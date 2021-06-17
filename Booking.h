@@ -8,9 +8,9 @@ using namespace std;
 
 class Booking :public EVENTS{
 private:
-    TnL As;
-    Sp typ;
-    int Pass;
+    TnL As; //comment
+    Sp typ; //comment
+    int Pass; //comment 
 public:
     Booking(int t, int i, Area*, Area*, Sp, int);
     int calcOn(int t) const;

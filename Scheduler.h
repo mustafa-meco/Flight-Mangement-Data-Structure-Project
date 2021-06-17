@@ -36,15 +36,15 @@ using namespace std;
 //	int Pass;
 //};
 
-//template <typename T>
+//template <typename T>       //COMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMENT
 class Scheduler
 {
 private:
 	int N_Areas;
-	int tkft; //take off time 
-	int lndt; //landing time
-	int pnt; //one passenger on time
-	int pft; //one passenger off time
+	int tkft;									//take off time 
+	int lndt;									 //landing time
+	int pnt;									 //one passenger on time
+	int pft;									//one passenger off time
 	Area** AreasL;
 	int AutoP;
 	int** Dists;

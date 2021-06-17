@@ -6,11 +6,11 @@
 class ASSIGNtoLane : public EVENTS
 {
 private: 
-	Lanes AssignedLane1;
+	Lanes AssignedLane1;               // Variable for the lane which will be assigned for the airplane
 	Lanes AssignedLane2;
 	//int IDAssign;
 	//int TimeAssign;
-	TnL AssignedArea; 
+	TnL AssignedArea;                  // Area which contains the assigned lane 
 
 public:
 	ASSIGNtoLane(int T, int id, Lanes l, Area A);

@@ -7,8 +7,8 @@ private:
 	/*int IDFly;
 	int TimeFly;*/
 	//TnL Area;
-	Lanes FromLane; 
-	Lanes ToLane;
+	Lanes FromLane;               // The lane where the flight take off
+	Lanes ToLane;                 // The lane where the flight will lane on 
 public:
 	FlyFromTo(int t, int id,Lanes from, Lanes to); 
 	Lanes getFromLane();

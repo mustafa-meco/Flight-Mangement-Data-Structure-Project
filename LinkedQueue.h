@@ -5,18 +5,18 @@
 #include "QueueADT.h"
 
 template <typename T>
-class LinkedQueue:public QueueADT<T>
+class LinkedQueue:public QueueADT<T>    //Data Stucture a Queue impelmentation with linkedlist
 {
 private :
-	Node<T>* backPtr;
-	Node<T>* frontPtr;
-public :
+	Node<T>* backPtr;                   //Pointer for the element which will be equeued 
+	Node<T>* frontPtr;                  // Pointer for the first elemet which will be equeued 
+public : 
 	LinkedQueue();	
-	bool isEmpty() const ;
-	bool enqueue(const T& newEntry);
-	bool dequeue(T& frntEntry);  
-	bool peek(T& frntEntry)  const;	
-	~LinkedQueue();
+	bool isEmpty() const ;              // function to check if there is any element in the list or not. 
+	bool enqueue(const T& newEntry);    // Function to enqueue the elements in the array
+	bool dequeue(T& frntEntry);         // Function to dequeue the last element from the array 
+	bool peek(T& frntEntry)  const;	    // Function to print the first element on the list
+	~LinkedQueue();                     // Destructor for the queue to remove all the elements and free the memory  
 };
 
 template <typename T>
