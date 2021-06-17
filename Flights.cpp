@@ -1,16 +1,13 @@
 #include "Flights.h"
 
-Flights::Flights() {
-	
-}
-
-Flights::Flights(int ID, TnL ars, Sp ty, int ts, int pa) {
+Flights::Flights(int t,int ID, Area* ta,Area* la, Sp ty, int pa) {
 	this->ID = ID;
 	//this-> take_off_time= 
-	Areas = ars;
+	TA = ta;
+	LA = la;
 	Flight_Type = ty;
-	Booking_Timestamp = ts;
 	Passengers = pa;
+	TS = t;
 }
 
 //void Flights::AutoP(int time) {
@@ -19,7 +16,7 @@ Flights::Flights(int ID, TnL ars, Sp ty, int ts, int pa) {
 //	}
 //}
 
-Sp Flights::getType() const{
+Sp Flights::getType() const{        // Getter for the Flight type
 	return Flight_Type;
 }
 
@@ -29,8 +26,8 @@ void Flights::promote() {
 	//Scheduler::setvip(a++);
 }
 
-Area* Flights::getTA() const { return Areas.TA; }
-Area* Flights::getLA() const { return Areas.LA; }
+Area* Flights::getTA() const { return TA; }
+Area* Flights::getLA() const { return LA; }
 
 
 int Flights::getID() const { return ID; }
@@ -61,26 +58,34 @@ Flights::~Flights() {
 
 }
 
-int Flights::getPassNUM()
+int Flights::getPassNUM()                           //Getter for the number of passengers
 {
 	return Passengers;
 }
 
 
 
-///this function is to refresh the flight by taking the current time and calculate the waiting time and if it is normal and its waiting time above autoprom time, it will return false to be auto promoted
-bool Flights::refresh(int ct) {
+
+
+bool Flights::refresh(int ct, int autoP) { //this function is to refresh the flight by taking the current time
+								//and calculate the waiting time 
+								//and if it is normal and its waiting time above autoprom time 
+								// it will return false to be auto promoted
 	WT = ct - TS;
 	switch (Flight_Type)
 	{
 	case Normal:
-		return WT < autoProm;
+		return WT < autoP;
 	default:
 		break;
 	}
 	return true;
 }
 
-void Flights::setAutoProm(int ap) {
-	autoProm = ap;
+//void Flights::setAutoProm(int ap) {         //Comment 
+//	autoProm = ap;
+//}
+
+void Flights::toServe(int cT) {
+	WT = cT - TS;
 }

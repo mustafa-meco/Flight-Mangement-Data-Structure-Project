@@ -2,7 +2,7 @@
 #include "EVENTS/EVENTS.h"
 //class EVENTS;
 
-class Promotion :public EVENTS
+class Promotion :public EVENTS   //Comment 
 {
 
 public:

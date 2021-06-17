@@ -21,7 +21,7 @@ int main() {
 	//Sc.Simulate(Events);
 	//cout << "please enter the output file name" << endl;
 	
-	Sc.outputfile();
+	Sc.outToFile();
 	/*cout << "please enter the output file name --- (Default: FlightOutput.txt)\nenter 0 for default";
 	cin >> filename;
 	if (filename == 0) 

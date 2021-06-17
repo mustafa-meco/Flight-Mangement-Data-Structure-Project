@@ -1,6 +1,6 @@
 #include "Cancellation.h"
 
-Cancellation::Cancellation(int T, int id) : EVENTS (T, id)
+Cancellation::Cancellation(int T, int id) : EVENTS (T, id) //comment
 {
 
 }

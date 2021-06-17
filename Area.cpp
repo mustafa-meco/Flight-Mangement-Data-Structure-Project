@@ -1,10 +1,10 @@
 #include "Area.h"
 
-Area::Area(int c, int n)
+Area::Area(int c, int n) 
 {
 	AreaNum = c;
 	NumOfLanes = n;
-	lanesLIST = new LinkedQueue<Lanes*>;               /////////////
+	lanesLIST = new LinkedQueue<Lanes*>;               
 	//NumOfAreas++;
 }
 
@@ -14,17 +14,17 @@ Area::Area(int c, int n)
 //	return ArrOfAreas[AreaNum][A];
 //}
 
-int Area::getNumLanes()
+int Area::getNumLanes() // return the number of lanes 
 {
 	return NumOfLanes;
 }
 
-int Area::getAreasNum()
+int Area::getAreasNum()                     // getter for index of area
 {
 	return AreaNum;
 }
 
-void Area::InsertLanes(Sp type, int Avt, int MA, int MT,int i)
+void Area::InsertLanes(Sp type, int Avt, int MA, int MT) //Function to store lanes and define its type
 {
 	if (type == VIP)
 	{
@@ -35,16 +35,16 @@ void Area::InsertLanes(Sp type, int Avt, int MA, int MT,int i)
 	{
 		countNORM++;
 	}
-	Lanes* L1 = new Lanes(type, Avt, MA, MT,i);
+	Lanes* L1 = new Lanes(type, Avt, MA, MT);
 	lanesLIST->enqueue(L1);
 	delete L1;
 }
 
-void Area::InsertLane(Lanes* L) {
+void Area::InsertLane(Lanes* L) { //Function to insert lane in the laneList  // comment
 	lanesLIST->enqueue(L);
 }
 
-Lanes* Area::getVIPlane(int t)
+Lanes* Area::getVIPlane(int t1, int t2)
 {
 	//	Sp type;
 	// 	   
@@ -54,7 +54,7 @@ Lanes* Area::getVIPlane(int t)
 	Lanes* l = temp;
 	do
 	{
-		if (l->getType() == VIP && l->check(t))
+		if (l->getType() == VIP && l->Serving(t1,t2))
 		{
 			countVIP++;
 			return l;
@@ -71,14 +71,14 @@ Lanes* Area::getVIPlane(int t)
 
 }
 
-Lanes* Area::getNORMlane(int t)
+Lanes* Area::getNORMlane(int t1,int t2)
 {
 	Lanes* temp = nullptr;
 	lanesLIST->dequeue(temp);
 	Lanes* l = temp;
 	do
 	{
-		if (l->getType() == Normal && l->check(t))
+		if (l->getType() == Normal && l->Serving(t1,t2))
 		{
 			return l;
 		}
@@ -93,22 +93,22 @@ Lanes* Area::getNORMlane(int t)
 	return NULL;
 }
 
-int Area::getNumVIP()
+int Area::getNumVIP()     // return the number of VIP Lanes 
 {
 	return countVIP;
 }
 
 
-bool Area::checkN(int t) {
-	Lanes* l = this->getNORMlane(t);
-	if (l)
-		this->InsertLane(l);
-	return l;
-}
-
-bool Area::checkV(int t) {
-	Lanes* l = this->getVIPlane(t);
-	if (l)
-		this->InsertLane(l);
-	return l;
-}
+//bool Area::checkN(int t) {
+//	Lanes* l = this->getNORMlane(t);
+//	if (l)
+//		this->InsertLane(l);
+//	return l;
+//}
+//
+//bool Area::checkV(int t) {
+//	Lanes* l = this->getVIPlane(t);
+//	if (l)
+//		this->InsertLane(l);
+//	return l;
+//}

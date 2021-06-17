@@ -2,7 +2,7 @@
 //#include <iostream>
 //#include"Scheduler.h"
 //using namespace std;
-#include "Def.h"
+//#include "Def.h"
 #include "Area.h"
 
 class Flights
@@ -19,12 +19,13 @@ private:
 	Sp Flight_Type; //There are 2 flight types : VIP and Normal.
 	int Passengers;   //the number of passengers for the flight.
 	//int Arrival_Area; //This is the area that the flight finishes at.
-	
-	TnL Areas;
-	static int autoProm;
+	int on_boarding_time;
+	//TnL Areas;
+	//static int autoProm;
+	Area* TA;
+	Area* LA;
 public:
-	Flights();
-	Flights(int ID, TnL, Sp, int , int );
+	Flights(int,int ID,Area* TA, Area* LA, Sp, int );
 	void ToServe(int time) ;
 	void Finish(int landing_time);
 	int getBT() const;
@@ -40,9 +41,10 @@ public:
 	Area* getLA() const;
 
 	int getID() const;
-	bool refresh(int);
-	static void setAutoProm(int);
+	bool refresh(int ct, int autop);
+	//static void setAutoProm(int);
 	~Flights();
 	int getPassNUM();
+	void toServe(int );
 	
 };

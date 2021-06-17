@@ -9,13 +9,12 @@
 //#include "EVENTS/EVENTS.h"
 #include "Cancellation.h"
 #include "Promotion.h"
-//#include "Flights.h"
+#include "Flights.h"
 #include "Def.h"
 //#include "EVENTS/EVENTS.h"
-#include "ASSIGNtoLane.h"
-#include "FlyFromTo.h"
-#include "FlyFromTo.h"
-#include "FinishedFlight.h"
+//#include "ASSIGNtoLane.h"
+//#include "FlyFromTo.h"
+//#include "FinishedFlight.h"
 using namespace std;
 
 //enum Sp {Normal , VIP};
@@ -36,15 +35,15 @@ using namespace std;
 //	int Pass;
 //};
 
-//template <typename T>
+//template <typename T>       //COMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMENT
 class Scheduler
 {
 private:
 	int N_Areas;
-	int tkft; //take off time 
-	int lndt; //landing time
-	int pnt; //one passenger on time
-	int pft; //one passenger off time
+	int tkft;									//take off time 
+	int lndt;									 //landing time
+	int pnt;									 //one passenger on time
+	int pft;									//one passenger off time
 	Area** AreasL;
 	int AutoP;
 	int** Dists;
@@ -66,13 +65,12 @@ public:
 	
 	//Scheduler();
 	bool readFile(string );
-	PriorityQueue<EVENTS*> prepare();
-	PriorityQueue<EVENTS*> prepareSimulation();
+	void prepare();
 	void Simulate(PriorityQueue<EVENTS*> Evs);
-	void outputfile();
+	void outToFile();
 	int getAutoP();
-	int getnormal();
-	int getvip();
+	int getNnormal();
+	//static int getvip();
 	void setnormal(int normal);
 	//static void setvip(int vip);
 	void promote(v<Flights*>* f);
@@ -81,117 +79,16 @@ public:
 	//void RefershAll();
 	int calcFly(Flights* f);
 	int calcTO(Flights* f);
+	int calcLand(Flights* f);
 //	bool CheckLane(Lanes l, int time);
 	void serveFlight(Flights *F, int t);
-	void preServe(v<Flights*>* f, int curT);
-	void RefershAll(int ct);
+	bool preServe(v<Flights*>* fnode, int cT);
+	void RefershAll(int);
 
-	//void ServeFligh(Flights *);
-	//void Refersh(int); 
-	//bool preServe(v<Flights*>*, int);
+	void ServeFligh(Flights *);
+	void Refersh(int); 
 	//Lanes getLane(Sp , int t1, int t2);
 	bool checkLane(Lanes*);
+	int getNvip();
 };
 
-//#pragma once
-//#include <iostream>
-//#include <fstream>
-//#include <string>
-//#include "Lanes.h"
-//#include "Area.h"
-//#include "Booking.h"
-//#include "PriorityQueue.h"
-////#include "EVENTS/EVENTS.h"
-//#include "Cancellation.h"
-//#include "Promotion.h"
-////#include "Flights.h"
-//#include "Def.h"
-////#include "EVENTS/EVENTS.h"
-//#include "ASSIGNtoLane.h"
-//#include "FlyFromTo.h"
-//#include "FlyFromTo.h"
-//#include "FinishedFlight.h"
-//using namespace std;
-//
-////enum Sp {Normal , VIP};
-////
-////enum EventT {B, X, P, AP, ASSIGNtoLane, FlyFromTo, FinishedFlight};
-////
-////struct TnL {
-////	Area* TA;
-////	Area* LA;
-////};
-//
-////struct Event {
-////	int ID;
-////	int TS;
-////	int TA;
-////	int LA;
-////	Sp typ;
-////	int Pass;
-////};
-//
-////template <typename T>
-//class Scheduler
-//{
-//private:
-//	int N_Areas;
-//	int tkft; //take off time 
-//	int lndt; //landing time
-//	int pnt; //one passenger on time
-//	int pft; //one passenger off time
-//	Area** AreasL;
-//	int AutoP;
-//	int** Dists;
-//	int N_Events;
-//	//FlightsList<Flights>* FlightsL;
-//	//string* rawEvents;
-//	PriorityQueue<EVENTS*> EventList;
-//	PriorityQueue<EVENTS*> preparedEvents;
-//	PriorityQueue<Flights*>* AreasWaitinglist;
-//	int normal_flights;
-//	int VIP_flights;
-//	LinkedQueue<Flights*> ServingFlights;
-//	LinkedQueue<Flights*> finishedFlights;
-//	void RefershPE(PriorityQueue<EVENTS*> q);
-//	void RefershPF(PriorityQueue<Flights*> q, int);
-//	void RefershLinK(LinkedQueue<Flights*> q);
-//
-//public:
-//
-//	//Scheduler();
-//	bool readFile(string);
-//	PriorityQueue<EVENTS*> prepare();
-//	void Simulate(PriorityQueue<EVENTS*> Evs);
-//	void outputfile();
-//	int getAutoP();
-//	int getnormal();
-//	int getvip();
-//	void setnormal(int normal);
-//	//static void setvip(int vip);
-//	void promote(v<Flights*>* f);
-//	Area* getAreaByID(int, Flights*& reqF);
-//	bool cancelFlight(int ID);
-//	void RefershAll();
-//	int calcFly(Flights* f);
-//	int calcTO(Flights* f);
-//	//	bool CheckLane(Lanes l, int time);
-//	void serveFlight(Flights* F, int t);
-//	void preServe(v<Flights*>* f, int curT)
-//		void RefershAll(int);
-//
-//	void ServeFligh(Flights*);
-//	<<<<<< < HEAD
-//		/*int get_AVG_wait();
-//		int get_AVG_serve();*/
-//		void Refersh();
-//	void preServe(v<Flights*>*);
-//	Lanes checkLane(int t);
-//	====== =
-//		void Refersh(int);
-//	bool preServe(v<Flights*>*, int);
-//	//Lanes getLane(Sp , int t1, int t2);
-//	bool checkLane(Lanes*);
-//	>>>>>> > f9c6e826830119ae0c4d982276a5c0dae8f7e743
-//};
-//

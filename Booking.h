@@ -8,7 +8,9 @@ using namespace std;
 
 class Booking :public EVENTS{
 private:
-    TnL As;
+    //TnL As;
+    Area *TA;
+    Area *LA;
     Sp typ;
     int Pass;
 public:
@@ -17,6 +19,8 @@ public:
     int calcOf(int t) const;
     int getNpass() const;
     Sp getType() const;
-    TnL getAreas() const;
+    //TnL getAreas() const;
+    Area* getTA() const;
+    Area* getLA() const;
 };
 

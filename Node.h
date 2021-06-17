@@ -5,16 +5,16 @@ template <typename T>
 class Node
 {
 private:
-	T item; // A data item
-	Node<T>* next; // Pointer to next node
+	T item;           // A data item
+	Node<T>* next;    // Pointer to next node
 public :
-	Node();
-	Node(const T & r_Item);	
-	Node(const T & r_Item, Node<T>* nextNodePtr);
-	void setItem(const T & r_Item);
-	void setNext(Node<T>* nextNodePtr);
-	T getItem() const ;
-	Node<T>* getNext() const ;
+	Node();                                // Default constuctor
+	Node(const T & r_Item);	               //Constuctor to intilize the value 
+	Node(const T & r_Item, Node<T>* nextNodePtr); //Comment 
+	void setItem(const T & r_Item);        // Setter for the data.  
+	void setNext(Node<T>* nextNodePtr);    //Setter for the next pointer
+	T getItem() const ;                    //Getter for the data of the pointer
+	Node<T>* getNext() const ;             //getter for the next pointer
 }; // end Node
 #endif
 
