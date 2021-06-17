@@ -12,6 +12,8 @@ enum Sp {    // The type of the flight
 
 enum EventT { B, X, P , L, F, FF};  //The event type. // comment
 
+
+
 //struct TnL {
 //	Area* TA;
 //	Area* LA;

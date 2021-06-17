@@ -12,10 +12,9 @@
 //#include "Flights.h"
 #include "Def.h"
 //#include "EVENTS/EVENTS.h"
-#include "ASSIGNtoLane.h"
-#include "FlyFromTo.h"
-#include "FlyFromTo.h"
-#include "FinishedFlight.h"
+//#include "ASSIGNtoLane.h"
+//#include "FlyFromTo.h"
+//#include "FinishedFlight.h"
 using namespace std;
 
 //enum Sp {Normal , VIP};
@@ -69,26 +68,27 @@ public:
 	PriorityQueue<EVENTS*> prepare();
 	void Simulate(PriorityQueue<EVENTS*> Evs);
 	void outToFile();
-	//static int getAutoP();
-	int getnormal();
+	int getAutoP();
+	int getNnormal();
 	//static int getvip();
 	void setnormal(int normal);
 	//static void setvip(int vip);
-	void promote(Flights* f);
+	void promote(v<Flights*>* f);
 	Area* getAreaByID(int, Flights * & reqF);
 	bool cancelFlight(int ID);
 	void RefershAll();
 	int calcFly(Flights* f);
 	int calcTO(Flights* f);
+	int calcLand(Flights* f);
 //	bool CheckLane(Lanes l, int time);
 	void serveFlight(Flights *F, int t);
-	void preServe(v<Flights*>* f, int curT)
+	bool preServe(v<Flights*>* fnode, int cT);
 	void RefershAll(int);
 
 	void ServeFligh(Flights *);
 	void Refersh(int); 
-	bool preServe(v<Flights*>*, int);
 	//Lanes getLane(Sp , int t1, int t2);
 	bool checkLane(Lanes*);
+	int getNvip();
 };
 

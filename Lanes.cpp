@@ -1,6 +1,6 @@
 #include "Lanes.h"
 
-Lanes::Lanes(Sp typ, int Avt, int MA, int MT,int i) {        //Constructor intialize the members
+Lanes::Lanes(Sp typ, int Avt, int MA, int MT) {        //Constructor intialize the members
 	type = typ;
 	Availability_Time = Avt;
 	MainAft = MA;
@@ -8,7 +8,7 @@ Lanes::Lanes(Sp typ, int Avt, int MA, int MT,int i) {        //Constructor intia
 	VARaft = 0;
 	VARtime = 0;
 	aval = false;
-	ID = i;
+	
 }
 
 //bool Lanes::check(int time )
@@ -49,20 +49,29 @@ void Lanes::Activate()                    // function to activate the lane
 	aval = true;
 }
 
-bool Lanes::Serving(int time1, int time2) 
-{                                          // function to serve the lane 
+bool Lanes::Serving(int time1, int time2)// function to serve the lane 
 										   //(deactivate the lane during the serving time)
-	if (check(time1))
-	{
-		VARaft++;
-		aval = false;
-		Availability_Time = time1 + time2;
+{
+	v<int>* workNode;
+	if (WorkingQueue.isEmpty()) {
+		workNode = new v<int>;
+		*workNode = { time1,time2 };
+		WorkingQueue.enqueue(*workNode);
 		return true;
 	}
-	else
-	{
-		return false;
+	
+	PriorityQueue<int> tempQ;
+	while (WorkingQueue.dequeue(*workNode)) {
+		tempQ.enqueue(*workNode);
+		if ((time2 < workNode->value && time2 > workNode->priority) || (time1 < workNode->value && time1 > workNode->priority)) {
+			while (tempQ.dequeue(*workNode)) WorkingQueue.enqueue(*workNode);
+			return false;
+		}
 	}
+	workNode = new v<int>;
+	*workNode = { time1,time2 };
+	WorkingQueue.enqueue(*workNode);
+	return true;
 }
 
 bool Lanes::check(int t) {                   //Boolean function to check the Availability of the lane.
@@ -71,8 +80,31 @@ bool Lanes::check(int t) {                   //Boolean function to check the Ava
  
 void Lanes::served()                         //Comment
 {
-	if (VARaft++>MainAft)
+	v<int>* workNode = nullptr;
+	WorkingQueue.dequeue(*workNode);
+	int end =workNode->value;
+	delete workNode;
+	workNode = NULL;
+	if (VARaft++>=MainAft)
 	{
+		workNode = new v<int>;
+		*workNode = {end,end+MainTime};
+		WorkingQueue.enqueue(*workNode);
 		VARtime = 0;
+	}
+}
+
+void Lanes::cancel(int time1, int time2) {
+	v<int>* workNode = nullptr;
+	PriorityQueue<int> tempQ;
+	while (WorkingQueue.dequeue(*workNode)) {
+		tempQ.enqueue(*workNode);
+		if (time2 == workNode->value && time1 == workNode->priority) {
+			tempQ.dequeue(*workNode);
+			delete workNode;
+			workNode = NULL;
+			while (tempQ.dequeue(*workNode)) WorkingQueue.enqueue(*workNode);
+			break;
+		}
 	}
 }

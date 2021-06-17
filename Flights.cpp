@@ -1,12 +1,13 @@
 #include "Flights.h"
 
-Flights::Flights(int ID, TnL ars, Sp ty, int ts, int pa) { //Constructor //comment
+Flights::Flights(int t,int ID, Area* ta,Area* la, Sp ty, int pa) {
 	this->ID = ID;
 	//this-> take_off_time= 
-	Areas = ars;
+	TA = ta;
+	LA = la;
 	Flight_Type = ty;
-	Booking_Timestamp = ts;
 	Passengers = pa;
+	TS = t;
 }
 
 //void Flights::AutoP(int time) {
@@ -20,15 +21,38 @@ Sp Flights::getType() const{        // Getter for the Flight type
 }
 
 
-void Flights::promote() {           //Comment 
-	//int a = Scheduler::getvip();
+void Flights::promote() {
+	Flight_Type = VIP;
 	//Scheduler::setvip(a++);
 }
 
-Area* Flights::getTA() const { return Areas.TA; }    //Getter for the Depareture Area //comment 
-Area* Flights::getTA() const { return Areas.LA; }    // Getter for the landing Area. 
+Area* Flights::getTA() const { return TA; }
+Area* Flights::getLA() const { return LA; }
 
-int Flights::getID() const { return ID; }            // comment
+
+int Flights::getID() const { return ID; }
+
+int Flights::getBT() const{
+	return boarding_time;
+}
+void Flights::ToServe(int time) {
+	wait_time = time- TS;
+}
+void Flights::Finish(int landing_time) {
+	finishing_time = service_time + wait_time + landing_time;
+}
+
+int Flights::getWT() const {
+
+	return wait_time;
+}
+int Flights::getST() const {
+	return service_time;
+}
+int Flights::getFT() const {
+	return getBT() + getWT() + getST();
+}
+
 
 Flights::~Flights() {
 
@@ -38,6 +62,7 @@ int Flights::getPassNUM()                           //Getter for the number of p
 {
 	return Passengers;
 }
+
 
 
 
@@ -59,4 +84,8 @@ bool Flights::refresh(int ct) { //this function is to refresh the flight by taki
 
 void Flights::setAutoProm(int ap) {         //Comment 
 	autoProm = ap;
+}
+
+void Flights::toServe(int cT) {
+	WT = cT - TS;
 }

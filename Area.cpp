@@ -24,7 +24,7 @@ int Area::getAreasNum()                     // getter for index of area
 	return AreaNum;
 }
 
-void Area::InsertLanes(Sp type, int Avt, int MA, int MT,int i) //Function to store lanes and define its type
+void Area::InsertLanes(Sp type, int Avt, int MA, int MT) //Function to store lanes and define its type
 {
 	if (type == VIP)
 	{
@@ -35,7 +35,7 @@ void Area::InsertLanes(Sp type, int Avt, int MA, int MT,int i) //Function to sto
 	{
 		countNORM++;
 	}
-	Lanes* L1 = new Lanes(type, Avt, MA, MT,i);
+	Lanes* L1 = new Lanes(type, Avt, MA, MT);
 	lanesLIST->enqueue(L1);
 	delete L1;
 }
@@ -44,7 +44,7 @@ void Area::InsertLane(Lanes* L) { //Function to insert lane in the laneList  // 
 	lanesLIST->enqueue(L);
 }
 
-Lanes* Area::getVIPlane(int t) // return VIP lane // comment
+Lanes* Area::getVIPlane(int t)
 {
 	//	Sp type;
 	// 	   
@@ -54,7 +54,7 @@ Lanes* Area::getVIPlane(int t) // return VIP lane // comment
 	Lanes* l = temp;
 	do
 	{
-		if (l->getType() == VIP && l->check(t))
+		if (l->getType() == VIP && l->Serving(t1,t2))
 		{
 			countVIP++;
 			return l;
@@ -71,14 +71,14 @@ Lanes* Area::getVIPlane(int t) // return VIP lane // comment
 
 }
 
-Lanes* Area::getNORMlane(int t)                        // return NORMAL lane   // comment
+Lanes* Area::getNORMlane(int t)
 {
 	Lanes* temp = nullptr;
 	lanesLIST->dequeue(temp);
 	Lanes* l = temp;
 	do
 	{
-		if (l->getType() == Normal && l->check(t))
+		if (l->getType() == Normal && l->Serving(t1,t2))
 		{
 			return l;
 		}
@@ -99,18 +99,16 @@ int Area::getNumVIP()     // return the number of VIP Lanes
 }
 
 
-bool Area::checkN(int t) {     // Function to check if the lane is normal or not
+bool Area::checkN(int t) {
 	Lanes* l = this->getNORMlane(t);
 	if (l)
 		this->InsertLane(l);
 	return l;
 }
- 
-bool Area::checkV(int t) { // Function to check if the lane is VIP or not 
+
+bool Area::checkV(int t) {
 	Lanes* l = this->getVIPlane(t);
 	if (l)
 		this->InsertLane(l);
 	return l;
 }
-
-

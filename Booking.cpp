@@ -1,11 +1,11 @@
 #include "Booking.h"
 
-Booking::Booking(int t, int i, Area* ta, Area* la, Sp ty, int pa) : EVENTS(t,i) {  //constructor 
-	As.TA = ta;              // comment
-	As.LA = la; // comment
-	typ = ty; // comment
-	Pass = pa; // comment
-	tp = B; // comment
+Booking::Booking(int t, int i, Area* ta, Area* la, Sp ty, int pa) : EVENTS(t,i) {
+	TA = ta;
+	LA = la;
+	typ = ty;
+	Pass = pa;
+	tp = B;
 }
 
 int Booking::calcOn(int t) const { //comment
@@ -20,11 +20,13 @@ int Booking::getNpass() const {     //comment
 	return Pass;
 }
 
-TnL Booking::getAreas() const {         // getter for the area which the plane will take off from.
-	return As;
-}
+//TnL Booking::getAreas() const {
+//	return As;
+//}
 
 Sp Booking::getType() const {           // getter to return the flight type after booking
 	return typ;
 }
 
+Area* Booking::getTA() const { return TA; }
+Area* Booking::getLA() const { return LA; }

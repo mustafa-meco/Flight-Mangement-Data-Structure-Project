@@ -33,7 +33,7 @@ public:
 	bool checkN(int t);                           
 	bool checkV(int t);                          
 };
-struct TnL {
-	Area* TA;                                     // Deperature Area // comment
-	Area* LA;                                     // landing area  
-};
+//struct TnL {
+//	Area* TA;
+//	Area* LA;
+//};
