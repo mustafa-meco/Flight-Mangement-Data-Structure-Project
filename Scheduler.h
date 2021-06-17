@@ -12,10 +12,9 @@
 //#include "Flights.h"
 #include "Def.h"
 //#include "EVENTS/EVENTS.h"
-#include "ASSIGNtoLane.h"
-#include "FlyFromTo.h"
-#include "FlyFromTo.h"
-#include "FinishedFlight.h"
+//#include "ASSIGNtoLane.h"
+//#include "FlyFromTo.h"
+//#include "FinishedFlight.h"
 using namespace std;
 
 //enum Sp {Normal , VIP};
@@ -80,14 +79,14 @@ public:
 	void RefershAll();
 	int calcFly(Flights* f);
 	int calcTO(Flights* f);
+	int calcLand(Flights* f);
 //	bool CheckLane(Lanes l, int time);
 	void serveFlight(Flights *F, int t);
-	void preServe(v<Flights*>* f, int curT)
+	bool preServe(v<Flights*>* fnode, int cT);
 	void RefershAll(int);
 
 	void ServeFligh(Flights *);
 	void Refersh(int); 
-	bool preServe(v<Flights*>*, int);
 	//Lanes getLane(Sp , int t1, int t2);
 	bool checkLane(Lanes*);
 };

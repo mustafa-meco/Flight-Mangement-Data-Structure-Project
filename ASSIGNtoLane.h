@@ -10,7 +10,7 @@ private:
 	Lanes AssignedLane2;
 	//int IDAssign;
 	//int TimeAssign;
-	TnL AssignedArea; 
+	//TnL AssignedArea; 
 
 public:
 	ASSIGNtoLane(int T, int id, Lanes l, Area A);

@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include <string>
+#include "PriorityQueue.h"
 //#include <iostream>
 //#include "Scheduler.h"
 #include "Def.h"
@@ -16,17 +17,16 @@ class Lanes
 	bool aval;               //booleanto check if the lanes available or not
 	Sp type;                 //Variable to define the type of the lane if it is VIP or Normal
 	int ID;
-
+	PriorityQueue<int> WorkingQueue;
 public:
 
-	Lanes(Sp typ, int Avt, int MA, int MT,int);              //Constructor intialize the members
+	Lanes(Sp typ, int Avt, int MA, int MT);              //Constructor intialize the members
 	bool check(int t);                                // Boolean function to check the Availability of the lane.
 	Sp getType() const;                                        // getter for the type of the lane
 	void Activate();                                     // function to activate the lane 
 	bool Serving(int time1, int time2);                  // function to serve the lane (deactivate the lane during the serving time)
 	void served();
-	bool Serving (int time1, int time2);                  // function to serve the lane (deactivate the lane during the serving time)
-	int getID() const;
+	void cancel(int t1, int t2);
 };
 
 

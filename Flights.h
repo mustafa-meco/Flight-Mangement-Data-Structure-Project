@@ -20,10 +20,11 @@ private:
 	int Passengers;   //the number of passengers for the flight.
 	//int Arrival_Area; //This is the area that the flight finishes at.
 	int on_boarding_time;
-	TnL Areas;
+	//TnL Areas;
 	static int autoProm;
+	Area* TA,*LA;
 public:
-	Flights(int ID, TnL, Sp, int , int );
+	Flights(int,int ID,Area* TA, Area* LA, Sp, int );
 	//void AutoP(int time); // calls promote()
 	//check();
 	Sp getType() const;
@@ -36,5 +37,6 @@ public:
 	static void setAutoProm(int);
 	~Flights();
 	int getPassNUM();
+	void toServe(int );
 	
 };

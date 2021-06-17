@@ -21,19 +21,20 @@ private:
 	LinkedQueue<Lanes*>* lanesLIST;		  //list to store the lanes
 public:
 
+	
 	Area(int c, int n);          //constructor
 	//int DisOfAreas(int);         // function to get the distance between the given area and the existing area
 	int getNumLanes();           // getter for number of lanes
 	int getAreasNum();           // getter for index of area
-	void InsertLanes(Sp s, int, int, int,int);    //Function to store lanes and define its type  
+	void InsertLanes(Sp s, int, int, int);    //Function to store lanes and define its type  
 	void InsertLane(Lanes* L);
-	Lanes* getVIPlane(int);                                    // return VIP lane
-	Lanes* getNORMlane(int t);                                   // return NORMAL lane  
+	Lanes* getVIPlane(int,int);                                    // return VIP lane
+	Lanes* getNORMlane(int t,int);                                   // return NORMAL lane  
 	int getNumVIP();                                       // return the number of VIP Lanes 
 	bool checkN(int t);
 	bool checkV(int t);
 };
-struct TnL {
-	Area* TA;
-	Area* LA;
-};
+//struct TnL {
+//	Area* TA;
+//	Area* LA;
+//};

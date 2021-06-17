@@ -11,7 +11,7 @@ private:
 	Lanes FinishedLane;
 	Area FinishedArea;
 public:
-	FinishedFlight(int t, int id, int Tserve, Lanes l);
+	FinishedFlight(int t, int id, int Tserve, Lanes *l);
 	int getTimeServed();
 	Lanes getFinishedLane();
 };

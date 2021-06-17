@@ -1,6 +1,6 @@
 #include "Lanes.h"
 
-Lanes::Lanes(Sp typ, int Avt, int MA, int MT,int i) {
+Lanes::Lanes(Sp typ, int Avt, int MA, int MT) {
 	type = typ;
 	Availability_Time = Avt;
 	MainAft = MA;
@@ -8,7 +8,7 @@ Lanes::Lanes(Sp typ, int Avt, int MA, int MT,int i) {
 	VARaft = 0;
 	VARtime = 0;
 	aval = false;
-	ID = i;
+	
 }
 
 //bool Lanes::check(int time )
@@ -51,17 +51,26 @@ void Lanes::Activate()
 
 bool Lanes::Serving(int time1, int time2)
 {
-	if (check(time1))
-	{
-		VARaft++;
-		aval = false;
-		Availability_Time = time1 + time2;
+	v<int>* workNode;
+	if (WorkingQueue.isEmpty()) {
+		workNode = new v<int>;
+		*workNode = { time1,time2 };
+		WorkingQueue.enqueue(*workNode);
 		return true;
 	}
-	else
-	{
-		return false;
+	
+	PriorityQueue<int> tempQ;
+	while (WorkingQueue.dequeue(*workNode)) {
+		tempQ.enqueue(*workNode);
+		if ((time2 < workNode->value && time2 > workNode->priority) || (time1 < workNode->value && time1 > workNode->priority)) {
+			while (tempQ.dequeue(*workNode)) WorkingQueue.enqueue(*workNode);
+			return false;
+		}
 	}
+	workNode = new v<int>;
+	*workNode = { time1,time2 };
+	WorkingQueue.enqueue(*workNode);
+	return true;
 }
 
 bool Lanes::check(int t) {
@@ -70,8 +79,31 @@ bool Lanes::check(int t) {
 
 void Lanes::served()
 {
-	if (VARaft++>MainAft)
+	v<int>* workNode = nullptr;
+	WorkingQueue.dequeue(*workNode);
+	int end =workNode->value;
+	delete workNode;
+	workNode = NULL;
+	if (VARaft++>=MainAft)
 	{
+		workNode = new v<int>;
+		*workNode = {end,end+MainTime};
+		WorkingQueue.enqueue(*workNode);
 		VARtime = 0;
+	}
+}
+
+void Lanes::cancel(int time1, int time2) {
+	v<int>* workNode = nullptr;
+	PriorityQueue<int> tempQ;
+	while (WorkingQueue.dequeue(*workNode)) {
+		tempQ.enqueue(*workNode);
+		if (time2 == workNode->value && time1 == workNode->priority) {
+			tempQ.dequeue(*workNode);
+			delete workNode;
+			workNode = NULL;
+			while (tempQ.dequeue(*workNode)) WorkingQueue.enqueue(*workNode);
+			break;
+		}
 	}
 }

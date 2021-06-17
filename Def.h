@@ -12,6 +12,8 @@ enum Sp {
 
 enum EventT { B, X, P , L, F, FF};
 
+
+
 //struct TnL {
 //	Area* TA;
 //	Area* LA;

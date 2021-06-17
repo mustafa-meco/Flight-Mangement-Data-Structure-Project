@@ -1,8 +1,8 @@
 #include "Booking.h"
 
 Booking::Booking(int t, int i, Area* ta, Area* la, Sp ty, int pa) : EVENTS(t,i) {
-	As.TA = ta;
-	As.LA = la;
+	TA = ta;
+	LA = la;
 	typ = ty;
 	Pass = pa;
 	tp = B;
@@ -20,11 +20,13 @@ int Booking::getNpass() const {
 	return Pass;
 }
 
-TnL Booking::getAreas() const {
-	return As;
-}
+//TnL Booking::getAreas() const {
+//	return As;
+//}
 
 Sp Booking::getType() const {
 	return typ;
 }
 
+Area* Booking::getTA() const { return TA; }
+Area* Booking::getLA() const { return LA; }
