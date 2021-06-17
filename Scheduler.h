@@ -68,12 +68,12 @@ public:
 	PriorityQueue<EVENTS*> prepare();
 	void Simulate(PriorityQueue<EVENTS*> Evs);
 	void outToFile();
-	//static int getAutoP();
-	int getnormal();
+	int getAutoP();
+	int getNnormal();
 	//static int getvip();
 	void setnormal(int normal);
 	//static void setvip(int vip);
-	void promote(Flights* f);
+	void promote(v<Flights*>* f);
 	Area* getAreaByID(int, Flights * & reqF);
 	bool cancelFlight(int ID);
 	void RefershAll();
@@ -89,5 +89,6 @@ public:
 	void Refersh(int); 
 	//Lanes getLane(Sp , int t1, int t2);
 	bool checkLane(Lanes*);
+	int getNvip();
 };
 

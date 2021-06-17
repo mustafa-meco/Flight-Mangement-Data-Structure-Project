@@ -22,14 +22,37 @@ Sp Flights::getType() const{
 
 
 void Flights::promote() {
-	//int a = Scheduler::getvip();
+	Flight_Type = VIP;
 	//Scheduler::setvip(a++);
 }
 
 Area* Flights::getTA() const { return TA; }
 Area* Flights::getLA() const { return LA; }
 
+
 int Flights::getID() const { return ID; }
+
+int Flights::getBT() const{
+	return boarding_time;
+}
+void Flights::ToServe(int time) {
+	wait_time = time- TS;
+}
+void Flights::Finish(int landing_time) {
+	finishing_time = service_time + wait_time + landing_time;
+}
+
+int Flights::getWT() const {
+
+	return wait_time;
+}
+int Flights::getST() const {
+	return service_time;
+}
+int Flights::getFT() const {
+	return getBT() + getWT() + getST();
+}
+
 
 Flights::~Flights() {
 

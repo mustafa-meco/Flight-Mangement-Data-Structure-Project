@@ -11,8 +11,8 @@ private:
 	int Booking_Timestamp;
 	int Arrival_Area; //This is the area that the flight finishes at.
 	int ID;
-	int time_service, time_wait;
-	int TS; //time stand 
+	int service_time, wait_time, boarding_time, finishing_time;
+	int TS; //time stamp 
 	int landing_area;
 	int WT;
 	//double Departure_Area; //There are n areas for each area there is a specific number of lanes.A flight is reserved from an area to another, this is the area that the flight starts from.
@@ -25,6 +25,12 @@ private:
 	Area* TA,*LA;
 public:
 	Flights(int,int ID,Area* TA, Area* LA, Sp, int );
+	void ToServe(int time) ;
+	void Finish(int landing_time);
+	int getBT() const;
+	int getWT() const;
+	int getST() const;
+	int getFT() const;
 	//void AutoP(int time); // calls promote()
 	//check();
 	Sp getType() const;
@@ -32,6 +38,7 @@ public:
 	void promote();
 	Area* getTA() const;
 	Area* getLA() const;
+
 	int getID() const;
 	bool refresh(int);
 	static void setAutoProm(int);
