@@ -1,6 +1,6 @@
 #include "Area.h"
 
-Area::Area(int c, int n) 
+Area::Area(int c, int n)               //Constructor to intialize the area number and the number of lanes.
 {
 	AreaNum = c;
 	NumOfLanes = n;
@@ -14,7 +14,7 @@ Area::Area(int c, int n)
 //	return ArrOfAreas[AreaNum][A];
 //}
 
-int Area::getNumLanes() // return the number of lanes 
+int Area::getNumLanes()                     // return the number of lanes 
 {
 	return NumOfLanes;
 }
@@ -24,7 +24,7 @@ int Area::getAreasNum()                     // getter for index of area
 	return AreaNum;
 }
 
-void Area::InsertLanes(Sp type, int Avt, int MA, int MT) //Function to store lanes and define its type
+void Area::InsertLanes(Sp type, int MA, int MT) //Function to store lanes and define its type
 {
 	if (type == VIP)
 	{
@@ -35,7 +35,12 @@ void Area::InsertLanes(Sp type, int Avt, int MA, int MT) //Function to store lan
 	{
 		countNORM++;
 	}
-	Lanes* L1 = new Lanes(type, Avt, MA, MT);
+
+	if (type==Cargo)
+	{
+		countCargo++;
+	}
+	Lanes* L1 = new Lanes(type, MA, MT);
 	lanesLIST->enqueue(L1);
 	delete L1;
 }
@@ -44,7 +49,7 @@ void Area::InsertLane(Lanes* L) { //Function to insert lane in the laneList  // 
 	lanesLIST->enqueue(L);
 }
 
-Lanes* Area::getVIPlane(int t1, int t2)
+Lanes* Area::getVIPlane(int t1, int t2)   //Getter for the VIP lanes from LanesList.
 {
 	//	Sp type;
 	// 	   
@@ -71,7 +76,7 @@ Lanes* Area::getVIPlane(int t1, int t2)
 
 }
 
-Lanes* Area::getNORMlane(int t1,int t2)
+Lanes* Area::getNORMlane(int t1,int t2)  //Getter for the normal lanes from LanesList
 {
 	Lanes* temp = nullptr;
 	lanesLIST->dequeue(temp);
@@ -97,7 +102,46 @@ int Area::getNumVIP()     // return the number of VIP Lanes
 {
 	return countVIP;
 }
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+Lanes* Area::getCargolane(int t1, int t2)  //Getter for the Cargo lanes from LanesList
+{
+	Lanes* temp = nullptr;
+	lanesLIST->dequeue(temp);
+	Lanes* l = temp;
+	do
+	{
+		if (l->getType() == Cargo && l->Serving(t1, t2))
+		{
+			countCargo++;
+			return l;
+		}
+		else
+		{
+			lanesLIST->enqueue(l);
+		}
+		lanesLIST->dequeue(l);
 
+	} while (l != temp);
+	lanesLIST->enqueue(l);
+	return NULL;
+}
+
+int Area::getNumCargo()   // return the number of Cargo Lanes 
+{
+	return countCargo;
+}
+
+
+bool Area::checkC(int t)
+{
+
+}
+
+bool Area::checkEG(int t)
+{
+
+}
 
 //bool Area::checkN(int t) {
 //	Lanes* l = this->getNORMlane(t);

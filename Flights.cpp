@@ -1,6 +1,6 @@
 #include "Flights.h"
 
-Flights::Flights(int t,int ID, Area* ta,Area* la, Sp ty, int pa) {
+Flights::Flights(int t,int ID, Area* ta,Area* la, Sp ty, int pa) { //Constructor
 	this->ID = ID;
 	//this-> take_off_time= 
 	TA = ta;
@@ -21,48 +21,47 @@ Sp Flights::getType() const{        // Getter for the Flight type
 }
 
 
-void Flights::promote() {
+void Flights::promote() {           //Function to promote from normal to VIP after certain time
 	Flight_Type = VIP;
 	//Scheduler::setvip(a++);
 }
 
-Area* Flights::getTA() const { return TA; }
-Area* Flights::getLA() const { return LA; }
+Area* Flights::getTA() const { return TA; }  //Getter for the Depature area
+Area* Flights::getLA() const { return LA; }  //Getter for the landing area
 
 
-int Flights::getID() const { return ID; }
+int Flights::getID() const { return ID; }    //Getter for the flight id
 
-int Flights::getBT() const{
-	return boarding_time;
+int Flights::getBT() const{         //Getter for Boarding time
+	return TS;
 }
-void Flights::ToServe(int time) {
-	wait_time = time- TS;
+void Flights::ToServe(int time) {    //Function to calculate the time which the plane take from getting out the waiting list 
+									 //to be assigned to lane    
+	WT = time- TS;
 }
-void Flights::Finish(int landing_time) {
-	finishing_time = service_time + wait_time + landing_time;
-}
+//void Flights::Finish(int landing_time) {
+//	finishing_time = service_time + wait_time + landing_time;
+//}
 
-int Flights::getWT() const {
-
-	return wait_time;
+int Flights::getWT() const {	//Function to return waiting time 
+	return WT;
 }
-int Flights::getST() const {
-	return service_time;
-}
-int Flights::getFT() const {
-	return getBT() + getWT() + getST();
-}
+//int Flights::getST() const {
+//	return service_time;
+//}
 
-
-Flights::~Flights() {
-
-}
+//int Flights::getFT() const {
+//	return getBT() + getWT() + getST();
+//}
 
 int Flights::getPassNUM()                           //Getter for the number of passengers
 {
 	return Passengers;
 }
 
+Flights::~Flights() {
+
+}
 
 
 
@@ -82,10 +81,10 @@ bool Flights::refresh(int ct) { //this function is to refresh the flight by taki
 	return true;
 }
 
-void Flights::setAutoProm(int ap) {         //Comment 
-	autoProm = ap;
-}
+//void Flights::setAutoProm(int ap) {         //Comment 
+//	autoProm = ap;
+//}
 
-void Flights::toServe(int cT) {
-	WT = cT - TS;
-}
+//void Flights::toServe(int cT) {    
+//	WT = cT - TS;
+//}

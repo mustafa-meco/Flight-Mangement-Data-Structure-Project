@@ -6,7 +6,7 @@
 //	
 //}
 
-bool Scheduler::readFile(string filename) {
+bool Scheduler::readFile(string filename) {       //Function to read the given data from the file
 	ifstream F;
 	
 	F.open(filename); cout << "Filename: " << filename << endl;
@@ -72,7 +72,7 @@ bool Scheduler::readFile(string filename) {
 		MA = stoi(line);
 		getline(F, line); cout << " " << line << endl;
 		MT = stoi(line);
-		ar->InsertLanes(type, AvT, MA, MT);
+		ar->InsertLanes(type, MA, MT);
 	}
 	getline(F, line); cout << "Auto Promotion time: " + line << endl;
 	AutoP = stoi(line);
@@ -164,7 +164,7 @@ bool Scheduler::readFile(string filename) {
 //==============================================================================================================||
 //==============================================================================================================||
 
-PriorityQueue<EVENTS*> Scheduler::prepare() {
+PriorityQueue<EVENTS*> Scheduler::prepare() {    //Function to process the data from the input file  
 	int curT = 0; int ID;
 	v<EVENTS*>* EventNode = nullptr;
 	EVENTS* Event;
@@ -267,15 +267,15 @@ PriorityQueue<EVENTS*> Scheduler::prepare() {
 //==============================================================================================================||
 
 
-int Scheduler::getAutoP() {
+int Scheduler::getAutoP() {           //Getter for the time of promotion 
 	return AutoP;
 }
 
 
-int Scheduler::getNnormal() {
+int Scheduler::getNnormal() {         //Getter for the number of normal flights
 	return normal_flights;
 }
-int Scheduler::getNvip() {
+int Scheduler::getNvip() {           //Getter for the number of VIP flights
 	return VIP_flights;
 }
 //void Scheduler::setnormal(int normal) {
@@ -284,13 +284,13 @@ int Scheduler::getNvip() {
 //void Scheduler::setvip(int vip) {
 //	//VIP_flights = vip;
 //}
-void Scheduler::promote(v<Flights*>* f) {
+void Scheduler::promote(v<Flights*>* f) {       //Function to promote the airplane 
 	normal_flights--;
 	VIP_flights++;
 	f->priority = 0;
 }
 
-Area* Scheduler::getAreaByID(int ID, Flights*& reqF)  {
+Area* Scheduler::getAreaByID(int ID, Flights*& reqF) {  // Function To return the area where the flight will take off 
 	//Flights* fl = ;
 	v<Flights*>* flightnode = nullptr;
 	int cou = 0;
@@ -317,7 +317,8 @@ Area* Scheduler::getAreaByID(int ID, Flights*& reqF)  {
 	return NULL;
 }
 
-bool Scheduler::cancelFlight(int ID)
+bool Scheduler::cancelFlight(int ID)  //Function to cancel the flight
+									  // If it is existed in the waiting list.  
 {
 	v<EVENTS*> *temp= nullptr;
 	preparedEvents.dequeue(*temp);
@@ -354,7 +355,7 @@ void Scheduler::RefershAll(int ct) // To arrange the contents of the list after 
 	RefershLinK(finishedFlights);
 }
 
-void Scheduler::RefershPE(PriorityQueue<EVENTS*> q)
+void Scheduler::RefershPE(PriorityQueue<EVENTS*> q)      //Function to refersh the list of events 
 {
 	v<EVENTS*> x,y;
 	int i = 0;
@@ -374,7 +375,7 @@ void Scheduler::RefershPE(PriorityQueue<EVENTS*> q)
 	}
 }
 
-void Scheduler::RefershPF(PriorityQueue<Flights*> q,int ct)
+void Scheduler::RefershPF(PriorityQueue<Flights*> q,int ct) //Function to refersh the flight list and run the function refresh 
 {
 	v<Flights*> x, y;
 	int i = 0;
@@ -395,7 +396,7 @@ void Scheduler::RefershPF(PriorityQueue<Flights*> q,int ct)
 	}
 }
 
-void Scheduler::RefershLinK(LinkedQueue<Flights*> q)
+void Scheduler::RefershLinK(LinkedQueue<Flights*> q) //To refersh the linked queue of the type Flights
 {
 	Flights* x;
 	Flights* y;
@@ -416,19 +417,22 @@ void Scheduler::RefershLinK(LinkedQueue<Flights*> q)
 
 	}
 }
-int Scheduler::calcFly(Flights* f) 
+
+int Scheduler::calcFly(Flights* f)  //Function to calculate the time of on boarding 
 {
 	Area *AL = f->getLA();
 	Area *AT= f->getTA();
 	return Dists[AT->getAreasNum()][AL->getAreasNum()];
 }
 
-int Scheduler::calcTO(Flights* f)
+int Scheduler::calcTO(Flights* f)        //Function to calculate the time of the passengers to get on the airplane 
+										 //+ the taking off time
 {
 	return (f->getPassNUM() * pnt) + tkft;
 }
 
-void Scheduler::serveFlight(Flights* F, int t)
+void Scheduler::serveFlight(Flights* F, int t)         //Function to move the flight from waiting list to serving list 
+													   // and calculating the waiting time  
 {
 	Area* AREA = getAreaByID(F->getID(), F);
 	int x = AREA->getAreasNum();
@@ -491,9 +495,9 @@ void Scheduler::serveFlight(Flights* F, int t)
 //
 //}
 
-void Scheduler::outToFile() {
+void Scheduler::outToFile() {                     //Function to show the output for the user 
 	string filename = "Output file";
-	ofstream file;                                                              //create file with name filename
+	ofstream file;                               //Create file with name filename
 	file.open(filename + ".txt");
 	file << "FT ID BT WT ST \n";
 	int FT, ID, BT, WT, ST;
@@ -514,7 +518,7 @@ void Scheduler::outToFile() {
 		file << FT << " " << ID << " " << BT << " " << WT << " " << ST << endl;
 
 	}
-	file << "Flights: " << getNnormal() + getNvip() << "[Norm: " << getNnormal() << ", VIP: " << getNvip() << endl;
+	file << "Flights: " << getNnormal() + getNvip()+getNCargo()+getNEmergence() << "[Norm: " << getNnormal() << ", VIP: " << getNvip() << ", Cargo: " << getNCargo() << ", Emergence: " << getNEmergence << endl;
 	file << "Areas: " << N_Areas << endl;
 	for (int i = 0; i < N_Areas; i++) {
 		file << "Area " << i << ":" << "Lanes: " << AreasL[i]->getNumLanes() << endl;
@@ -527,7 +531,8 @@ void Scheduler::outToFile() {
 //	AreasWaitinglist[are->getAreasNum() - 1]
 //}
 
- //Function to assign a Lane and make Assign to Lane Event for both taking off and landing
+ //Function to assign a Lane and make Assign to Lane Event for both taking off and landing 
+ //and return boolean if the operation is done or not
 bool Scheduler::preServe(v<Flights*>* fnode, int cT) {
 	Sp ftype = fnode->value->getType();
 	int Id = fnode->value->getID();
@@ -545,6 +550,8 @@ bool Scheduler::preServe(v<Flights*>* fnode, int cT) {
 	case Normal:
 		if (!ServeLane)ServeLane = TkAr->getNORMlane(cT, FlyTime);
 		if (!LandLane)LandLane = LnAr->getNORMlane(LandTime, FinTime);
+//	case Cargo:
+
 		break;
 	default:
 		break;
@@ -569,7 +576,16 @@ bool Scheduler::preServe(v<Flights*>* fnode, int cT) {
 }
 
 
-int Scheduler::calcLand(Flights* F) {
+int Scheduler::calcLand(Flights* F) {    //Function to calculate the time which the passengers take to get of the airplane 
+										 //and the landing time
 	return pnt * F->getPassNUM() + lndt;
+}
+ 
+int Scheduler:: getNCargo(){               //Getter for the number of Cargo Flights;
+	return Cargo_Flights;
+}
+
+int Scheduler::getNEmergence() {           //Getter for the number of Emergence Flights
+	return Emergence_Flights;
 }
 

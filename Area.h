@@ -19,19 +19,27 @@ private:
 /*	static int** ArrOfAreas;*/		      //two dimentional array for areas  
 	int NumOfLanes;					      // Variable for number of lanes
 	LinkedQueue<Lanes*>* lanesLIST;		  //list to store the lanes
+	int countCargo;                       //counter for the Cargo lanes
 public:
 
-	Area(int c, int n);                         
+	Area(int c, int n);                          
 	//int DisOfAreas(int);                      
 	int getNumLanes();					        
 	int getAreasNum();							
-	void InsertLanes(Sp s, int, int, int);    
+	void InsertLanes(Sp s, int, int);    
 	void InsertLane(Lanes* L);                  
 	Lanes* getVIPlane(int, int);                     
 	Lanes* getNORMlane(int t, int);                    
 	int getNumVIP();                             
 	bool checkN(int t);                           
-	bool checkV(int t);                          
+	bool checkV(int t);               
+
+	Lanes* getCargolane(int t1, int t2);
+	int getNumCargo();
+
+
+
+
 };
 //struct TnL {
 //	Area* TA;

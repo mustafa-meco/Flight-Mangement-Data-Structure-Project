@@ -1,8 +1,8 @@
 #include "Lanes.h"
 
-Lanes::Lanes(Sp typ, int Avt, int MA, int MT) {        //Constructor intialize the members
+Lanes::Lanes(Sp typ, int MA, int MT) {        //Constructor intialize the members
 	type = typ;
-	Availability_Time = Avt;
+	//Availability_Time = Avt;
 	MainAft = MA;
 	MainTime = MT;
 	VARaft = 0;
@@ -51,7 +51,7 @@ void Lanes::Activate()                    // function to activate the lane
 
 bool Lanes::Serving(int time1, int time2)// function to serve the lane 
 										   //(deactivate the lane during the serving time)
-{
+{											// Checking if there is no action at this time
 	v<int>* workNode;
 	if (WorkingQueue.isEmpty()) {
 		workNode = new v<int>;
@@ -78,7 +78,8 @@ bool Lanes::check(int t) {                   //Boolean function to check the Ava
 	return Availability_Time < t;
 }
  
-void Lanes::served()                         //Comment
+void Lanes::served()                         //Calculating the number of the times for the aiplane to know-
+											 //-the time of its maintanence 
 {
 	v<int>* workNode = nullptr;
 	WorkingQueue.dequeue(*workNode);
@@ -94,7 +95,7 @@ void Lanes::served()                         //Comment
 	}
 }
 
-void Lanes::cancel(int time1, int time2) {
+void Lanes::cancel(int time1, int time2) {    //To cancel the booked flight, lane and decreasing the time. 
 	v<int>* workNode = nullptr;
 	PriorityQueue<int> tempQ;
 	while (WorkingQueue.dequeue(*workNode)) {

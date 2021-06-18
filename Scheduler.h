@@ -39,27 +39,29 @@ using namespace std;
 class Scheduler
 {
 private:
-	int N_Areas;
+	int N_Areas;                                // Number of areas
 	int tkft;									//take off time 
-	int lndt;									 //landing time
-	int pnt;									 //one passenger on time
+	int lndt;									//landing time
+	int pnt;									//one passenger on time
 	int pft;									//one passenger off time
-	Area** AreasL;
-	int AutoP;
-	int** Dists;
-	int N_Events;
+	Area** AreasL;                              //array of areas     
+	int AutoP;                                  //Time which the airplane takes to be promoted  
+	int** Dists;                                //matrix for the distances between each Aera and the other one
+	int N_Events;                               //number of events 
 	//FlightsList<Flights>* FlightsL;
 	//string* rawEvents;
-	PriorityQueue<EVENTS*> EventList;
-	PriorityQueue<EVENTS*> preparedEvents;
-	PriorityQueue<Flights*>* AreasWaitinglist;
-	int normal_flights;
-	int VIP_flights;
-	LinkedQueue<Flights*> ServingFlights;
-	LinkedQueue<Flights*> finishedFlights;
-	void RefershPE(PriorityQueue<EVENTS*> q);
+	PriorityQueue<EVENTS*> EventList;				// List of the all events
+	PriorityQueue<EVENTS*> preparedEvents;			// list of the events after modifications  
+	PriorityQueue<Flights*>* AreasWaitinglist;		// Array where each index has a queue for each area
+	int normal_flights;                             // number of normal flights    
+	int VIP_flights;                                // number of vip flights
+	LinkedQueue<Flights*> ServingFlights;           // list of the flights which is served
+	LinkedQueue<Flights*> finishedFlights;          // list of flights which are finished and the passengers out 
+	void RefershPE(PriorityQueue<EVENTS*> q);          
 	void RefershPF(PriorityQueue<Flights*> q,int );
 	void RefershLinK(LinkedQueue<Flights*> q);
+	int Cargo_Flights;
+	int Emergence_Flights;
 
 public:
 	
@@ -90,5 +92,8 @@ public:
 	//Lanes getLane(Sp , int t1, int t2);
 	bool checkLane(Lanes*);
 	int getNvip();
+	int getNCargo();
+	int getNEmergence();
+
 };
 

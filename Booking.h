@@ -9,17 +9,17 @@ using namespace std;
 class Booking :public EVENTS{
 private:
     //TnL As;
-    Area *TA;
-    Area *LA;
-    Sp typ;
-    int Pass;
+    Area *TA;          //Depareture Area
+    Area *LA;          //Landing Area
+    Sp typ;            //Type of the flight or the lane
+    int Pass;          //Number of passengers    
 public:
-    Booking(int t, int i, Area*, Area*, Sp, int);
-    int calcOn(int t) const;
-    int calcOf(int t) const;
-    int getNpass() const;
+    Booking(int t, int i, Area*, Area*, Sp, int); 
+    int calcOn(int t) const; 
+    int calcOf(int t) const; 
+    int getNpass() const; 
     Sp getType() const;
-    //TnL getAreas() const;
+    //TnL getAreas() const; 
     Area* getTA() const;
     Area* getLA() const;
 };

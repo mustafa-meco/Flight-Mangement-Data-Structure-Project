@@ -4,14 +4,23 @@
 //#include "Area.h"
 
 enum Sp {    // The type of the flight 
-	
+
 	VIP,
-	Normal
+	Normal,
+	Cargo,
+	Emergence, 
 };
 
 
-enum EventT { B, X, P , L, F, FF};  //The event type. // comment
-
+enum EventT { //The event type 
+	 B          //Booking
+	,X          //Cancellation   
+	,P          //Promotion 
+	,L          //AssignToLane
+	,AL			//adding lane
+	,F          //Fly from to
+	,FF};       //Finished Flight 
+                                    
 
 
 //struct TnL {

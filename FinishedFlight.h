@@ -5,13 +5,13 @@
 class FinishedFlight : public EVENTS
 {
 private: 
-	int TimeFinish;  // Time which the plane will take from the lane to until taking off //comment
+	int TimeFinish;  // The time when the all passengers are out 
 	int IDfinish;    // The id of the airplane which is finished.  
-	int TimeServed;  // time which the airplane takes to make the passengers get on the plane + taking off the lane. //comment
-	Lanes FinishedLane; //comment 
-	Area FinishedArea;  //comment 
+	int TimeServed;  // Time which the airplane takes to make the passengers get on the plane + taking off the lane. 
+	Lanes FinishedLane; //The lane where the all passengers will be out 
+	Area FinishedArea;  //The area which contains the previous lane
 public:
-	FinishedFlight(int t, int id, int Tserve, Lanes *l);
+	FinishedFlight(int t, int id, int Tserve, Lanes *l);  
 	int getTimeServed();
 	Lanes getFinishedLane();
 };
