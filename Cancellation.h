@@ -13,5 +13,6 @@ public:
 	Cancellation(int T, int id);
 	//int getIDcancel();
 	//int getTimeCancel();
+	EventT getEventT() const;
 };
 

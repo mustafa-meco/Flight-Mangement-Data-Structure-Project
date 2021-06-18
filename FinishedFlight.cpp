@@ -5,6 +5,7 @@
 //	TimeServed = Tserve;
 //	FinishedLane = l;
 ////	FinishedArea = A;
+//	tp = FF;
 //}
 //int FinishedFlight::getTimeServed()
 //{

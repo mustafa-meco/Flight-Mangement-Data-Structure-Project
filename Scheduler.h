@@ -15,6 +15,7 @@
 //#include "ASSIGNtoLane.h"
 //#include "FlyFromTo.h"
 //#include "FinishedFlight.h"
+#include "AddLane.h"
 using namespace std;
 
 //enum Sp {Normal , VIP};
@@ -50,30 +51,30 @@ private:
 	int N_Events;
 	//FlightsList<Flights>* FlightsL;
 	//string* rawEvents;
-	PriorityQueue<EVENTS*> EventList;
-	PriorityQueue<EVENTS*> preparedEvents;
-	PriorityQueue<Flights*>* AreasWaitinglist;
+	PriorityQueue<EVENTS> EventList;
+	PriorityQueue<EVENTS> preparedEvents;
+	PriorityQueue<Flights>* AreasWaitinglist;
 	int normal_flights;
 	int VIP_flights;
-	LinkedQueue<Flights*> ServingFlights;
-	LinkedQueue<Flights*> finishedFlights;
-	void RefershPE(PriorityQueue<EVENTS*> q);
-	void RefershPF(PriorityQueue<Flights*> q,int );
-	void RefershLinK(LinkedQueue<Flights*> q);
+	LinkedQueue<Flights> ServingFlights;
+	LinkedQueue<Flights> finishedFlights;
+	void RefershPE(PriorityQueue<EVENTS> q);
+	void RefershPF(PriorityQueue<Flights> q,int );
+	void RefershLinK(LinkedQueue<Flights> q);
 
 public:
 	
 	//Scheduler();
 	bool readFile(string );
 	void prepare();
-	void Simulate(PriorityQueue<EVENTS*> Evs);
+	void Simulate(PriorityQueue<EVENTS> Evs);
 	void outToFile();
 	int getAutoP();
 	int getNnormal();
 	//static int getvip();
 	void setnormal(int normal);
 	//static void setvip(int vip);
-	void promote(v<Flights*>* f);
+	bool promote(Flights* f);
 	Area* getAreaByID(int, Flights * & reqF);
 	bool cancelFlight(int ID);
 	//void RefershAll();
@@ -82,7 +83,7 @@ public:
 	int calcLand(Flights* f);
 //	bool CheckLane(Lanes l, int time);
 	void serveFlight(Flights *F, int t);
-	bool preServe(v<Flights*>* fnode, int cT);
+	bool preServe(Flights* fnode, int cT);
 	void RefershAll(int);
 
 	void ServeFligh(Flights *);

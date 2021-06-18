@@ -7,6 +7,6 @@ class Promotion :public EVENTS   //Comment
 
 public:
     Promotion(int,int);
-
+    EventT getEventT() const;
 };
 

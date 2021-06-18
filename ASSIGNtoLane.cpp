@@ -5,6 +5,7 @@
 //{
 //	AssignedLane1 = l;
 //	AssignedArea.TA = A;
+//	tp = L;
 //}
 ////Lanes ASSIGNtoLane::getLane0()
 ////{

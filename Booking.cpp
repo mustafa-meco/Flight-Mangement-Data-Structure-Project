@@ -30,3 +30,7 @@ Sp Booking::getType() const {           // getter to return the flight type afte
 
 Area* Booking::getTA() const { return TA; }
 Area* Booking::getLA() const { return LA; }
+
+EventT Booking::getEventT() const {
+	return B;
+}

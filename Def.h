@@ -10,7 +10,7 @@ enum Sp {    // The type of the flight
 };
 
 
-enum EventT { B, X, P , L, F, FF};  //The event type. // comment
+enum EventT { B, X, P , AL, L, F, FF};  //The event type. // comment
 
 
 

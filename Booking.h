@@ -22,5 +22,6 @@ public:
     //TnL getAreas() const;
     Area* getTA() const;
     Area* getLA() const;
+    EventT getEventT() const;
 };
 

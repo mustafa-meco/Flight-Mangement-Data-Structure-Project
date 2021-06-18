@@ -1,12 +1,17 @@
 #include "Flights.h"
 
 Flights::Flights(int t,int ID, Area* ta,Area* la, Sp ty, int pa) {
+	cout << "new Flight: time: " << t << " ID: " << ID << endl;
 	this->ID = ID;
 	//this-> take_off_time= 
 	TA = ta;
+	cout << "TA: " << ta->getAreasNum() << endl;
 	LA = la;
+	cout << "LA: " << la->getAreasNum() << endl;
 	Flight_Type = ty;
+	cout << "Type: " << ty << endl;
 	Passengers = pa;
+	cout << "no. Pass: " << pa << endl;
 	TS = t;
 }
 
