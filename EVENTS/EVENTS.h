@@ -17,10 +17,11 @@ private:
 protected:
 	EventT tp;
 public:
+	EVENTS();
 	EVENTS(int i, int);
 	int getTS() const;
 	int getID() const;
-	EventT getEventT() const;
+	virtual EventT getEventT() const;
 };
 
 

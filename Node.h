@@ -1,4 +1,4 @@
-
+#pragma once
 #ifndef _NODE
 #define _NODE
 template <typename T>
@@ -28,7 +28,7 @@ template < typename T>
 Node<T>::Node( const T& r_Item)
 {
 	item = r_Item;
-	next = nullptr;
+	next = NULL;
 } 
 
 template < typename T>

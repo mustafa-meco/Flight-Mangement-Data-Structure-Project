@@ -1,111 +1,221 @@
 #pragma once
-#include "QueueADT.h"
 
-//#include "Scheduler.h"
-#include"Flights.h"
-template <typename T>
-struct v {                 //Comment
-	int priority = NULL;
-	T value = NULL;        
-};
+#include "Node.h"
 
-//class Flights;
-class EVENTS;
 template <typename T>
-class PriorityQueue    // PriorityQueue is a special type of queues
-					   //as when we dequeue an element it will not be the last element but the one with the most priority  
+class PNode : public Node<T>
 {
-private:
-	int front;
-	int rear;
-	v<T>* Arr;
-	int size;
+	double Priority;
 public:
-	PriorityQueue(int size = 50);
-	bool isEmpty() const;
-	bool enqueue(const v<T>& newEntry);
-	bool dequeue(v<T>& frntEntry);
-	bool isFull() const;
-	bool peek(v<T>& frntEntry)  const;
+	PNode(const T & item, double _priority): Node<T>(item)
+	{
+		Priority = _priority;
+	}
+	double getPriority()
+	{
+		return Priority;
+	}
 };
 
-template<typename T>
-PriorityQueue<T>::PriorityQueue(int s) {
-	front = -1;
-	rear = -1;
-	Arr = new v<T>[s];
-	size = s;
+template <typename T>
+class PriorityQueue
+{
+	Node<T>* backPtr;
+	Node<T>* frontPtr;
+public:
+	PriorityQueue();
+
+	bool isEmpty() const;
+	bool enqueue(const T& newEntry, double Priority);
+	bool dequeue(T& frntEntry, double& Priority);
+	bool peekFront(T& frntEntry, double& Priority)  const;
+
+	//toArray function to be used ONLY when drawing the queue items
+	const T* toArray(int& count);	//returns array of T (array of items)
+
+	~PriorityQueue();
+};
+/////////////////////////////////////////////////////////////////////////////////////////
+
+/*
+Function: Queue()
+The constructor of the Queue class.
+
+*/
+
+template <typename T>
+PriorityQueue<T>::PriorityQueue()
+{
+	backPtr = nullptr;
+	frontPtr = nullptr;
+
 }
+/////////////////////////////////////////////////////////////////////////////////////////
 
-//template<typename T>
-//PriorityQueue<T>::~PriorityQueue() {
-//	for (int i = front; i <= rear; i++) {
-//		delete Arr[i];
-//		Arr[i] = NULL;
-//	}
-//	delete[] Arr;
-//	Arr = NULL;
-//}
+/*
+Function: isEmpty
+Sees whether this queue is empty.
 
-template<typename T>
-bool PriorityQueue<T>::isEmpty() const {
-	return front != -1;
-}
-
-template<typename T>
-bool PriorityQueue<T>::isFull() const {
-	return (rear == size - 1 && front == 0) || (front == rear + 1);
-}
-
-template<typename T>
-bool PriorityQueue<T>::enqueue(const v<T>& newEntry) {
-	//if ((rear == size - 1 && front == 0) || (front == rear + 1))
-		//return false;
-	if (isFull())
-		return false;
-	if (rear == size - 1) {
-		rear = (rear + 1) % size - 1;
-	}
-	Arr[++rear] = newEntry;
-	int i = 0; v<T>* n = &Arr[rear];
-	while (n->priority < Arr[rear - i - 1].priority) {
-		*n = Arr[rear - i];
-		Arr[rear - i ] = Arr[rear -i -1];
-		Arr[rear - i - 1] = *n;
-		if (rear - i == front)
-			break;
-		i++;
-	}
-	if (front == -1)
-		Arr[++front] = newEntry;
-	return true;
-}
-
-template<typename T>
-bool PriorityQueue<T>::dequeue(v<T>& frntEntry) {
-	if (isEmpty())
-		return false;
-	if (front == rear) {
-		frntEntry = Arr[front];
-		front = -1; rear = -1;
-	}
+Input: None.
+Output: True if the queue is empty; otherwise false.
+*/
+template <typename T>
+bool PriorityQueue<T>::isEmpty() const
+{
+	if (frontPtr == nullptr)
+		return true;
 	else
-		frntEntry = Arr[front++];
-	
-	if (front == size-1) {
-		front = (front + 1) % size - 1;
-	}
-	return true;
-	
+		return false;
 }
 
-template<typename T>
-bool PriorityQueue<T>::peek(v<T>& frntEntry) const
+/////////////////////////////////////////////////////////////////////////////////////////
+
+/*Function:enqueue
+Adds newEntry at the back of this queue.
+
+Input: newEntry .
+Output: True if the operation is successful; otherwise false.
+*/
+
+template <typename T>
+bool PriorityQueue<T>::enqueue(const T& newEntry, double Priority)
+{
+	Node<T>* newPNodePtr = new PNode<T>(newEntry, Priority);
+	// Insert the new node
+	if (isEmpty())
+		frontPtr = newPNodePtr; // The queue is empty
+	else
+	{
+		Node<T>* P = frontPtr;
+		if (static_cast<PNode<T>*>(newPNodePtr)->getPriority() > static_cast<PNode<T>*>(P)->getPriority())
+		{
+			frontPtr = newPNodePtr;
+			frontPtr->setNext(P);
+			return true;
+		}
+		//else
+		while (P->getNext())
+		{
+			if (static_cast<PNode<T>*>(newPNodePtr)->getPriority() > static_cast<PNode<T>*>(P->getNext())->getPriority())
+			{
+				newPNodePtr->setNext(P->getNext());
+				P->setNext(newPNodePtr);
+				return true;
+			}
+			//else
+			P = P->getNext();
+		}
+		backPtr->setNext(newPNodePtr); // The queue was not empty
+	}
+	backPtr = newPNodePtr; // New node is at back
+	return true;
+} // end enqueue
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+/*Function: dequeue
+Removes the front of this queue. That is, removes the item that was added
+earliest.
+
+Input: None.
+Output: True if the operation is successful; otherwise false.
+*/
+
+template <typename T>
+bool PriorityQueue<T>::dequeue(T& frntEntry, double& Priority)
 {
 	if (isEmpty())
 		return false;
 
-	frntEntry = Arr[front];
+	Node<T>* nodeToDeletePtr = frontPtr;
+	PNode<T>* Pnode = static_cast<PNode<T>*>(frontPtr);
+	frntEntry = frontPtr->getItem();
+	Priority = Pnode->getPriority();
+	frontPtr = frontPtr->getNext();
+	// Queue is not empty; remove front
+	if (nodeToDeletePtr == backPtr)	 // Special case: one node in queue
+		backPtr = nullptr;
+
+	// Free memory reserved by the dequeued node
+	delete nodeToDeletePtr;
+
+
 	return true;
 
 }
+
+/////////////////////////////////////////////////////////////////////////////////////////
+
+/*
+Function: peekFront
+gets the front of this queue. The operation does not modify the queue.
+
+Input: None.
+Output: The front of the queue.
+return: flase if Queue is empty
+*/
+template <typename T>
+bool PriorityQueue<T>::peekFront(T& frntEntry,double& Priority) const
+{
+	if (isEmpty())
+		return false;
+
+	PNode<T>* pnode = NULL;
+	frntEntry = frontPtr->getItem();
+	Priority = pnode->getPriority();
+	return true;
+
+}
+///////////////////////////////////////////////////////////////////////////////////
+
+template <typename T>
+PriorityQueue<T>::~PriorityQueue()
+{
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////
+
+/*
+Function: toArray
+returns an array of "T"
+Output: count: the length of the returned array (zero if Queue is empty)
+returns: The array of T. (nullptr if Queue is empty)
+*/
+
+//IMPORTANT:
+//toArray function to be used ONLY when drawing the queue items
+
+template <typename T>
+const T* PriorityQueue<T>::toArray(int& count)
+{
+
+	//IMPORTANT:
+	//toArray function to be used ONLY when drawing the queue items
+
+	count = 0;
+
+	if (!frontPtr)
+		return nullptr;
+	//counting the no. of items in the Queue
+	Node<T>* p = frontPtr;
+	while (p)
+	{
+		count++;
+		p = p->getNext();
+	}
+
+
+	T* Arr = new T[count];
+	p = frontPtr;
+	for (int i = 0; i < count;i++)
+	{
+		Arr[i] = p->getItem();
+		p = p->getNext();
+	}
+	return Arr;
+	//IMPORTANT:
+	//toArray function to be used ONLY when drawing the queue items
+
+}
+

@@ -6,7 +6,7 @@ using namespace std;
 
 //class EVENTS;
 
-class Booking :public EVENTS{
+class Booking :public EVENTS {
 private:
     //TnL As;
     Area *TA;          //Depareture Area
@@ -22,5 +22,6 @@ public:
     //TnL getAreas() const; 
     Area* getTA() const;
     Area* getLA() const;
+    EventT getEventT() const;
 };
 

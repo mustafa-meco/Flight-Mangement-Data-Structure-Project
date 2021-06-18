@@ -4,7 +4,7 @@ Area::Area(int c, int n)               //Constructor to intialize the area numbe
 {
 	AreaNum = c;
 	NumOfLanes = n;
-	lanesLIST = new LinkedQueue<Lanes*>;               
+	lanesLIST = new LinkedQueue<Lanes>;               
 	//NumOfAreas++;
 }
 
@@ -35,18 +35,13 @@ void Area::InsertLanes(Sp type, int MA, int MT) //Function to store lanes and de
 	{
 		countNORM++;
 	}
-
-	if (type==Cargo)
-	{
-		countCargo++;
-	}
 	Lanes* L1 = new Lanes(type, MA, MT);
-	lanesLIST->enqueue(L1);
+	lanesLIST->enqueue(*L1);
 	delete L1;
 }
 
 void Area::InsertLane(Lanes* L) { //Function to insert lane in the laneList  // comment
-	lanesLIST->enqueue(L);
+	lanesLIST->enqueue(*L);
 }
 
 Lanes* Area::getVIPlane(int t1, int t2)   //Getter for the VIP lanes from LanesList.
@@ -55,7 +50,7 @@ Lanes* Area::getVIPlane(int t1, int t2)   //Getter for the VIP lanes from LanesL
 	// 	   
 		//for (/*int i = 0; i < NumOfLanes; i++*/)   
 	Lanes* temp = nullptr;
-	lanesLIST->dequeue(temp);
+	lanesLIST->dequeue(*temp);
 	Lanes* l = temp;
 	do
 	{
@@ -66,12 +61,12 @@ Lanes* Area::getVIPlane(int t1, int t2)   //Getter for the VIP lanes from LanesL
 		}
 		else
 		{
-			lanesLIST->enqueue(l);
+			lanesLIST->enqueue(*l);
 		}
-		lanesLIST->dequeue(l);
+		lanesLIST->dequeue(*l);
 
 	} while (l != temp);
-	lanesLIST->enqueue(l);
+	lanesLIST->enqueue(*l);
 	return NULL;
 
 }
@@ -79,7 +74,7 @@ Lanes* Area::getVIPlane(int t1, int t2)   //Getter for the VIP lanes from LanesL
 Lanes* Area::getNORMlane(int t1,int t2)  //Getter for the normal lanes from LanesList
 {
 	Lanes* temp = nullptr;
-	lanesLIST->dequeue(temp);
+	lanesLIST->dequeue(*temp);
 	Lanes* l = temp;
 	do
 	{
@@ -89,12 +84,12 @@ Lanes* Area::getNORMlane(int t1,int t2)  //Getter for the normal lanes from Lane
 		}
 		else
 		{
-			lanesLIST->enqueue(l);
+			lanesLIST->enqueue(*l);
 		}
-		lanesLIST->dequeue(l);
+		lanesLIST->dequeue(*l);
 
 	} while (l != temp);
-	lanesLIST->enqueue(l);
+	lanesLIST->enqueue(*l);
 	return NULL;
 }
 

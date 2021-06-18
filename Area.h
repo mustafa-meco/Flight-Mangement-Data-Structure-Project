@@ -2,7 +2,7 @@
 #include "Lanes.h"
 //#include "Scheduler.h"
 #include "LinkedQueue.h"
-#include "Def.h"
+//#include "Def.h"
 using namespace std;
 //class Scheduler;
 //class Lanes;
@@ -18,8 +18,7 @@ private:
 	//static int NumOfAreas;			  //Variable for number of areas
 /*	static int** ArrOfAreas;*/		      //two dimentional array for areas  
 	int NumOfLanes;					      // Variable for number of lanes
-	LinkedQueue<Lanes*>* lanesLIST;		  //list to store the lanes
-	int countCargo;                       //counter for the Cargo lanes
+	LinkedQueue<Lanes>* lanesLIST;		  //list to store the lanes
 public:
 
 	Area(int c, int n);                          

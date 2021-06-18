@@ -1,12 +1,17 @@
 #include "Flights.h"
 
-Flights::Flights(int t,int ID, Area* ta,Area* la, Sp ty, int pa) { //Constructor
+Flights::Flights(int t,int ID, Area* ta,Area* la, Sp ty, int pa) {
+	cout << "new Flight: time: " << t << " ID: " << ID << endl;
 	this->ID = ID;
 	//this-> take_off_time= 
 	TA = ta;
+	cout << "TA: " << ta->getAreasNum() << endl;
 	LA = la;
+	cout << "LA: " << la->getAreasNum() << endl;
 	Flight_Type = ty;
+	cout << "Type: " << ty << endl;
 	Passengers = pa;
+	cout << "no. Pass: " << pa << endl;
 	TS = t;
 }
 
@@ -66,7 +71,7 @@ Flights::~Flights() {
 
 
 
-bool Flights::refresh(int ct) { //this function is to refresh the flight by taking the current time
+bool Flights::refresh(int ct, int autoP) { //this function is to refresh the flight by taking the current time
 								//and calculate the waiting time 
 								//and if it is normal and its waiting time above autoprom time 
 								// it will return false to be auto promoted
@@ -74,7 +79,7 @@ bool Flights::refresh(int ct) { //this function is to refresh the flight by taki
 	switch (Flight_Type)
 	{
 	case Normal:
-		return WT < autoProm;
+		return WT < autoP;
 	default:
 		break;
 	}
@@ -85,6 +90,7 @@ bool Flights::refresh(int ct) { //this function is to refresh the flight by taki
 //	autoProm = ap;
 //}
 
-//void Flights::toServe(int cT) {    
-//	WT = cT - TS;
-//}
+
+Flights::Flights() {
+	
+}

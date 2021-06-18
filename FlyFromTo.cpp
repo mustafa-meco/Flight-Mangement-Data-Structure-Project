@@ -5,6 +5,7 @@
 //	//Area = A;
 //	FromLane = from;
 //	ToLane = to;
+//	tp = F;
 //}
 //
 //Lanes FlyFromTo::getFromLane()        //Getter for the lane where the flight will take off
