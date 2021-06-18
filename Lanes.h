@@ -19,7 +19,7 @@ class Lanes
 	int ID;
 	PriorityQueue<int> WorkingQueue;
 public:
-
+	Lanes();
 	Lanes(Sp typ, int MA, int MT);              //Constructor intialize the members
 	bool check(int t);                                // Boolean function to check the Availability of the lane.
 	Sp getType() const;                                        // getter for the type of the lane

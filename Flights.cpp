@@ -94,3 +94,6 @@ bool Flights::refresh(int ct, int autoP) { //this function is to refresh the fli
 void Flights::toServe(int cT) {
 	WT = cT - TS;
 }
+Flights::Flights() {
+	
+}

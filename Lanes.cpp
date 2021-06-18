@@ -100,3 +100,6 @@ void Lanes::cancel(int time1, int time2) {
 		}
 	}
 }
+Lanes::Lanes() {
+
+}

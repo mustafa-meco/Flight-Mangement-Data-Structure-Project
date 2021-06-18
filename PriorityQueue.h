@@ -161,7 +161,7 @@ bool PriorityQueue<T>::peekFront(T& frntEntry,double& Priority) const
 	if (isEmpty())
 		return false;
 
-	PNode<T>* pnode = dynamic_cast<PNode<T>>(frontPtr);
+	PNode<T>* pnode = NULL;
 	frntEntry = frontPtr->getItem();
 	Priority = pnode->getPriority();
 	return true;

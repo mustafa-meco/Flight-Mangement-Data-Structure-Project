@@ -25,6 +25,7 @@ private:
 	Area* TA;
 	Area* LA;
 public:
+	Flights();
 	Flights(int,int ID,Area* TA, Area* LA, Sp, int );
 	void ToServe(int time) ;
 	void Finish(int landing_time);

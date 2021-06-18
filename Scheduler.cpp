@@ -173,10 +173,10 @@ void Scheduler::prepare() {
 	int curT = 0; int ID;
 	cout << "curT: " << curT;
 	
-	EVENTS* Event;
-	Flights* tempFlight;
-	Area* tempArea;
-	Lanes* tempLane;
+	EVENTS* Event = NULL;
+	Flights* tempFlight = NULL;
+	Area* tempArea = NULL;
+	Lanes* tempLane = NULL;
 	double Epri;
 	double Fpri;
 	
@@ -238,7 +238,8 @@ void Scheduler::prepare() {
 		default:
 			break;
 		}
-		Lanes* ServLane, *LandLane;
+		Lanes* ServLane = NULL;
+		Lanes* Lane = NULL;
 		Sp FlightType;
 		PriorityQueue<Flights> tempQ;
 		for (int i = 0; i < N_Areas; i++) {
@@ -299,7 +300,7 @@ int Scheduler::getNvip() {
 //}
 bool Scheduler::promote(Flights* f) {
 	
-	Flights* tempF;
+	Flights* tempF = NULL;
 	double pri;
 	PriorityQueue<Flights> tempQ;
 	while (AreasWaitinglist[getAreaByID(f->getID(), f)->getAreasNum() - 1].dequeue(*tempF,pri)) {
@@ -318,7 +319,7 @@ bool Scheduler::promote(Flights* f) {
 
 Area* Scheduler::getAreaByID(int ID, Flights*& reqF)  {
 	//Flights* fl = ;
-	Flights* tempFlight;
+	Flights* tempFlight = NULL;
 	double Fpri;
 	int cou = 0;
 	for (int i = 0; i < N_Areas; i++) {
@@ -346,7 +347,9 @@ Area* Scheduler::getAreaByID(int ID, Flights*& reqF)  {
 
 bool Scheduler::cancelFlight(int ID)
 {
-	Flights* tempF,*f;
+	Flights* tempF = NULL;
+	Flights* f= NULL;
+
 	double pri;
 	PriorityQueue<Flights> tempQ;
 	while (AreasWaitinglist[getAreaByID(ID, f)->getAreasNum() - 1].dequeue(*tempF, pri)) {
@@ -385,7 +388,8 @@ void Scheduler::RefershAll(int ct) // To arrange the contents of the list after 
 
 void Scheduler::RefershPE(PriorityQueue<EVENTS> q)
 {
-	EVENTS* x,*y;
+	EVENTS* x = NULL;
+	EVENTS* y = NULL;
 	int i = 0;
 	double prix,priy;
 	q.peekFront(*x,prix);
@@ -406,7 +410,8 @@ void Scheduler::RefershPE(PriorityQueue<EVENTS> q)
 
 void Scheduler::RefershPF(PriorityQueue<Flights> q,int ct)
 {
-	Flights* x,* y;
+	Flights* x = NULL;
+	Flights* y=NULL;
 	double prix, priy;
 	int i = 0;
 	q.peekFront(*x,prix);
@@ -428,8 +433,8 @@ void Scheduler::RefershPF(PriorityQueue<Flights> q,int ct)
 
 void Scheduler::RefershLinK(LinkedQueue<Flights> q)
 {
-	Flights* x;
-	Flights* y;
+	Flights* x = NULL;
+	Flights* y=NULL;
 
 	int i = 0;
 	q.peek(*x);
@@ -463,7 +468,7 @@ void Scheduler::serveFlight(Flights* F, int t)
 {
 	Area* AREA = getAreaByID(F->getID(), F);
 	int x = AREA->getAreasNum();
-	Flights *tempF;
+	Flights* tempF = NULL;
 	double Fpri;
 	PriorityQueue<Flights> tempQ;
 	while (AreasWaitinglist[x-1].dequeue(*tempF,Fpri))
@@ -532,8 +537,8 @@ void Scheduler::outToFile() {
 	int sumWT = 0;
 	int sumST = 0;
 
-	Flights* F;
-	EVENTS* E;
+	Flights* F = NULL;
+	EVENTS* E = NULL;
 	while (finishedFlights.dequeue(*F)) {
 		FT = F->getFT();
 		ID = F->getID();

@@ -1,5 +1,8 @@
 #include "EVENTS.h"
 
+EVENTS::EVENTS() {
+
+}
 EVENTS::EVENTS(int t, int i)
 {
 	TS = t;
